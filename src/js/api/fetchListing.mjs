@@ -1,4 +1,4 @@
-import { API_LISTINGS } from "../constants";
+import { API_LISTINGS } from "../constants.mjs";
 
 async function fetchListings() {
   try {

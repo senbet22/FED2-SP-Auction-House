@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="shortcut icon" href="/Logo1.svg" type="image/x-icon" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auction House</title>
+    <script type="module" src="/src/app.js"></script>
+    <script type="module" src="/src/js/ui/profile/profileHandler.js"></script>
+    <script type="module" src="/src/js/ui/navbar.js"></script>
+  </head>
+  <body
+    class="font-reddit-mono dark bg-background min-h-screen flex flex-col overflow-x-hidden"
+  >
+    <!-- Header -->
+    <header class="bg-primary mx-auto fixed top-0 w-full z-50 shadow-md">
+      <nav class="max-w-5xl mx-auto">
+        <a href="/">
+          <img src="/Logo1.svg" alt="" class="h-20 sm:h-28" />
+        </a>
+        <div
+          id="wallet"
+          class="absolute hidden sm:block text-text text-xl right-16 top-10"
+        >
+          <p>wallet(0)</p>
+        </div>
+        <div id="hamburger" class="sm:hidden absolute w-5 top-4 right-14">
+          <svg
+            class="text-text h-14 w-16"
+            fill="currentColor"
+            viewBox="0 0 448 512"
+          >
+            <path
+              d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"
+            />
+          </svg>
+        </div>
+        <div
+          id="navtab"
+          class="bg-text text-background h-fit sm:h-16 px-6 hidden sm:flex flex-col sm:flex-row pt-14 sm:pt-0 items-center justify-between shadow-md"
+        >
+          <div class="bg-secondary text-text text-lg relative w-full max-w-sm">
+            <input
+              type="text"
+              name="search"
+              id="search"
+              placeholder="What are you looking for?"
+              class="focus:w-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+            />
+            <svg
+              class="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5"
+              viewBox="0 0 512 512"
+            >
+              <path
+                fill="currentColor"
+                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+              />
+            </svg>
+          </div>
+          <ul
+            class="text-xl sm:text-2xl py-5 sm:py-0 flex flex-col sm:flex-row space-x-6 ml-6"
+          >
+            <li class="hover:text-secondary">
+              <a href="/profile/">Profile</a>
+            </li>
+            <li class="hover:text-secondary"><a href="/">Home</a></li>
+            <li class="hover:text-secondary"><a href="">Listings</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main section -->
+    <main class="flex-grow max-w-5xl mx-2 lg:mx-auto mt-36 sm:mt-64">
+      <section
+        class="w-full px-4 lg:w-4xl text-text mx-auto bg-secondary p-6 shadow-lg flex flex-col gap-6"
+      >
+        <!-- Title -->
+        <div class="flex flex-col sm:flex-row justify-between items-center mb-4">
+          <h1 id="itemName" class="text-2xl font-bold">Item Name</h1>
+          <span class="text-lg text-text"
+            >Updated: <span id="itemUpdated" class="">25 February 2015</span></span
+          >
+        </div>
+
+        <!-- Image Section -->
+        <div class="flex flex-col md:flex-row items-center md:items-start">
+          <!-- Image Section -->
+          <div class="w-full md:w-1/2 flex justify-center">
+            <img
+              id="itemImage"
+              src="/public/auctionHouse.png"
+              alt="Item Image"
+              class="w-64 h-64 object-cover"
+            />
+          </div>
+        
+          <!-- Description Section -->
+          <div class="w-full md:w-2/3 md:pl-6 p-4 md:mx-0">
+            <p id="itemDescription" class="text-lg md:text-xl">
+              It is a long established fact that a reader will be distracted by
+              the readable content of a page when looking at its layout.
+            </p>
+          </div>
+        </div>
+        
+
+
+
+        
+
+          <p id="itemPrice" class="text-xl font-semibold">Listing price: $40</p>
+          <div class="flex flex-col md:flex-row gap-4">
+            <!-- Left Section (1/3 width on md+) -->
+            <div class="w-full md:w-1/3 text-xl">
+              <p id="itemHighestBid" class="text-primary mt-2">
+                Highest Bid: N/A
+              </p>
+              <p id="itemParticipants" class="text-primary mt-2">
+                Participants: 3
+              </p>
+            </div>
+          
+            <!-- Right Section (Wraps under before md, 2/3 width on md+) -->
+            <div class="w-full md:w-2/3 flex flex-col text-start">
+              <p id="itemCategory" class="text-lg text-text mt-2">
+                Category: House
+              </p>
+              <p id="itemTags" class="text-lg text-text mt-2">
+                Tags: #Horse
+              </p>
+            </div>
+          </div>
+          
+
+          <div class="flex items-center gap-4 mt-6">
+            <button
+              class="bg-background text-text px-6 py-3 rounded-lg text-xl hover:bg-text hover:text-secondary cursor-pointer shadow-md"
+            >
+              BID NOW
+            </button>
+            <span class="bg-primary text-background px-6 py-3 shadow-md rounded-lg"
+              >3 days: 12 hrs : 12 mins</span
+            >
+          </div>
+        </div>
+              <!-- User Section -->
+      <div class="flex items-center gap-4 mt-8 px-4">
+        <img
+          src="/public/senbetPB22.jpg"
+          alt="User Profile"
+          class="w-12 h-12 rounded-full"
+        />
+        <p class="text-lg">Tom Andre</p>
+      </div>
+            <!-- Action Buttons -->
+            <div class="flex justify-end gap-4 mt-6 text-lg">
+              <button class="bg-background text-text px-6 py-3 rounded-lg shadow-md cursor-pointer hover:text-secondary hover:bg-text">
+                Edit Item
+              </button>
+              <button class="bg-accent text-background px-6 py-3 rounded-lg shadow-md cursor-pointer hover:text-secondary hover:bg-text">
+                Delete Item
+              </button>
+            </div>
+      </section>
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="relative px-5 w-full h-48 p-10 bg-text text-secondary text-lg flex justify-center"
+    >
+      <div class="gap-5 text-lg flex flex-col items-center justify-center">
+        <h3>Copyright © 2025 Auction House</h3>
+        <h3>All Rights Reserved.</h3>
+        <h3>
+          Created by Senbet Gereslase as a semester project at Noroff, 2025.
+        </h3>
+      </div>
+      <a href="/" class="absolute bottom-0 right-0 hidden md:block">
+        <img src="/smallLogo.svg" alt="" class="h-48 w-auto" />
+      </a>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="shortcut icon" href="/Logo1.svg" type="image/x-icon" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auction House</title>
+    <script type="module" src="/src/app.js"></script>
+    <script type="module" src="/src/js/ui/profile/profileHandler.js"></script>
+    <script type="module" src="/src/js/ui/navbar.js"></script>
+  </head>
+  <body
+    class="font-reddit-mono dark bg-background min-h-screen flex flex-col overflow-x-hidden"
+  >
+    <!-- Header -->
+    <header class="bg-primary mx-auto fixed top-0 w-full z-50 shadow-md">
+      <nav class="max-w-5xl mx-auto">
+        <a href="/">
+          <img src="/Logo1.svg" alt="" class="h-20 sm:h-28" />
+        </a>
+        <div
+          id="wallet"
+          class="absolute hidden sm:block text-text text-xl right-16 top-10"
+        >
+          <p>wallet(0)</p>
+        </div>
+        <div id="hamburger" class="sm:hidden absolute w-5 top-4 right-14">
+          <svg
+            class="text-text h-14 w-16"
+            fill="currentColor"
+            viewBox="0 0 448 512"
+          >
+            <path
+              d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"
+            />
+          </svg>
+        </div>
+        <div
+          id="navtab"
+          class="bg-text text-background h-fit sm:h-16 px-6 hidden sm:flex flex-col sm:flex-row pt-14 sm:pt-0 items-center justify-between shadow-md"
+        >
+          <div class="bg-secondary text-text text-lg relative w-full max-w-sm">
+            <input
+              type="text"
+              name="search"
+              id="search"
+              placeholder="What are you looking for?"
+              class="focus:w-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+            />
+            <svg
+              class="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5"
+              viewBox="0 0 512 512"
+            >
+              <path
+                fill="currentColor"
+                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+              />
+            </svg>
+          </div>
+          <ul
+            class="text-xl sm:text-2xl py-5 sm:py-0 flex flex-col sm:flex-row space-x-6 ml-6"
+          >
+            <li class="hover:text-secondary">
+              <a href="/profile/">Profile</a>
+            </li>
+            <li class="hover:text-secondary"><a href="/">Home</a></li>
+            <li class="hover:text-secondary"><a href="">Listings</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main body -->
+    <main class="flex-grow max-w-5xl mx-auto my-52 sm:mt-64">
+      <section class="w-full px-2 lg:w-3xl h-full bg-background mx-auto">
+        <div class="formheader mb-10 bg-text flex justify-center items-center">
+          <img src="/smallLogo.svg" class="mr-auto" alt="" />
+          <h1
+            class="text-secondary mr-auto text-xl lg:text-3xl font-bold text-center px-4"
+          >
+            Edit Listing
+          </h1>
+        </div>
+
+        <div class="p-6 shadow-lg text-lg md:text-xl bg-secondary">
+          <!-- Edit Listing Form -->
+          <form id="editListingForm" class="space-y-6 block my-10">
+            <div>
+              <label class="block">Item Name</label>
+              <input
+                type="text"
+                id="itemName"
+                placeholder="Enter item name"
+                class="w-full border-b-2 border-text focus:outline-none"
+              />
+              <p id="itemNameError" class="text-accent text-left">
+                404: Missing or invalid details
+              </p>
+            </div>
+
+            <div>
+              <label class="block">Listing Price</label>
+              <input
+                type="number"
+                id="listingPrice"
+                placeholder="Enter listing price"
+                class="w-full border-b-2 border-text focus:outline-none"
+              />
+              <p id="priceError" class="text-accent text-left">
+                404: Missing or invalid details
+              </p>
+            </div>
+
+            <div>
+              <label class="block">Picture URL</label>
+              <input
+                type="text"
+                id="itemPicture"
+                placeholder="Enter picture URL"
+                class="w-full border-b-2 border-text focus:outline-none"
+              />
+              <p id="imgError" class="text-accent text-left">
+                404: Missing or invalid details
+              </p>
+            </div>
+
+            <div>
+              <label class="block">Listing Time</label>
+              <select
+                id="listingTime"
+                class="w-full border-b-2 bg-background border-text focus:outline-none"
+              >
+                <option value="24H">24 Hours</option>
+                <option value="30Days">30 Days</option>
+                <option value="60Days">60 Days</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block">Tag</label>
+              <input
+                type="text"
+                id="itemTag"
+                placeholder="Enter item tag"
+                class="w-full border-b-2 border-text focus:outline-none"
+              />
+              <p id="tagError" class="text-accent text-left">
+                404: Missing or invalid details
+              </p>
+            </div>
+
+            <div>
+              <label class="block">Category</label>
+              <select
+                id="itemCategory"
+                class="w-full border-b-2 bg-background border-text focus:outline-none"
+              >
+                <option value="Art">Art</option>
+                <option value="Watches">Watches</option>
+                <option value="Jewelry">Jewelry</option>
+                <option value="Vintage">Vintage</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Cars">Cars</option>
+                <option value="Interiors">Interiors</option>
+                <option value="Decor">Decor</option>
+                <option value="Games">Games</option>
+                <option value="Books">Books</option>
+                <option value="Toys">Toys</option>
+                <option value="Sports">Sports</option>
+                <option value="Collectibles and Memorabilia">
+                  Collectibles and Memorabilia
+                </option>
+              </select>
+              <p id="categoryError" class="text-accent text-left">
+                404: Missing or invalid details
+              </p>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex justify-between">
+              <button
+                class="w-2/5 flex justify-center bg-background hover:text-background hover:bg-primary text-text text-2xl py-2 rounded-lg cursor-pointer shadow-md"
+                id="updateListing"
+              >
+                Update Listing
+              </button>
+
+              <button
+                class="w-2/5 flex justify-center bg-accent hover:bg-text hover:text-secondary text-background text-2xl py-2 rounded-lg cursor-pointer shadow-md"
+                id="deleteListing"
+              >
+                Delete Listing
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="formfooter bg-text flex justify-center items-center h-36">
+          <p class="text-secondary text-sm sm:text-lg text-center mx-4">
+            Edit your listing details or delete it permanently.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="relative px-5 w-full h-48 p-10 bg-text text-secondary text-lg flex justify-center"
+    >
+      <div class="gap-5 text-lg flex flex-col items-center justify-center">
+        <h3>Copyright © 2025 Auction House</h3>
+        <h3>All Rights Reserved.</h3>
+        <h3>
+          Created by Senbet Gereslase as a semester project at Noroff, 2025.
+        </h3>
+      </div>
+      <a href="/" class="absolute bottom-0 right-0 hidden md:block">
+        <img src="/smallLogo.svg" alt="" class="h-48 w-auto" />
+      </a>
+    </footer>
+  </body>
+</html>

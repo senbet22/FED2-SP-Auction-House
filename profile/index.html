@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="shortcut icon" href="/Logo1.svg" type="image/x-icon" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auction House</title>
+    <script type="module" src="/src/app.js"></script>
+    <script type="module" src="/src/js/ui/profile/profileHandler.js"></script>
+    <script type="module" src="/src/js/ui/navbar.js"></script>
+  </head>
+  <body
+    class="font-reddit-mono dark bg-background min-h-screen flex flex-col overflow-x-hidden"
+  >
+    <!-- Header -->
+    <header class="bg-primary mx-auto fixed top-0 w-full z-50 shadow-md">
+      <nav class="max-w-5xl mx-auto">
+        <a href="/">
+          <img src="/Logo1.svg" alt="" class="h-20 sm:h-28" />
+        </a>
+        <div
+          id="wallet"
+          class="absolute hidden sm:block text-text text-xl right-16 top-10"
+        >
+          <p>wallet(0)</p>
+        </div>
+        <div id="hamburger" class="sm:hidden absolute w-5 top-4 right-14">
+          <svg
+            class="text-text h-14 w-16"
+            fill="currentColor"
+            viewBox="0 0 448 512"
+          >
+            <path
+              d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"
+            />
+          </svg>
+        </div>
+        <div
+          id="navtab"
+          class="bg-text text-background h-fit sm:h-16 px-6 hidden sm:flex flex-col sm:flex-row pt-14 sm:pt-0 items-center justify-between shadow-md"
+        >
+          <div class="bg-secondary text-text text-lg relative w-full max-w-sm">
+            <input
+              type="text"
+              name="search"
+              id="search"
+              placeholder="What are you looking for?"
+              class="focus:w-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+            />
+            <svg
+              class="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5"
+              viewBox="0 0 512 512"
+            >
+              <path
+                fill="currentColor"
+                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+              />
+            </svg>
+          </div>
+          <ul
+            class="text-xl sm:text-2xl py-5 sm:py-0 flex flex-col sm:flex-row space-x-6 ml-6"
+          >
+            <li class="hover:text-secondary">
+              <a href="/profile/">Profile</a>
+            </li>
+            <li class="hover:text-secondary">
+              <a href="/item/create/">Item</a>
+            </li>
+            <li class="hover:text-secondary"><a href="/">Home</a></li>
+            <li class="hover:text-secondary">
+              <a href="/item/create/">Create Listing</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main body -->
+    <main class="flex-grow max-w-5xl mx-auto mt-36 sm:mt-64 shadow-md">
+      <section
+        class="w-full h-svh px-2 lg:w-3xl h- bg-background text-text mx-auto"
+      >
+        <div
+          class="profile-header mb-10 bg-text text-secondary flex justify-between items-center h-28"
+        >
+          <p class="text-lg text-center mx-5">
+            Track your bids, wins, and listings all in one place. Stay updated
+            on the auctions that matter to you!
+          </p>
+        </div>
+        <div
+          class="flex w-full m-auto text-lg sm:text-xl font-medium bg-secondary space-x-2"
+        >
+          <button
+            id="bidsButton"
+            class="px-2 py-3 w-auto hover:bg-primary hover:text-background cursor-pointer bg-background shadow-md"
+          >
+            My Bids
+          </button>
+          <button
+            id="winsButton"
+            class="px-2 py-3 w-auto hover:bg-primary hover:text-background cursor-pointer bg-background shadow-md"
+          >
+            My Wins
+          </button>
+          <button
+            id="listingButton"
+            class="px-2 py-3 w-auto hover:bg-primary hover:text-background cursor-pointer bg-background shadow-md"
+          >
+            My Listings
+          </button>
+          <button
+            id="ProfileButton"
+            class="px-2 py-3 w-auto hover:bg-primary hover:text-background cursor-pointer bg-background shadow-md"
+          >
+            Update Profile
+          </button>
+        </div>
+
+        <div class="p-2 shadow-lg text-lg md:text-xl bg-secondary py-8">
+          <!-- Bids card -->
+          <div
+            id="bidsCard"
+            class="bids-card drop-shadow-xl bg-background md:mx-20"
+          >
+            <h1 class="m-4 text-xl sm:text-2xl">
+              Fake rolex x Adidas watch 3.5
+            </h1>
+            <div class="prime-info flex justify-between">
+              <div class="w-1/4 mx-4">
+                <img
+                  src="/public/auctionHouse.png"
+                  class="max-h-full w-24 bg-accent"
+                  alt=""
+                />
+              </div>
+              <div class="w-1/2 text-sm sm:text-lg">
+                <p>Listing price: $399</p>
+                <p>Seller: senbet</p>
+                <p>category: Jewlery</p>
+              </div>
+              <div class="w-1/2">
+                <p
+                  class="p-2 bg-primary text-background bg-center flex items-center justify-center shadow-md"
+                >
+                  3d : 12h : 12m
+                </p>
+              </div>
+            </div>
+            <div
+              class="secondary-info flex justify-between text-sm sm:text-xl p-4 gap-4"
+            >
+              <div class="">Leading bid: $330</div>
+              <div class="">Participants: 3</div>
+              <div class="">Your bid: $35</div>
+            </div>
+            <div class="flex">
+              <div
+                class="bg-secondary hover:bg-primary hover:text-background w-fit m-2 p-2 rounded-full shadow-md ml-auto"
+              >
+                <a class="m-2" href="/item/">View item</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Wins card -->
+          <div id="winsCard" class="bids-card bg-background md:mx-20 shadow-md">
+            <h1 class="m-4 text-xl sm:text-2xl">
+              Fake rolex x Adidas watch 3.5
+            </h1>
+            <div class="prime-info flex justify-between">
+              <div class="w-1/4 mx-4">
+                <img
+                  src="/public/auctionHouse.png"
+                  class="max-h-full w-24 bg-accent"
+                  alt=""
+                />
+              </div>
+              <div class="w-1/2 text-sm sm:text-lg">
+                <p>Listing price: $399</p>
+                <p>Seller: senbet</p>
+                <p>category: Jewlery</p>
+              </div>
+              <div class="w-1/2">
+                <p
+                  class="p-2 bg-primary text-background bg-center flex items-center justify-center shadow-md"
+                >
+                  Winning bid: $400
+                </p>
+              </div>
+            </div>
+            <div class="flex mx-4 items-center">
+              <div
+                class="bg-secondary hover:bg-primary hover:text-background w-fit m-2 p-2 rounded-full shadow-md ml-auto"
+              >
+                <a class="m-2" href="item/">View item</a>
+              </div>
+            </div>
+          </div>
+          <!-- My listing card -->
+          <div
+            id="listingCard"
+            class="bids-card bg-background md:mx-20 shadow-md"
+          >
+            <h1 class="m-4 text-xl sm:text-2xl">
+              Fake rolex x Adidas watch 3.5
+            </h1>
+            <div class="prime-info flex justify-between">
+              <div class="w-1/4 mx-4">
+                <img
+                  src="/public/auctionHouse.png"
+                  class="max-h-full w-24 bg-accent"
+                  alt=""
+                />
+              </div>
+              <div class="w-1/2 text-sm sm:text-lg">
+                <p>Listing price: $399</p>
+                <p>Seller: senbet</p>
+                <p>category: Jewlery</p>
+              </div>
+              <div class="w-1/2">
+                <p
+                  class="p-2 bg-primary text-background bg-center flex items-center justify-center shadow-md"
+                >
+                  3d : 12h : 12m
+                </p>
+              </div>
+            </div>
+            <div
+              class="secondary-info flex justify-between text-sm sm:text-xl p-4 gap-4"
+            >
+              <div class="">No bids yet</div>
+              <div class="">Participants: N/A</div>
+            </div>
+            <div class="flex">
+              <div
+                class="bg-background hover:bg-primary hover:text-background w-fit m-2 p-2 rounded-full shadow-md ml-auto"
+              >
+                <a class="m-2" href="/item/edit/">Edit item</a>
+              </div>
+              <div
+                class="bg-secondary hover:bg-primary hover:text-background w-fit m-2 p-2 rounded-full shadow-md ml-auto"
+              >
+                <a class="m-2" href="item/">View item</a>
+              </div>
+            </div>
+          </div>
+          <!-- Update Profile card -->
+          <div
+            id="profileCard"
+            class="bids-card text-lg bg-background md:mx-20 shadow-md"
+          >
+            <h1
+              class="m-4 text-xl flex justify-center text-background p-2 bg-primary sm:text-2xl"
+            >
+              Update Profile
+            </h1>
+            <div class="prime-info flex justify-between items-center">
+              <div class="w-1/4 mx-4">
+                <img
+                  src="/public/auctionHouse.png"
+                  class="max-h-full w-24 bg-accent"
+                  alt=""
+                />
+              </div>
+              <div
+                class="mr-2 text-sm sm:text-lg w-full border-b-2 border-text focus:outline-none"
+              >
+                <input
+                  type="text"
+                  placeholder="Enter image URL"
+                  class="w-full p-2 bg-secondary"
+                />
+              </div>
+            </div>
+            <div class="prime-info flex justify-between items-center">
+              <div class="w-1/4 mx-4">
+                <h2 class="">Bio</h2>
+              </div>
+              <div
+                class="mr-2 text-sm sm:text-lg w-full border-b-2 border-text focus:outline-none"
+              >
+                <textarea
+                  type="text"
+                  placeholder="Enter Bio"
+                  class="w-full p-2 bg-secondary"
+                ></textarea>
+              </div>
+            </div>
+            <div class="flex">
+              <div
+                class="bg-background hover:bg-primary hover:text-background w-fit mx-auto m-2 p-2 rounded-full shadow-md ml-auto"
+              >
+                <a class="m-2" href="item/">Update profile</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="relative px-5 w-full h-48 p-10 bg-text text-secondary text-lg flex justify-center"
+    >
+      <div class="gap-5 text-lg flex flex-col items-center justify-center">
+        <h3>Copyright © 2025 Auction House</h3>
+        <h3>All Rights Reserved.</h3>
+        <h3>
+          Created by Senbet Gereslase as a semester project at Noroff, 2025.
+        </h3>
+      </div>
+      <a href="/" class="absolute bottom-0 right-0 hidden md:block">
+        <img src="/smallLogo.svg" alt="" class="h-48 w-auto" />
+      </a>
+    </footer>
+  </body>
+</html>

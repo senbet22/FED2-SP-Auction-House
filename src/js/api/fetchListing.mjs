@@ -1,18 +1,18 @@
-import { API_LISTINGS } from "../constants.mjs";
+import { optionGet } from "./requestOptions.mjs";
 
-async function fetchListings() {
+export async function fetchListings(url) {
   try {
-    const response = await fetch(API_LISTINGS);
+    const response = await fetch(url, optionGet);
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
     const data = await response.json();
-    console.log("API Listings:", data);
+
+    return data.data;
   } catch (error) {
     console.error("Failed to fetch listings:", error);
+    return [];
   }
 }
-
-fetchListings();

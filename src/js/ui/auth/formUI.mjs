@@ -15,22 +15,17 @@ function setActiveButton(activeButton, inactiveButton) {
 }
 
 loginButton.addEventListener("click", () => {
-  // Show the login form and hide the register form
   loginForm.style.display = "block";
   registerForm.style.display = "none";
 
-  // Update button styles
   setActiveButton(loginButton, registerButton);
 });
 
 registerButton.addEventListener("click", () => {
-  // Show the register form and hide the login form
   registerForm.style.display = "block";
   loginForm.style.display = "none";
 
-  // Update button styles
   setActiveButton(registerButton, loginButton);
 });
 
-// Default to showing the login form and setting login button as active
 loginButton.click();

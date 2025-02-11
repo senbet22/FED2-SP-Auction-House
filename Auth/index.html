@@ -8,68 +8,58 @@
     <script type="module" src="/src/app.mjs"></script>
   </head>
   <body
-    class="font-reddit-mono dark bg-background min-h-screen flex flex-col overflow-x-hidden"
+    class="font-reddit-mono bg-background min-h-screen flex flex-col overflow-x-hidden"
   >
     <!-- Header -->
-    <header class="bg-primary mx-auto fixed top-0 w-full z-50 shadow-md">
+    <header
+      class="bg-primary mx-auto fixed top-0 w-full z-50 shadow-text shadow-sm"
+    >
       <nav class="max-w-5xl mx-auto">
         <a href="/">
-          <img src="/Logo1.svg" alt="" class="h-20 sm:h-28" />
+          <img src="/Logo1.svg" alt="" class="h-20 sm:h-20" />
         </a>
-        <div
-          id="wallet"
-          class="absolute hidden sm:block text-text text-xl right-16 top-10"
-        >
-          <p>wallet(0)</p>
-        </div>
-        <div id="hamburger" class="sm:hidden absolute w-5 top-4 right-14">
-          <svg
-            class="text-text h-14 w-16"
-            fill="currentColor"
-            viewBox="0 0 448 512"
+        <label id="hamburger" class="sm:hidden absolute pb-5 top-0 right-5">
+          <div
+            class="w-20 h-20 cursor-pointer flex flex-col items-center justify-center"
           >
-            <path
-              d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"
-            />
-          </svg>
-        </div>
+            <input id="navToggle" class="hidden peer" type="checkbox" />
+            <div
+              class="w-[66%] h-[8px] bg-secondary rounded-sm shadow-text shadow-md transition-all duration-300 origin-left translate-y-[1.35rem] peer-checked:rotate-[-45deg]"
+            ></div>
+            <div
+              class="w-[66%] h-[8px] bg-secondary rounded-sm shadow-text shadow-md transition-all duration-300 origin-center peer-checked:hidden"
+            ></div>
+            <div
+              class="w-[66%] h-[8px] bg-secondary rounded-sm shadow-text shadow-md transition-all duration-300 origin-left -translate-y-[1.35rem] peer-checked:rotate-[45deg]"
+            ></div>
+          </div>
+        </label>
+
         <div
           id="navtab"
-          class="bg-text text-background h-fit sm:h-16 px-6 hidden sm:flex flex-col sm:flex-row pt-14 sm:pt-0 items-center justify-between shadow-md"
+          class="hidden bg-text text-background h-fit sm:h-14 px-6 sm:flex flex-col sm:flex-row pt-12 sm:pt-0 items-center justify-between shadow-md"
         >
-          <div class="bg-secondary text-text text-lg relative w-full max-w-sm">
-            <input
-              type="text"
-              name="search"
-              id="search"
-              placeholder="What are you looking for?"
-              class="focus:w-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-            />
-            <svg
-              class="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5"
-              viewBox="0 0 512 512"
-            >
-              <path
-                fill="currentColor"
-                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
-              />
-            </svg>
-          </div>
           <ul
-            class="text-xl sm:text-2xl py-5 sm:py-0 flex flex-col sm:flex-row space-x-6 ml-6"
+            class="text-2xl sm:text-2xl py-5 sm:py-0 flex flex-col sm:flex-row space-x-6 ml-6"
           >
-            <li class="hover:text-secondary">
-              <a href="/profile/">Profile</a>
-            </li>
             <li class="hover:text-secondary"><a href="/">Home</a></li>
-            <li class="hover:text-secondary"><a href="">Listings</a></li>
+            <li class="hover:text-secondary">
+              <a href="/item/create/index.html">Create listing</a>
+            </li>
+            <li class="hover:text-secondary"><a href="/auth/">Login</a></li>
           </ul>
+          <div
+            id="wallet"
+            class="sm:block text-background text-lg right-16 top-10"
+          >
+            <p class="italic">wallet(0)</p>
+          </div>
         </div>
       </nav>
     </header>
 
     <!-- Main body -->
-    <main class="flex-grow max-w-5xl mx-auto my-52 sm:mt-64">
+    <main class="h-svh flex-1 max-w-5xl mx-auto my-52 sm:mt-64">
       <section class="w-full px-2 lg:w-3xl h- bg-background text-text mx-auto">
         <div class="formheader mb-10 bg-text flex justify-center items-center">
           <img src="/smallLogo.svg" class="mr-auto" alt="" />
@@ -98,23 +88,32 @@
         </div>
         <div class="p-6 shadow-lg text-lg md:text-xl bg-secondary">
           <!-- Login form -->
-          <form id="loginForm" class="space-y-6 block my-10">
+          <form id="loginForm" name="login" class="space-y-6 block my-10">
             <div>
               <label class="block">Email address</label>
               <input
                 type="email"
-                id="email"
-                placeholder=""
+                id="email-login"
                 class="w-full border-b-2 border-text focus:outline-none"
+                autocomplete="email"
+                required
               />
             </div>
             <div>
               <label class="block">Password</label>
               <input
                 type="password"
-                id="password"
+                id="password-login"
                 class="w-full border-b-2 border-text focus:outline-none"
+                autocomplete="current-password"
+                required
               />
+              <div
+                id="loginErrorContainer"
+                class="hidden px-2 rounded-md bg-background text-accent"
+              >
+                <p id="loginErrorMessage" class="text-left"></p>
+              </div>
             </div>
             <!-- Invisible Placeholder for seamless change -->
             <div class="invisible">
@@ -124,58 +123,82 @@
                 class="w-full border-b-2 border-text focus:outline-none"
               />
             </div>
-            <div
-              id="errorContainer"
-              class="hidden mx-4 bg-accent rounded-full text-background p-2"
-            >
-              <p id="errorMessage" class="text-center">
-                404: Wrong Email or password
-              </p>
-            </div>
+
             <button
               class="w-2/3 flex justify-center mx-auto bg-background hover:text-background hover:bg-primary text-text text-2xl py-2 rounded-lg cursor-pointer shadow-md"
               id="submitLoginForm"
             >
               Login
             </button>
-
-            <!-- Register form -->
           </form>
-          <form id="registerForm" class="space-y-6 block my-10 bg-secondary">
+
+          <!-- Register form -->
+          <form
+            novalidate
+            id="registerForm"
+            name="register"
+            class="space-y-6 block my-10 bg-secondary"
+          >
             <div>
-              <label class="block">Username</label>
+              <label class="block">Name</label>
               <input
-                name="username"
-                id="username"
-                placeholder=""
+                name="name"
+                id="name"
+                placeholder="Enter your name"
                 class="w-full border-b-2 border-text focus:outline-none"
+                required
               />
+              <div
+                id="errorNameContainer"
+                class="hidden px-2 rounded-md bg-background text-accent"
+              >
+                <p id="errorNameMessage" class="text-left"></p>
+              </div>
             </div>
             <div>
               <label class="block">Email address</label>
               <input
                 type="email"
-                id="email"
-                placeholder=""
+                id="email-register"
+                required
+                pattern="^[\\w\\-.]+@(stud\\.)?noroff\\.no$"
+                title="Please enter a valid noroff.no or stud.noroff.no address"
+                placeholder="Enter your email"
+                autocomplete="email"
                 class="w-full border-b-2 border-text focus:outline-none"
               />
+              <div
+                id="errorEmailContainer"
+                class="hidden px-2 rounded-md bg-background text-accent"
+              >
+                <p id="errorEmailMessage" class="text-left"></p>
+              </div>
             </div>
             <div>
               <label class="block">Password</label>
               <input
                 type="password"
-                id="password"
+                id="password-register"
                 class="w-full border-b-2 border-text focus:outline-none"
+                autocomplete="new-password"
+                minlength="8"
+                placeholder="Enter your password"
+                required
               />
+              <div
+                id="errorPassContainer"
+                class="hidden px-2 rounded-md bg-background text-accent"
+              >
+                <p id="errorPassMessage" class="text-left"></p>
+              </div>
+              <div
+                id="errorContainer"
+                class="hidden px-2 rounded-md bg-background text-accent"
+              >
+                <p id="errorMessage" class="text-left"></p>
+              </div>
             </div>
-            <div
-              id="errorContainer"
-              class="hidden mx-4 bg-accent rounded-full text-background p-2"
-            >
-              <p id="errorMessage" class="text-center">
-                404: Wrong Email or password
-              </p>
-            </div>
+
             <button
               class="w-2/3 flex justify-center mx-auto bg-background hover:text-background hover:bg-primary text-text text-2xl py-2 rounded-lg cursor-pointer shadow-md"
               id="submitRegForm"
@@ -191,13 +214,28 @@
           </p>
         </div>
       </section>
+      <div
+        id="RegsuccessAlert"
+        class="z-50 fixed hidden border-2 border-primary top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-text px-6 py-4 my-4 rounded-md text-lg items-center mx-auto max-w-lg"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          class="text-green-600 w-5 h-5 sm:w-5 sm:h-5 mr-3"
+        >
+          <path
+            fill="currentColor"
+            d="M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z"
+          ></path>
+        </svg>
+        <span class="text-secondary">Registration successful!</span>
+      </div>
     </main>
 
     <!-- Footer -->
     <footer
-      class="relative px-5 w-full h-48 p-10 bg-text text-secondary text-lg flex justify-center"
+      class="px-5 w-full h-32 p-10 bg-text text-secondary text-lg flex justify-center"
     >
-      <div class="gap-5 text-lg flex flex-col items-center justify-center">
+      <div class="gap-5 text-sm flex flex-col items-center justify-center">
         <h3>Copyright © 2025 Auction House</h3>
         <h3>All Rights Reserved.</h3>
         <h3>
@@ -205,7 +243,7 @@
         </h3>
       </div>
       <a href="/" class="absolute bottom-0 right-0 hidden md:block">
-        <img src="/smallLogo.svg" alt="" class="h-48 w-auto" />
+        <img src="/smallLogo.svg" alt="" class="h-32 w-auto" />
       </a>
     </footer>
   </body>

@@ -7,122 +7,223 @@
     <title>Auction House</title>
     <script type="module" src="/src/app.mjs"></script>
   </head>
-  <body class="font-reddit-mono dark bg-background min-h-screen flex flex-col overflow-x-hidden">
+  <body
+    class="font-reddit-mono dark bg-background min-h-screen flex flex-col overflow-x-hidden"
+  >
     <!-- Header -->
-    <header class="bg-primary mx-auto fixed top-0 w-full z-50 shadow-md">
+    <header
+      class="bg-primary mx-auto fixed top-0 w-full z-50 shadow-text shadow-sm"
+    >
       <nav class="max-w-5xl mx-auto">
         <a href="/">
-          <img src="/Logo1.svg" alt="" class="h-20 sm:h-28" />
+          <img src="/Logo1.svg" alt="" class="h-20 sm:h-20" />
         </a>
-        <div
-          id="wallet"
-          class="absolute hidden sm:block text-text text-xl right-16 top-10"
-        >
-          <p>wallet(0)</p>
-        </div>
-        <div id="hamburger" class="sm:hidden absolute w-5 top-4 right-14">
-          <svg
-          
-            class="text-secondary h-14 w-16"
-            fill="currentColor"
-            viewBox="0 0 448 512"
+        <label id="hamburger" class="sm:hidden absolute pb-5 top-0 right-5">
+          <div
+            class="w-20 h-20 cursor-pointer flex flex-col items-center justify-center"
           >
-            <path
-              d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"
-            />
-          </svg>
-        </div>
+            <input id="navToggle" class="hidden peer" type="checkbox" />
+            <div
+              class="w-[66%] h-[8px] bg-secondary rounded-sm shadow-text shadow-md transition-all duration-300 origin-left translate-y-[1.35rem] peer-checked:rotate-[-45deg]"
+            ></div>
+            <div
+              class="w-[66%] h-[8px] bg-secondary rounded-sm shadow-text shadow-md transition-all duration-300 origin-center peer-checked:hidden"
+            ></div>
+            <div
+              class="w-[66%] h-[8px] bg-secondary rounded-sm shadow-text shadow-md transition-all duration-300 origin-left -translate-y-[1.35rem] peer-checked:rotate-[45deg]"
+            ></div>
+          </div>
+        </label>
+
         <div
           id="navtab"
-          class="bg-text text-background h-fit sm:h-16 px-6 hidden sm:flex flex-col sm:flex-row pt-14 sm:pt-0 items-center justify-between shadow-md"
+          class="hidden bg-text text-background h-fit sm:h-14 px-6 sm:flex flex-col sm:flex-row pt-12 sm:pt-0 items-center justify-between shadow-md"
         >
-          <div class="bg-secondary text-text text-lg relative w-full max-w-sm">
-            <input
-              type="text"
-              name="search"
-              id="search"
-              placeholder="What are you looking for?"
-              class="focus:w-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-            />
-            <svg
-              class="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5"
-              viewBox="0 0 512 512"
-            >
-              <path
-                fill="currentColor"
-                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
-              />
-            </svg>
-          </div>
           <ul
-            class="text-xl sm:text-2xl py-5 sm:py-0 flex flex-col sm:flex-row space-x-6 ml-6"
+            class="text-2xl sm:text-2xl py-5 sm:py-0 flex flex-col sm:flex-row space-x-6 ml-6"
           >
-            <li class="hover:text-secondary"><a href="">Home</a></li>
-            <li class="hover:text-secondary"><a href="">Listings</a></li>
-            <li class="hover:text-secondary"><a href="/Auth/">Login</a></li>
+            <li class="hover:text-secondary"><a href="/">Home</a></li>
+            <li class="hover:text-secondary">
+              <a href="/item/create/">Create listing</a>
+            </li>
+            <li class="border-b-4 border-secondary hover:text-secondary">
+              <a href="/profile/">Profile</a>
+            </li>
+            <li class="hover:text-secondary"><a href="/auth/">Login</a></li>
           </ul>
+          <div
+            id="wallet"
+            class="sm:block flex-row text-background text-lg right-16 top-10"
+          >
+            <p class="hidden italic">wallet(0)</p>
+          </div>
         </div>
       </nav>
     </header>
 
     <!-- Main body -->
-    <main class="flex-grow max-w-5xl mx-auto mt-36 sm:mt-52 ">
-      <section class="container mx-auto">
-        <div
-          id="cardWrapper"
-          class=" columns-1 mx-2 sm:mx-0 sm:columns-2 lg:columns-3 gap-6"
-        >
-          <div id="card" class="bg-background shadow-2xl overflow-hidden mb-6 min-w-80">
-            <div class="flex justify-between text-lg p-4">
-              <div id="ProfileId" class="flex-row">
-                <img
-                  src="/senbetPB22.jpg"
-                  alt=""
-                  class="h-14 w-14 rounded-full shadow-md border-2 border-text"
-                />
-                <p>Senbet's traktor</p>
+    <main class="h-svh flex-1 bg-secondary max-w-5xl mx-auto mt-36 sm:mt-52">
+      <section class="mb-10 bg-background py-8">
+        <div class="max-w-7xl mx-auto px-4">
+          <div class="sm:flex sm:justify-between">
+            <!-- Left Section: Filters -->
+            <!-- Category Filter -->
+            <div class="filter-category mb-4">
+              <label for="category" class="block text-lg font-medium text-text">
+                Category
+              </label>
+              <select
+                id="category"
+                class="w-full p-2 border cursor-pointer border-gray-300 rounded-md bg-secondary text-text text-lg focus:outline-none focus:ring-2 focus:ring-primary"
+              >
+                <option value="">Default</option>
+                <option value="art">Art</option>
+                <option value="watches">Watches</option>
+                <option value="jewelry">Jewelry</option>
+                <option value="vintage">Vintage</option>
+                <option value="fashion">Fashion</option>
+                <option value="cars">Cars</option>
+                <option value="interiors">Interiors</option>
+                <option value="decor">Decor</option>
+                <option value="games">Games</option>
+                <option value="books">Books</option>
+                <option value="toys">Toys</option>
+                <option value="sports">Sports</option>
+                <option value="collectibles">Collectibles</option>
+                <option value="memorabilia">Memorabilia</option>
+              </select>
+            </div>
+
+            <!-- Filter Checkbox Options -->
+            <div class="filter-options mb-4">
+              <label for="filter" class="block text-lg font-medium text-text">
+                Filter
+              </label>
+
+              <div class="flex flex-col space-y-2 mt-2">
+                <label class="inline-flex items-center text-lg text-text">
+                  <input
+                    type="checkbox"
+                    id="includeClosedAuctions"
+                    class="form-checkbox h-5 w-5 text-primary focus:outline-none cursor-pointer"
+                  />
+                  <span class="ml-2">Include Closed Auctions</span>
+                </label>
               </div>
-              <p class="flex  items-center">august 13 2021</p>
             </div>
-            <h1 class="bg-secondary text-left text-xl px-4 py-3">
-              I am card, probably Iphone
-            </h1>
-            <img class="w-fit max-h-56 mx-auto" src="/auctionHouse.png" alt="" />
-            <div class="card-info px-4 text-lg">
-              <p id="category">Category: House</p>
-              <p id="category">Tags: House</p>
-            </div>
-            <div id="bids" class=" text-background  bg-text p-2 flex w-1/3 ml-auto items-center justify-center shadow-md">
-              <p>9 bids so far</p>
-            </div>
-            <div class="card-info flex w-full">
-              <p class="w-2/3 p-2 bg-primary text-background bg-center flex items-center justify-center shadow-md">3d : 12h : 12m</p>
-              <p class="w-1/3 p-2 bg-background flex items-center justify-center shadow-md cursor-pointer font-semibold hover:bg-secondary">Bid Now</p>
+
+            <!-- Right Section: Welcome and Login/Register -->
+            <div class="right-section sm:w-1/2 sm:pl-8">
+              <h1 class="text-2xl md:text-3xl font-bold mb-4 text-primary">
+                Welcome to Auction House
+              </h1>
+              <p class="text-lg mb-6 text-text">
+                Explore a wide range of products and place your bids on the
+                items you love!
+              </p>
+
+              <div>
+                <a href="/auth/" class="inline-block" id="loginRegisterLink">
+                  <button
+                    class="px-6 py-2 bg-primary text-background rounded-md font-semibold hover:bg-text cursor-pointer transition-colors"
+                    id="loginRegisterButton"
+                  >
+                    Login / Register
+                  </button>
+                </a>
+              </div>
             </div>
           </div>
-
-
-
+        </div>
       </section>
-      <section>
-        
+
+      <section
+        id="cardWrapper"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        <!-- Template for each card -->
+        <template id="listing-template">
+          <div
+            class="listing-card bg-background cursor-pointer border-gray-100 border-4 shadow-text shadow-sm overflow-hidden mb-6 mx-auto sm:mx-2 min-w-72 max-w-80 flex flex-col"
+          >
+            <div class="flex justify-between text-lg p-4">
+              <div class="flex-row">
+                <img
+                  class="seller-avatar h-14 w-14 rounded-full shadow-md border-2 border-text"
+                  src=""
+                  alt="Seller Avatar"
+                />
+                <p class="seller-name">Seller Name</p>
+              </div>
+              <p class="date-posted">Date</p>
+            </div>
+            <h1
+              class="listing-title bg-primary truncate text-background text-left text-lg px-4 py-3"
+            >
+              Item Title
+            </h1>
+            <img
+              class="listing-image w-full max-h-52 mx-auto object-cover"
+              src=""
+              alt="Listing Image"
+            />
+            <div
+              class="flex items-center justify-center h-48 mb-4 bg-gray-300 rounded-sm"
+            >
+              <svg
+                class="w-10 h-10 text-gray-200 dark:text-gray-600"
+                aria-hidden="true"
+                fill="currentColor"
+                viewBox="0 0 16 20"
+              >
+                <path
+                  d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z"
+                />
+                <path
+                  d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"
+                />
+              </svg>
+            </div>
+            <div class="card-info px-4 text-lg flex-grow">
+              <p class="price">Highest Bid: $40</p>
+              <p class="bids">Bids: 0</p>
+            </div>
+            <div class="card-footer flex w-full">
+              <p
+                class="time-left w-1/2 p-2 bg-primary text-background flex items-center justify-center shadow-md"
+              >
+                Time Left
+              </p>
+              <p
+                class="item-action w-1/2 p-2 text-text bg-background flex justify-center hover:shadow-md shadow-md border-4 border-gray-300 shadow-accent cursor-pointer font-semibold hover:text-primary hover:bg-secondary"
+              >
+                Bid Now
+              </p>
+            </div>
+          </div>
+        </template>
       </section>
+      <div>
+        <button
+          class="px-6 py-4 flex mx-auto mb-4 bg-primary text-background rounded-md text-lg font-semibold hover:bg-text cursor-pointer transition-colors"
+          id="loadMore"
+        >
+          Load more items
+        </button>
+      </div>
     </main>
 
     <!-- Footer -->
     <footer
-      class="relative px-5 w-full h-48 p-10 bg-text text-secondary text-lg flex justify-center"
+      class="px-5 w-full h-32 p-10 bg-text text-secondary text-lg flex justify-center"
     >
-      <div class="gap-5 text-lg flex flex-col items-center justify-center">
+      <div class="gap-5 text-sm flex flex-col items-center justify-center">
         <h3>Copyright © 2025 Auction House</h3>
         <h3>All Rights Reserved.</h3>
         <h3>
           Created by Senbet Gereslase as a semester project at Noroff, 2025.
         </h3>
       </div>
-      <a href="/" class="absolute bottom-0 right-0 hidden md:block">
-        <img src="/smallLogo.svg" alt="" class="h-48 w-auto" />
-      </a>
     </footer>
   </body>
 </html>

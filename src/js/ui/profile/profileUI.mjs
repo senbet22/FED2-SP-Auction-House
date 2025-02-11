@@ -66,5 +66,5 @@ profileButton.addEventListener("click", () => {
   );
 });
 
-// Default to showing the "Bids" section and setting its button as active
+// Default to showing the Bids section and setting its button as active
 bidsButton.click();

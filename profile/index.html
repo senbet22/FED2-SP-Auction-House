@@ -59,7 +59,7 @@
     <!-- Main body -->
     <main class="flex-1 h-svh max-w-5xl mx-auto mt-36 sm:mt-64 shadow-md">
       <section
-        class="w-full px-2 lg:w-3xl m-10 bg-background text-text mx-auto"
+        class="w-full min-h-screen px-2 lg:w-3xl m-10 bg-background text-text mx-auto"
       >
         <div
           class="profile-header mb-10 bg-text text-secondary flex justify-between items-center h-28"
@@ -70,216 +70,220 @@
           </p>
         </div>
         <div
-          class="flex w-full m-auto text-lg sm:text-xl font-medium bg-secondary space-x-2"
+          class="flex shadow-text w-full m-auto text-lg sm:text-xl font-medium bg-secondary space-x-0.5"
         >
           <button
             id="bidsButton"
-            class="px-2 py-3 w-auto hover:bg-primary hover:text-background cursor-pointer bg-background shadow-md"
+            class="px-2 py-3 w-auto hover:bg-primary hover:text-background cursor-pointer bg-background shadow-md shadow-text/30"
           >
             My Bids
           </button>
           <button
             id="winsButton"
-            class="px-2 py-3 w-auto hover:bg-primary hover:text-background cursor-pointer bg-background shadow-md"
+            class="px-2 py-3 w-auto hover:bg-primary hover:text-background cursor-pointer bg-background shadow-md shadow-text/30"
           >
             My Wins
           </button>
           <button
             id="listingButton"
-            class="px-2 py-3 w-auto hover:bg-primary hover:text-background cursor-pointer bg-background shadow-md"
+            class="px-2 py-3 w-auto hover:bg-primary hover:text-background cursor-pointer bg-background shadow-md shadow-text/30"
           >
             My Listings
           </button>
           <button
             id="ProfileButton"
-            class="px-2 py-3 w-auto hover:bg-primary hover:text-background cursor-pointer bg-background shadow-md"
+            class="px-2 py-3 w-auto hover:bg-primary hover:text-background cursor-pointer bg-background shadow-md shadow-text/30"
           >
             Update Profile
           </button>
         </div>
 
-        <div class="p-2 shadow-lg text-lg md:text-xl bg-secondary py-8">
-          <!-- Bids card -->
-          <div
-            id="bidsCard"
-            class="bids-card drop-shadow-xl bg-background md:mx-20"
-          >
-            <h1 class="m-4 text-xl sm:text-2xl">
-              Fake rolex x Adidas watch 3.5
-            </h1>
+        <!-- Bids card -->
+        <div id="bidsCard" class="bids-card bg-secondary py-5 shadow-md"></div>
+
+        <!-- Wins card -->
+        <div id="winsCard" class="bids-card bg-secondary py-5 shadow-md"></div>
+
+        <!-- My listing card -->
+        <div
+          id="listingCard"
+          class="bids-card bg-secondary py-5 shadow-md"
+        ></div>
+
+        <!-- Listing Template -->
+        <template id="listingTemplate">
+          <div class="listing-card bids-card bg-background shadow-md">
+            <h1 class="listing-title m-4 text-xl sm:text-2xl"></h1>
             <div class="prime-info flex justify-between">
               <div class="w-1/4 mx-4">
                 <img
-                  src="/public/auctionHouse.png"
-                  class="max-h-full w-24 bg-accent"
-                  alt=""
+                  class="listing-image max-h-24 w-24 bg-accent"
+                  src="placeholder"
+                  alt="Listing image"
                 />
               </div>
               <div class="w-1/2 text-sm sm:text-lg">
-                <p>Listing price: $399</p>
-                <p>category: Jewlery</p>
+                <p class="bids">Bids: 0</p>
+                <p class="category">Category: N/A</p>
+                <div class="price">Highest Bid: $0</div>
               </div>
-              <div class="w-1/2">
-                <p class="time-left">Time left</p>
+              <div class="w-1/3">
+                <p class="text-sm sm:text-lg">Time left</p>
                 <p
-                  class="p-2 bg-primary text-background bg-center flex items-center justify-center shadow-md"
+                  class="time-left justify-center p-2 text-sm sm:text-lg bg-primary text-background bg-center flex items-center shadow-md"
                 >
-                  3d : 12h : 12m
+                  Ends in: --
                 </p>
               </div>
             </div>
             <div
-              class="secondary-info flex justify-between text-sm sm:text-xl p-4 gap-4"
+              class="secondary-info flex justify-items-end text-sm sm:text-xl py-4 px-2"
             >
-              <div class="">Leading bid: $330</div>
-              <div class="">Participants: 3</div>
-              <div class="">Your bid: $35</div>
-            </div>
-            <div class="flex">
-              <div
-                class="bg-secondary hover:bg-primary hover:text-background w-fit m-2 p-2 rounded-full shadow-md ml-auto"
+              <p class="created-date text-sm mr-auto mt-auto">N/A:</p>
+              <a
+                class="item-action m-0.5 bg-background hover:bg-secondary hover:text-text p-2 px-4 shadow-sm rounded-full shadow-text/40"
+                href="item/"
+                >View</a
               >
-                <a class="m-2" href="/item/">View item</a>
-              </div>
+              <a
+                class="item-action m-0.5 bg-background hover:bg-primary hover:text-background p-2 px-4 shadow-sm rounded-full shadow-text/40"
+                href="item/"
+                >Edit</a
+              >
+              <a
+                class="item-action m-0.5 bg-background hover:bg-accent hover:text-background p-2 px-4 rounded-full shadow-sm shadow-text/40"
+                href="item/"
+                >Delete</a
+              >
             </div>
           </div>
+        </template>
 
-          <!-- Wins card -->
-          <div id="winsCard" class="bids-card bg-background md:mx-20 shadow-md">
-            <h1 class="m-4 text-xl sm:text-2xl">
-              Fake rolex x Adidas watch 3.5
-            </h1>
+        <!-- Bids Template -->
+        <template id="bidsTemplate">
+          <div class="bids-card bg-background shadow-md">
+            <h1 class="bids-title m-4 text-xl sm:text-2xl"></h1>
             <div class="prime-info flex justify-between">
               <div class="w-1/4 mx-4">
                 <img
-                  src="/public/auctionHouse.png"
-                  class="max-h-full w-24 bg-accent"
-                  alt=""
+                  class="bids-image max-h-24 w-24 bg-accent"
+                  src="placeholder"
+                  alt="Bids image"
                 />
               </div>
               <div class="w-1/2 text-sm sm:text-lg">
-                <p>Listing price: $399</p>
-                <p>Seller: senbet</p>
-                <p>category: Jewlery</p>
+                <p class="bids-category">Category: N/A</p>
+                <p class="participants">Participants: 0</p>
               </div>
-              <div class="w-1/2">
+              <div class="w-1/3">
+                <p class="text-sm sm:text-lg">Time left</p>
                 <p
-                  class="p-2 bg-primary text-background bg-center flex items-center justify-center shadow-md"
+                  class="time-left justify-center p-2 text-sm sm:text-lg bg-primary text-background bg-center flex items-center shadow-md"
                 >
-                  Winning bid: $400
+                  Ends in: --
+                </p>
+              </div>
+            </div>
+            <div
+              class="secondary-info flex justify-between text-sm sm:text-xl py-4 px-2"
+            >
+              <div class="leading-bid">Leading bid: $0</div>
+              <div class="your-bid">Your bid: $0</div>
+            </div>
+            <div class="flex">
+              <div class="bid-time p-2">Bid time:</div>
+
+              <a
+                class="bids-action text-lg bg-secondary hover:bg-primary hover:text-background m-2 p-2 rounded-full shadow-text/40 shadow-sm ml-auto"
+                href="item/"
+                >View Item</a
+              >
+            </div>
+          </div>
+        </template>
+
+        <!-- Wins Template -->
+        <template id="winsTemplate">
+          <div class="wins-card bg-background shadow-md">
+            <h1 class="wins-title m-4 text-xl sm:text-2xl"></h1>
+            <div class="prime-info flex justify-between">
+              <div class="w-1/4 mx-4">
+                <img
+                  class="wins-image max-h-24 w-24"
+                  src="placeholder"
+                  alt="Wins image"
+                />
+              </div>
+              <div class="w-1/2 text-sm sm:text-lg">
+                <p class="wins-category">Category: N/A</p>
+                <p class="wins-seller">Seller: N/A</p>
+              </div>
+              <div class="w-1/3">
+                <p
+                  class="p-2 bg-primary text-background bg-center sm:text-lg flex items-center justify-center shadow-md winning-bid"
+                >
+                  Winning bid: $0
                 </p>
               </div>
             </div>
             <div class="flex mx-4 items-center">
-              <div
-                class="bg-secondary hover:bg-primary hover:text-background w-fit m-2 p-2 rounded-full shadow-md ml-auto"
+              <p class="win-time"></p>
+              <a
+                class="wins-action text-lg bg-secondary hover:bg-primary hover:text-background m-2 p-2 rounded-full shadow-text/40 shadow-sm ml-auto"
+                href="item/"
+                >View Item</a
               >
-                <a class="m-2" href="item/">View item</a>
-              </div>
             </div>
           </div>
-          <!-- My listing card -->
-          <div
-            id="listingCard"
-            class="bids-card bg-secondary py-5 shadow-md"
-          ></div>
-          <!-- Listing Template -->
-          <template id="listingTemplate">
-            <div class="listing-card bids-card bg-background shadow-md">
-              <h1 class="listing-title m-4 text-xl sm:text-2xl"></h1>
-              <div class="prime-info flex justify-between">
-                <div class="w-1/4 mx-4">
-                  <img
-                    class="listing-image max-h-24 w-24 bg-accent"
-                    src="placeholder"
-                    alt="Listing image"
-                  />
-                </div>
-                <div class="w-1/2 text-sm sm:text-lg">
-                  <p class="bids">Bids: 0</p>
-                  <p class="category">Category: N/A</p>
-                  <div class="price">Highest Bid: $0</div>
-                </div>
-                <div class="w-1/3">
-                  <p>Time left</p>
+        </template>
 
-                  <p
-                    class="time-left justify-center p-2 text-lg bg-primary text-background bg-center flex items-center shadow-md"
-                  >
-                    Ends in: --
-                  </p>
-                </div>
-              </div>
-              <div
-                class="secondary-info flex justify-end text-sm sm:text-xl p-4 gap-2"
-              >
-                <div
-                  class="bg-background cursor-pointer hover:bg-secondary hover:text-text w-fit p-2 px-4 shadow-md shadow-text/50"
-                >
-                  <a class="item-action m-2" href="item/">View</a>
-                </div>
-                <div
-                  class="bg-background cursor-pointer hover:bg-primary hover:text-background w-fit p-2 px-4 shadow-md shadow-text/50"
-                >
-                  <a class="item-action m-2" href="item/">Edit </a>
-                </div>
-                <div
-                  class="bg-background cursor-pointer hover:bg-accent hover:text-background w-fit p-2 px-4 rounded-md shadow-md shadow-text/50"
-                >
-                  <a class="item-action m-2" href="item/">Delete</a>
-                </div>
-              </div>
-            </div>
-          </template>
-
-          <!-- Update Profile card -->
-          <div
-            id="profileCard"
-            class="bids-card text-lg bg-background md:mx-20 shadow-md"
+        <!-- Update Profile card -->
+        <div
+          id="profileCard"
+          class="bids-card text-lg bg-background md:mx-20 shadow-md"
+        >
+          <h1
+            class="m-4 text-xl flex justify-center text-background p-2 bg-primary sm:text-2xl"
           >
-            <h1
-              class="m-4 text-xl flex justify-center text-background p-2 bg-primary sm:text-2xl"
+            Update Profile
+          </h1>
+          <div class="prime-info flex justify-between items-center">
+            <div class="w-1/4 mx-4">
+              <img
+                src="/public/auctionHouse.png"
+                class="max-h-full w-24 bg-accent"
+                alt=""
+              />
+            </div>
+            <div
+              class="mr-2 text-sm sm:text-lg w-full border-b-2 border-text focus:outline-none"
             >
-              Update Profile
-            </h1>
-            <div class="prime-info flex justify-between items-center">
-              <div class="w-1/4 mx-4">
-                <img
-                  src="/public/auctionHouse.png"
-                  class="max-h-full w-24 bg-accent"
-                  alt=""
-                />
-              </div>
-              <div
-                class="mr-2 text-sm sm:text-lg w-full border-b-2 border-text focus:outline-none"
-              >
-                <input
-                  type="text"
-                  placeholder="Enter image URL"
-                  class="w-full p-2 bg-secondary"
-                />
-              </div>
+              <input
+                type="text"
+                placeholder="Enter image URL"
+                class="w-full p-2 bg-secondary"
+              />
             </div>
-            <div class="prime-info flex justify-between items-center">
-              <div class="w-1/4 mx-4">
-                <h2 class="">Bio</h2>
-              </div>
-              <div
-                class="mr-2 text-sm sm:text-lg w-full border-b-2 border-text focus:outline-none"
-              >
-                <textarea
-                  type="text"
-                  placeholder="Enter Bio"
-                  class="w-full p-2 bg-secondary"
-                ></textarea>
-              </div>
+          </div>
+          <div class="prime-info flex justify-between items-center">
+            <div class="w-1/4 mx-4">
+              <h2 class="">Bio</h2>
             </div>
-            <div class="flex">
-              <div
-                class="bg-background hover:bg-primary hover:text-background w-fit mx-auto m-2 p-2 rounded-full shadow-md ml-auto"
-              >
-                <a class="m-2" href="item/">Update profile</a>
-              </div>
+            <div
+              class="mr-2 text-sm sm:text-lg w-full border-b-2 border-text focus:outline-none"
+            >
+              <textarea
+                type="text"
+                placeholder="Enter Bio"
+                class="w-full p-2 bg-secondary"
+              ></textarea>
+            </div>
+          </div>
+          <div class="flex">
+            <div
+              class="bg-background hover:bg-primary hover:text-background w-fit mx-auto m-2 p-2 rounded-full shadow-md ml-auto"
+            >
+              <a class="m-2" href="item/">Update profile</a>
             </div>
           </div>
         </div>

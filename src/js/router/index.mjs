@@ -18,6 +18,8 @@ export default async function router(pathname = window.location.pathname) {
       await import("../ui/profile/profileUI.mjs");
       await import("../ui/profile/myWins.mjs");
       await import("../ui/profile/myListings.mjs");
+      await import("../ui/profile/myBids.mjs");
+      await import("../ui/profile/myWins.mjs");
       break;
     case "/item/":
       await import("./views/navbar.mjs");

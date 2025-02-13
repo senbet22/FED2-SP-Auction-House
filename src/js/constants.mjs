@@ -23,8 +23,8 @@ export function getAuctionEndpoints() {
   if (userName) {
     return {
       API_MY_PROFILE: `${API_PROFILES}/${userName.name}`,
-      API_MY_LISTINGS: `${API_PROFILES}/${userName.name}/listings?_bids=true`,
-      API_MY_WINS: `${API_PROFILES}/${userName.name}/wins`,
+      API_MY_LISTINGS: `${API_PROFILES}/${userName.name}/listings?_bids=true&_seller=true`,
+      API_MY_WINS: `${API_PROFILES}/${userName.name}/wins?_bids=true&_seller=true`,
       API_MY_BIDS: `${API_PROFILES}/${userName.name}/bids`,
     };
   } else {

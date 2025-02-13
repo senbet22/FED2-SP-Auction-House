@@ -1,6 +1,7 @@
 import { optionGetProfile } from "../../api/requestOptions.mjs";
 import { getAuctionEndpoints } from "../../constants.mjs";
 import { formatTimeLeft } from "../../utils/formatTimer.mjs";
+import { formatBidTime } from "../../utils/formatBidTime.mjs";
 import { getHighestBid } from "../../utils/getHighestBid.mjs";
 
 const MY_PROFILE_ENDPOINT = getAuctionEndpoints();
@@ -80,6 +81,9 @@ function displayListings(listings) {
     highestBidElement.textContent = `Highest Bid: $${
       highestBid !== null ? highestBid : "N/A"
     }`;
+
+    const createdDateElement = clone.querySelector(".created-date");
+    createdDateElement.textContent = formatBidTime(listing.created);
 
     const itemActionElement = clone.querySelector(".item-action");
     itemActionElement.href = `/item/${listing.id}`;

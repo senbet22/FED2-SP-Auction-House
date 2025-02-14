@@ -100,7 +100,7 @@ function displayBids(bids) {
     }
 
     const viewItemElement = clone.querySelector(".bids-action");
-    viewItemElement.href = `/item/${bid.listing.id}`;
+    viewItemElement.href = `/item/?id=${bid.listing.id}`;
 
     bidsCardContainer.appendChild(clone);
   });

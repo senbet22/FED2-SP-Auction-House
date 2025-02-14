@@ -19,22 +19,23 @@ export const optionGetProfile = (token) => ({
   },
 });
 
-export const optionPost = (blogdata) => ({
+export const optionPost = (biddata) => ({
   method: "POST",
   headers: {
     "Content-Type": "application/json",
     Authorization: `Bearer ${accessToken}`,
+    "X-Noroff-API-Key": API_KEY,
   },
-  body: JSON.stringify(blogdata),
+  body: JSON.stringify(biddata),
 });
 
-export const optionPut = (blogdata) => ({
+export const optionPut = (biddata) => ({
   method: "PUT",
   headers: {
     "Content-Type": "application/json",
     Authorization: `Bearer ${accessToken}`,
   },
-  body: JSON.stringify(blogdata),
+  body: JSON.stringify(biddata),
 });
 
 export const optionDelete = {

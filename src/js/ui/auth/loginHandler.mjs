@@ -25,11 +25,16 @@ form.addEventListener("submit", async (event) => {
     sessionStorage.setItem("token", accessToken);
     sessionStorage.setItem("auctionProfile", JSON.stringify(user));
 
+    // Store welcome message flag with timestamp (expires after 10 sec)
+    sessionStorage.setItem(
+      "showWelcomeMessage",
+      JSON.stringify({ timestamp: Date.now() })
+    );
+
     console.log("Login successful:", userData);
     window.location.href = "/";
   } catch (error) {
     console.error("Login failed:", error);
-
     errorMessage.textContent = error.message;
     errorContainer.classList.remove("hidden");
   }

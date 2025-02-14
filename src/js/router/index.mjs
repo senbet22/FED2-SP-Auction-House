@@ -2,6 +2,7 @@ export default async function router(pathname = window.location.pathname) {
   switch (pathname) {
     case "/":
       await import("./views/navbar.mjs");
+      await import("../ui/components/welcomeMsg.mjs");
       await import("../ui/listings/uiHandler.mjs");
       await import("../ui/components/wallet.mjs");
       await import("../api/fetchUserProfile.mjs");
@@ -23,7 +24,10 @@ export default async function router(pathname = window.location.pathname) {
       break;
     case "/item/":
       await import("./views/navbar.mjs");
-      await import("../ui/listings/singleItemFetch.mjs");
+      await import("../ui/singleItem/uiSingleItem.mjs");
+      await import("../ui/singleItem/bidHandler.mjs");
+      await import("../ui/singleItem/bidModal.mjs");
+      await import("../ui/components/wallet.mjs");
 
       break;
     default:

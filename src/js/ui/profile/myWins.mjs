@@ -99,7 +99,7 @@ function displayWins(wins) {
 
     const itemActionElement = clone.querySelector(".wins-action");
     if (itemActionElement) {
-      itemActionElement.href = `/item/${win.id}`;
+      itemActionElement.href = `/item/?id=${win.id}`;
     } else {
       console.warn("Item action element not found in template!");
     }

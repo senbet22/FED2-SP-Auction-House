@@ -86,7 +86,7 @@ function displayListings(listings) {
     createdDateElement.textContent = formatBidTime(listing.created);
 
     const itemActionElement = clone.querySelector(".item-action");
-    itemActionElement.href = `/item/${listing.id}`;
+    itemActionElement.href = `/item/?id=${listing.id}`;
 
     listingCardContainer.appendChild(clone);
   });

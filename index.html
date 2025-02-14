@@ -18,7 +18,8 @@
         <a href="/">
           <img src="/Logo1.svg" alt="" class="h-20 sm:h-20" />
         </a>
-        <label id="hamburger" class="sm:hidden absolute pb-5 top-0 right-5">
+
+        <label id="hamburger" class="md:hidden absolute pb-5 top-0 right-5">
           <div
             class="w-20 h-20 cursor-pointer flex flex-col items-center justify-center"
           >
@@ -37,10 +38,29 @@
 
         <div
           id="navtab"
-          class="hidden bg-text text-background h-fit sm:h-14 px-6 sm:flex flex-col sm:flex-row pt-12 sm:pt-0 items-center justify-between shadow-md"
+          class="hidden bg-text text-background h-fit md:h-14 px-6 md:flex flex-col md:flex-row pt-12 sm:pt-0 items-center justify-between shadow-md"
         >
+          <div class="bg-secondary text-text text-lg relative w-full max-w-72">
+            <input
+              type="text"
+              name="search"
+              id="search"
+              placeholder="What are you looking for?"
+              class="focus:w-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+            />
+            <svg
+              class="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5"
+              viewBox="0 0 512 512"
+            >
+              <path
+                fill="currentColor"
+                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+              />
+            </svg>
+          </div>
+
           <ul
-            class="text-2xl sm:text-2xl py-5 sm:py-0 flex flex-col sm:flex-row space-x-6 ml-6"
+            class="text-xl py-5 md:py-0 flex flex-col md:flex-row space-x-6 ml-6"
           >
             <li class="hover:text-secondary"><a href="/">Home</a></li>
             <li class="hover:text-secondary">
@@ -51,30 +71,24 @@
             </li>
             <li class="hover:text-secondary"><a href="/auth/">Login</a></li>
           </ul>
-          <div
-            id="wallet"
-            class="sm:block flex-row text-background text-lg right-16 top-10"
-          >
-            <p class="hidden italic">wallet(0)</p>
-          </div>
         </div>
       </nav>
     </header>
 
     <!-- Main body -->
-    <main class="h-svh flex-1 bg-secondary max-w-5xl mx-auto mt-36 sm:mt-52">
+    <main class="h-svh flex-1 bg-secondary max-w-5xl mx-auto mt-36">
       <section class="mb-10 bg-background py-8">
         <div class="max-w-7xl mx-auto px-4">
           <div class="sm:flex sm:justify-between">
             <!-- Left Section: Filters -->
             <!-- Category Filter -->
-            <div class="filter-category mb-4">
+            <div class="filter-category md:w-1/2 mb-4">
               <label for="category" class="block text-lg font-medium text-text">
                 Category
               </label>
               <select
                 id="category"
-                class="w-full p-2 border cursor-pointer border-gray-300 rounded-md bg-secondary text-text text-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                class="w-fit p-2 border cursor-pointer border-gray-300 rounded-md bg-secondary text-text text-lg focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <option value="">Default</option>
                 <option value="art">Art</option>
@@ -92,24 +106,6 @@
                 <option value="collectibles">Collectibles</option>
                 <option value="memorabilia">Memorabilia</option>
               </select>
-            </div>
-
-            <!-- Filter Checkbox Options -->
-            <div class="filter-options mb-4">
-              <label for="filter" class="block text-lg font-medium text-text">
-                Filter
-              </label>
-
-              <div class="flex flex-col space-y-2 mt-2">
-                <label class="inline-flex items-center text-lg text-text">
-                  <input
-                    type="checkbox"
-                    id="includeClosedAuctions"
-                    class="form-checkbox h-5 w-5 text-primary focus:outline-none cursor-pointer"
-                  />
-                  <span class="ml-2">Include Closed Auctions</span>
-                </label>
-              </div>
             </div>
 
             <!-- Right Section: Welcome and Login/Register -->
@@ -150,7 +146,7 @@
               <div class="flex-row">
                 <img
                   class="seller-avatar h-14 w-14 rounded-full shadow-md border-2 border-text"
-                  src=""
+                  src="/public/auctionHouse.png"
                   alt="Seller Avatar"
                 />
                 <p class="seller-name">Seller Name</p>
@@ -164,7 +160,7 @@
             </h1>
             <img
               class="listing-image w-full max-h-52 mx-auto object-cover"
-              src=""
+              src="/public/auctionHouse.png"
               alt="Listing Image"
             />
             <div
@@ -203,6 +199,7 @@
           </div>
         </template>
       </section>
+
       <div>
         <button
           class="px-6 py-4 flex mx-auto mb-4 bg-primary text-background rounded-md text-lg font-semibold hover:bg-text cursor-pointer transition-colors"
@@ -210,6 +207,33 @@
         >
           Load more items
         </button>
+      </div>
+
+      <!-- Welcome message upon login: -->
+      <div
+        class="welcome-message hidden fixed top-36 right-5 mr-auto flex-col gap-3 z-50 bg-secondary"
+      >
+        <div
+          class="relative border max-w-72 border-gray-200 rounded-lg shadow-lg"
+        >
+          <div class="flex items-center p-4">
+            <img
+              id="userAvatar"
+              class="object-cover w-12 h-12 rounded-lg"
+              src="https://randomuser.me/api/portraits/women/71.jpg"
+              alt=""
+            />
+
+            <div class="ml-3 overflow-hidden">
+              <p id="userName" class="font-medium text-lg sm:text-xl text-text">
+                Welcome back, Senbet!
+              </p>
+              <p class="max-w-xs text-sm sm:text-lg text-primary truncate">
+                You are now logged in.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
 

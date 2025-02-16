@@ -1,34 +1,75 @@
 import { API_LISTINGS } from "../../constants.mjs";
 import { optionPost } from "../../api/requestOptions.mjs";
 
+const modal = document.getElementById("bidModal");
+const alertBox = document.getElementById("alertMessage");
+const alertText = document.getElementById("alertText");
+
+const bidSucessMessage = document.getElementById("bidSucessMessage");
+const sucessText = document.getElementById("sucessText");
+
+function showAlert(message) {
+  alertText.textContent = message;
+  alertBox.classList.remove("hidden");
+  alertBox.classList.remove("translate-x-full");
+
+  setTimeout(() => {
+    alertBox.classList.add("translate-x-full");
+  }, 3000);
+}
+
+function showSuccess(success) {
+  // Hide the alert box if it's visible
+  alertBox.classList.add("hidden");
+
+  sucessText.textContent = success;
+  bidSucessMessage.classList.remove("hidden");
+  bidSucessMessage.classList.remove("translate-x-full");
+
+  setTimeout(() => {
+    bidSucessMessage.classList.add("translate-x-full");
+  }, 2000); // Delay for the success message
+
+  setTimeout(() => {
+    location.reload();
+  }, 2000); // reload 2 seconds after the success message is shown
+}
+
 export async function bidRequest(id) {
   const bidInput = document.getElementById("bidInput");
   const bidAmount = parseFloat(bidInput.value);
 
   if (!bidAmount || bidAmount <= 0) {
-    alert("Please enter a valid bid amount!");
+    modal.classList.add("hidden");
+    showAlert("Please enter a valid bid amount!");
     return;
   }
 
-  const biddata = {
-    amount: bidAmount,
-  };
-
-  const bidOptions = optionPost(biddata);
-  console.log(optionPost(biddata.token));
+  const bidData = { amount: bidAmount };
+  const bidOptions = optionPost(bidData);
 
   try {
-    const response = await fetch(`${API_LISTINGS}/${id}/bids`, bidOptions); // Send the request
+    const response = await fetch(`${API_LISTINGS}/${id}/bids`, bidOptions);
 
     if (!response.ok) {
-      throw new Error(`Error: ${response.status} ${response.statusText}`); // Handle response errors
+      const errorData = await response.json();
+      console.log("Error data:", errorData);
+      throw new Error(
+        `${errorData.statusCode}: ${errorData.status}. ${errorData.errors[0].message}`
+      );
     }
 
     const data = await response.json();
     console.log("Bid submitted successfully:", data);
+
+    // Show success message for 2 seconds, then reload the page
+    showSuccess("Congratulations! You have placed your bid.");
+
+    modal.classList.add("hidden");
     return data;
   } catch (error) {
-    console.error("Error fetching item data:", error);
+    console.error("Error placing bid:", error);
+    showAlert(error.message);
     return null;
   }
 }
@@ -37,13 +78,14 @@ const urlParams = new URLSearchParams(window.location.search);
 const itemId = urlParams.get("id");
 
 const observer = new MutationObserver(() => {
-  const bidButton = document.getElementById("bidButton");
+  const bidButton = document.getElementById("confirmBid");
 
   if (bidButton) {
     bidButton.addEventListener("click", () => {
       bidRequest(itemId).then((response) => {
         if (response) {
           console.log("Bid placed successfully:", response);
+          modal.classList.add("hidden");
         } else {
           console.log("Bid failed.");
         }

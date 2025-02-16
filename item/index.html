@@ -59,32 +59,6 @@
     </header>
 
     <main class="flex-1 pt-20 sm:pt-36 h-svh">
-      <div
-        id="bidModal"
-        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden"
-      >
-        <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
-          <p class="text-lg mb-4">
-            Are you sure you want to place a bid of $<span
-              id="bidAmountDisplay"
-            ></span
-            >?
-          </p>
-          <button
-            id="confirmBid"
-            class="bg-blue-500 text-white px-4 py-2 rounded-lg mr-2"
-          >
-            Confirm
-          </button>
-          <button
-            id="cancelBid"
-            class="bg-red-500 text-white px-4 py-2 rounded-lg"
-          >
-            Cancel
-          </button>
-        </div>
-      </div>
-
       <template id="single-item-template">
         <section
           class="w-full px-4 lg:w-5xl text-text mx-auto bg-secondary p-6 shadow-lg flex flex-col gap-6"
@@ -239,6 +213,79 @@
         </section>
       </div>
     </main>
+    <!-- Modal -->
+    <div
+      id="bidModal"
+      class="hidden fixed inset-0 bg-primary/30 justify-center items-center"
+    >
+      <div class="bg-background p-6 rounded-lg shadow-lg w-96">
+        <h2 class="text-xl font-bold mb-4">Confirm Your Bid</h2>
+
+        <p class="text-text">
+          The current highest bid is:
+          <span id="highestBidAmount" class="font-bold">$0</span>
+        </p>
+
+        <p class="text-text mt-2">
+          Your bid: <span id="yourBidAmount" class="font-bold">$0</span>
+        </p>
+
+        <div class="mt-4 flex justify-end space-x-4">
+          <button
+            id="closeModal"
+            class="bg-secondary cursor-pointer px-4 py-2 rounded hover:bg-accent hover:text-background"
+          >
+            Cancel
+          </button>
+          <button
+            id="confirmBid"
+            class="bg-primary cursor-pointer text-white px-4 py-2 rounded hover:bg-text"
+          >
+            Confirm
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alert Message -->
+    <div
+      id="alertMessage"
+      class="hidden fixed top-36 right-0 w-72 sm:w-96 transform translate-x-full flex items-center p-4 mb-4 text-secondary border-t-4 border-accent bg-text transition-transform duration-500 ease-in-out"
+      role="alert"
+    >
+      <svg
+        class="shrink-0 w-4 h-4"
+        aria-hidden="true"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+      >
+        <path
+          d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+        />
+      </svg>
+      <div class="ms-3 font-medium text-lg" id="alertText">Error message</div>
+    </div>
+
+    <!-- Bid successful message!  transform translate-x-full -->
+    <div
+      id="bidSucessMessage"
+      class="hidden fixed top-36 right-0 w-72 transform translate-x-full sm:w-96 flex items-center p-4 mb-4 text-text border-t-4 border-primary bg-secondary transition-transform duration-500 ease-in-out"
+      role="alert"
+    >
+      <svg
+        class="shrink-0 w-4 h-4"
+        aria-hidden="true"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z"
+        />
+      </svg>
+      <div class="ms-3 font-medium text-lg" id="sucessText">
+        Success message
+      </div>
+    </div>
 
     <!-- Footer -->
     <footer

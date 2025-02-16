@@ -16,7 +16,7 @@
     >
       <nav class="max-w-5xl mx-auto">
         <a href="/">
-          <img src="/Logo1.svg" alt="" class="h-20 sm:h-20" />
+          <img src="/Logo1.svg" alt="" class="h-20" />
         </a>
 
         <label id="hamburger" class="md:hidden absolute pb-5 top-0 right-5">
@@ -38,15 +38,17 @@
 
         <div
           id="navtab"
-          class="hidden bg-text text-background h-fit md:h-14 px-6 md:flex flex-col md:flex-row pt-12 sm:pt-0 items-center justify-between shadow-md"
+          class="hidden bg-text text-background h-fit md:h-14 px-6 md:flex flex-col md:flex-row pt-12 md:pt-0 items-center justify-between shadow-md"
         >
-          <div class="bg-secondary text-text text-lg relative w-full max-w-72">
+          <div
+            class="bg-secondary ml-6 text-text text-lg relative w-full max-w-72"
+          >
             <input
               type="text"
               name="search"
               id="search"
               placeholder="What are you looking for?"
-              class="focus:w-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+              class="focus:w-full pl-4 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
             />
             <svg
               class="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5"

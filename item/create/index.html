@@ -59,10 +59,8 @@
     </header>
 
     <!-- Main body -->
-    <main class="h-svh flex-1 max-w-5xl mx-auto my-52 sm:mt-64">
-      <section
-        class="w-full px-2 lg:w-3xl h-full bg-background text-text mx-auto"
-      >
+    <main class="h-svh w-full flex-1 max-w-5xl mx-auto my-52 sm:mt-64">
+      <section class="px-2 lg:w-3xl bg-background text-text mx-auto">
         <div class="formheader mb-10 bg-text flex justify-between items-center">
           <img src="/public/smallLogo.svg" class="mr-auto" alt="" />
           <h1
@@ -72,78 +70,85 @@
           </h1>
         </div>
 
-        <div class="p-6 shadow-lg text-lg md:text-xl bg-secondary">
+        <!-- Create Listing Form -->
+        <div class="p-6 shadow-lg text-lg w-full md:text-xl bg-secondary">
           <!-- Create Listing Form -->
           <form id="createListingForm" class="space-y-6 block my-10">
+            <!-- Item Name -->
             <div>
-              <label class="block">Item Name</label>
+              <label class="block">Title</label>
               <input
                 type="text"
-                id="itemName"
-                placeholder="Enter item name"
-                class="w-full border-b-2 border-text focus:outline-none"
+                id="itemTitle"
+                placeholder="Enter item title"
+                class="w-full border-b-2 bg-background border-text focus:outline-none p-2"
               />
-              <p id="itemNameError" class="text-accent text-left">
+              <p id="itemTitleError" class="text-accent text-left hidden">
                 404: Missing or invalid details
               </p>
             </div>
 
+            <!-- Description -->
             <div>
-              <label class="block">Listing Price</label>
-              <input
-                type="number"
-                id="listingPrice"
-                placeholder="Enter listing price"
-                class="w-full border-b-2 border-text focus:outline-none"
-              />
-              <p id="priceError" class="text-accent text-left">
+              <label class="block">Description</label>
+              <textarea
+                id="itemDescription"
+                placeholder="Enter item description"
+                class="w-full border-2 border-text focus:outline-none p-3 h-32 resize-none rounded-lg bg-background"
+              ></textarea>
+              <p id="descriptionError" class="text-accent text-left hidden">
                 404: Missing or invalid details
               </p>
             </div>
 
+            <!-- Image URL -->
             <div>
-              <label class="block">Picture URL</label>
+              <label class="block">Image URL</label>
               <input
                 type="text"
-                id="itemPicture"
-                placeholder="Enter picture URL"
-                class="w-full border-b-2 border-text focus:outline-none"
+                id="itemImage"
+                placeholder="Enter image URL"
+                class="w-full bg-background border-b-2 border-text focus:outline-none p-2"
               />
-              <p id="imgError" class="text-accent text-left">
+              <p id="imgError" class="text-accent text-left hidden">
                 404: Missing or invalid details
               </p>
             </div>
 
+            <!-- Image Alt Text -->
+            <div>
+              <label class="block">Image Alt Text</label>
+              <input
+                type="text"
+                id="imageAlt"
+                placeholder="Enter alternative text for image"
+                class="w-full bg-background border-b-2 border-text focus:outline-none p-2"
+              />
+              <p id="altError" class="text-accent text-left hidden">
+                404: Missing or invalid details
+              </p>
+            </div>
+
+            <!-- Listing Time -->
             <div>
               <label class="block">Listing Time</label>
               <select
                 id="listingTime"
-                class="w-full border-b-2 bg-background border-text focus:outline-none"
+                class="w-full border-b-2 bg-background border-text focus:outline-none p-2"
               >
                 <option value="24H">24 Hours</option>
                 <option value="30Days">30 Days</option>
                 <option value="60Days">60 Days</option>
+                <option value="90Days">90 Days</option>
               </select>
             </div>
 
-            <div>
-              <label class="block">Tag</label>
-              <input
-                type="text"
-                id="itemTag"
-                placeholder="Enter item tag"
-                class="w-full border-b-2 border-text focus:outline-none"
-              />
-              <p id="tagError" class="text-accent text-left">
-                404: Missing or invalid details
-              </p>
-            </div>
-
+            <!-- Category -->
             <div>
               <label class="block">Category</label>
               <select
                 id="itemCategory"
-                class="w-full border-b-2 bg-background border-text focus:outline-none"
+                class="w-full border-b-2 bg-background border-text focus:outline-none p-2"
               >
                 <option value="Art">Art</option>
                 <option value="Watches">Watches</option>
@@ -157,11 +162,9 @@
                 <option value="Books">Books</option>
                 <option value="Toys">Toys</option>
                 <option value="Sports">Sports</option>
-                <option value="Collectibles and Memorabilia">
-                  Collectibles and Memorabilia
-                </option>
+                <option value="Collectibles">Collectibles</option>
               </select>
-              <p id="categoryError" class="text-accent text-left">
+              <p id="categoryError" class="text-accent text-left hidden">
                 404: Missing or invalid details
               </p>
             </div>
@@ -186,6 +189,7 @@
           </form>
         </div>
 
+        <!-- Form Footer -->
         <div class="formfooter bg-text flex justify-center items-center h-36">
           <p class="text-secondary text-sm sm:text-lg text-center mx-4">
             Create your listing and get started with your auction!
@@ -205,9 +209,6 @@
           Created by Senbet Gereslase as a semester project at Noroff, 2025.
         </h3>
       </div>
-      <a href="/" class="absolute bottom-0 right-0 hidden md:block">
-        <img src="/smallLogo.svg" alt="" class="h-32 w-auto" />
-      </a>
     </footer>
   </body>
 </html>

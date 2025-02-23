@@ -1,4 +1,4 @@
-import { fetchUserProfile } from "../../api/fetchUserProfile.mjs";
+import { fetchUserProfile } from "../../api/UserProfile.mjs";
 
 async function displayWallet() {
   try {

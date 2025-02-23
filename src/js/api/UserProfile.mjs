@@ -1,4 +1,4 @@
-import { optionGetProfile } from "../api/requestOptions.mjs";
+import { optionGetProfile } from "./requestOptions.mjs";
 
 import { getAuctionEndpoints } from "../constants.mjs";
 

@@ -80,11 +80,6 @@ form.addEventListener("submit", async (event) => {
 
     console.log(userData);
 
-    const { accessToken, ...user } = userData.data;
-
-    sessionStorage.setItem("token", accessToken);
-    sessionStorage.setItem("username", JSON.stringify(user));
-
     console.log("Registration successful:", userData);
 
     const successAlert = document.getElementById("RegsuccessAlert");
@@ -92,8 +87,8 @@ form.addEventListener("submit", async (event) => {
 
     setTimeout(() => {
       successAlert.classList.add("hidden");
-      window.location.href = "/";
-    }, 2000);
+      location.reload();
+    }, 2300);
   } catch (error) {
     console.error("Registration failed:", error);
 

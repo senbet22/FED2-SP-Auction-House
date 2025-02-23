@@ -1,4 +1,4 @@
-import { fetchListings } from "../../api/fetchListing.mjs";
+import { fetchListings } from "../../api/listing.mjs";
 import { API_LISTINGS } from "../../constants.mjs";
 
 // Ensure currentPage is a valid number before proceeding

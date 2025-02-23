@@ -8,7 +8,7 @@ const alertText = document.getElementById("alertText");
 const bidSucessMessage = document.getElementById("bidSucessMessage");
 const sucessText = document.getElementById("sucessText");
 
-function showAlert(message) {
+export function showAlert(message) {
   alertText.textContent = message;
   alertBox.classList.remove("hidden");
   alertBox.classList.remove("translate-x-full");
@@ -62,14 +62,16 @@ export async function bidRequest(id) {
     const data = await response.json();
     console.log("Bid submitted successfully:", data);
 
-    // Show success message for 2 seconds, then reload the page
+    // Make sure to update sessionStorage and display only once
     showSuccess("Congratulations! You have placed your bid.");
+    sessionStorage.setItem("lastBid", bidAmount);
 
     modal.classList.add("hidden");
     return data;
   } catch (error) {
     console.error("Error placing bid:", error);
     showAlert(error.message);
+    modal.classList.add("hidden");
     return null;
   }
 }

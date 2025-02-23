@@ -1,5 +1,5 @@
 import { renderListingCard } from "./renderListingCard.mjs";
-import { fetchListings } from "../../api/fetchListing.mjs";
+import { fetchListings } from "../../api/listing.mjs";
 import { handleCardClick } from "./clickHandler.mjs";
 import { API_LISTINGS } from "../../constants.mjs";
 import { loadMoreBtn } from "./loadMoreBtn..mjs";

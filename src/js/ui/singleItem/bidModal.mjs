@@ -1,5 +1,3 @@
-import { bidRequest } from "./bidHandler.mjs";
-
 const observer = new MutationObserver(() => {
   const modal = document.getElementById("bidModal");
   const bidButton = document.getElementById("bidButton");
@@ -14,7 +12,7 @@ const observer = new MutationObserver(() => {
     bidButton.addEventListener("click", () => {
       const highestBid = document
         .querySelector("#itemHighestBid")
-        .textContent.replace(/\D/g, ""); // Extract numeric value
+        .textContent.replace(/\D/g, "");
       highestBidDisplay.textContent = `$${highestBid || 0}`;
       yourBidDisplay.textContent = `$${bidInput.value || 0}`;
       modal.classList.remove("hidden");
@@ -33,23 +31,6 @@ const observer = new MutationObserver(() => {
       if (event.target === modal) {
         modal.classList.add("hidden");
       }
-    });
-
-    confirmBidButton.addEventListener("click", () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const itemId = urlParams.get("id");
-
-      bidRequest(itemId).then((response) => {
-        if (response) {
-          console.log("Bid placed successfully:", response);
-
-          highestBidDisplay.textContent = `$${response.amount}`;
-
-          modal.classList.add("hidden");
-        } else {
-          console.log("Bid failed.");
-        }
-      });
     });
 
     observer.disconnect();

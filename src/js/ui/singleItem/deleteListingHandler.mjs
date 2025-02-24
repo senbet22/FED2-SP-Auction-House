@@ -10,7 +10,6 @@ export function handleDeleteButtonClick(listingId, accessToken) {
   const modal = document.getElementById("deleteModal");
   const confirmDeleteBtn = document.getElementById("confirmDelete");
   const cancelDeleteBtn = document.getElementById("cancelDelete");
-  const successMessage = document.getElementById("deleteSuccessMessage");
 
   if (deleteBtn) {
     deleteBtn.addEventListener("click", () => {
@@ -30,15 +29,11 @@ export function handleDeleteButtonClick(listingId, accessToken) {
         await deleteListing(listingId, accessToken);
         modal.classList.add("hidden"); // Hide modal after deletion
 
-        if (successMessage) {
-          successMessage.classList.remove("hidden");
-          successMessage.classList.remove("translate-x-full");
-          successMessage.classList.add("translate-x-0");
+        // Set itemDeleted flag in sessionStorage for toastMessage.
+        sessionStorage.setItem("itemDeleted", "true");
 
-          setTimeout(() => {
-            window.location.href = "/"; // Redirect to homepage
-          }, 2000);
-        }
+        // Redirect to homepage immediately after deletion
+        window.location.href = "/";
       } catch (error) {
         console.error("Failed to delete item:", error);
       }

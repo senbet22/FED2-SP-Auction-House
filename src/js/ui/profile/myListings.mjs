@@ -77,7 +77,7 @@ function displayListings(listings) {
     }
 
     const highestBidElement = clone.querySelector(".price");
-    const highestBid = getHighestBid(listing.bids);
+    const { highestBid } = getHighestBid(listing.bids);
     highestBidElement.textContent = `Highest Bid: $${
       highestBid !== null ? highestBid : "N/A"
     }`;

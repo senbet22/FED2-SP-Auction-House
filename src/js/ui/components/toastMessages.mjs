@@ -24,3 +24,25 @@
     }
   }
 })();
+
+if (sessionStorage.getItem("itemDeleted") === "true") {
+  const deleteMessage = document.getElementById("deleteSucessMessage");
+
+  if (deleteMessage) {
+    // Show message
+    deleteMessage.classList.remove("hidden", "translate-x-full");
+    deleteMessage.classList.add("translate-x-0");
+
+    // Hide message after 2 seconds
+    setTimeout(() => {
+      deleteMessage.classList.remove("translate-x-0");
+      deleteMessage.classList.add("translate-x-full");
+
+      // Clear sessionStorage after transition
+      setTimeout(() => {
+        sessionStorage.removeItem("itemDeleted");
+        deleteMessage.classList.add("hidden");
+      }, 500); // Wait for transition to complete
+    }, 2000);
+  }
+}

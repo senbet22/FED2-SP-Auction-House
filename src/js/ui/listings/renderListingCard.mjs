@@ -14,9 +14,9 @@ export function renderListingCard(listing, template, cardWrapper) {
   listingTitleElement.textContent = listing.title;
   listingTitleElement.setAttribute("title", listing.title);
 
-  const highestBidAmount = getHighestBid(listing.bids);
+  const { highestBid } = getHighestBid(listing.bids);
   clone.querySelector(".price").textContent = `Highest Bid: $${
-    highestBidAmount !== null ? highestBidAmount : "N/A"
+    highestBid !== null ? highestBid : "N/A"
   }`;
   clone.querySelector(".bids").textContent = `Bids: ${
     listing._count?.bids || 0

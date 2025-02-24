@@ -2,7 +2,6 @@ import { optionGetProfile } from "../../api/requestOptions.mjs";
 import { getAuctionEndpoints } from "../../constants.mjs";
 import { formatTimeLeft } from "../../utils/formatTimer.mjs";
 import { formatBidTime } from "../../utils/formatBidTime.mjs";
-import { getHighestBid } from "../../utils/getHighestBid.mjs";
 
 const MY_BIDS_ENDPOINT = getAuctionEndpoints().API_MY_BIDS;
 
@@ -21,14 +20,39 @@ export async function fetchUserBids() {
     }
 
     const data = await response.json();
-    console.log("Bids Data:", data.data);
-
     if (!data.data.length) {
       console.warn("No bids found for this user.");
       return;
     }
+    const userHighestBids = new Map();
 
-    displayBids(data.data);
+    data.data.forEach((bid) => {
+      const listingId = bid.listing.id;
+      const bidAmount = bid.amount;
+
+      // Filters out bids where the auction has already ended
+      const endsAt = new Date(bid.listing.endsAt);
+      const now = new Date();
+
+      if (endsAt <= now) {
+        return;
+      }
+
+      if (
+        !userHighestBids.has(listingId) ||
+        userHighestBids.get(listingId).amount < bidAmount
+      ) {
+        userHighestBids.set(listingId, bid);
+      }
+    });
+
+    const filteredListings = Array.from(userHighestBids.values());
+
+    if (filteredListings.length === 0) {
+      console.warn("No active bids found for this user.");
+    } else {
+      displayBids(filteredListings);
+    }
   } catch (error) {
     console.error("Error fetching user bids:", error);
   }
@@ -77,15 +101,6 @@ function displayBids(bids) {
     if (expired) {
       timeLeftElement.classList.remove("bg-primary");
       timeLeftElement.classList.add("bg-accent");
-    }
-
-    const leadingBidElement = clone.querySelector(".leading-bid");
-    if (expired) {
-      leadingBidElement.style.display = "none"; // Hide if auction expired
-    } else {
-      leadingBidElement.textContent = `Leading bid: $${
-        getHighestBid(bid.listing.bids) || "N/A"
-      }`;
     }
 
     const participantsElement = clone.querySelector(".participants");

@@ -16,11 +16,28 @@ export function populateItemDetails(item) {
   const template = document.getElementById("single-item-template");
   const mainContainer = document.querySelector("main");
   const singleItemCard = document.getElementById("singleItemCard");
+  // const adminButtons = document.getElementById("adminButtons");
 
   if (!template || !mainContainer || !singleItemCard) {
     console.error("Template or main container or placeholder not found!");
     return;
   }
+
+  // const auctionProfile = JSON.parse(sessionStorage.getItem("auctionProfile"));
+
+  // // Check if item.seller.name matches auctionProfile.name
+  // if (item.seller.name && auctionProfile.name == item.seller.name) {
+  //   console.log(item.seller.name);
+  //   console.log(auctionProfile.name);
+
+  //   if (adminButtons) {
+  //     adminButtons.classList.remove("hidden"); // Remove the hidden class
+  //     adminButtons.classList.add("flex"); // Remove the hidden class
+  //     console.log(
+  //       "Admin buttons are now visible because the seller name matches the auction profile name."
+  //     );
+  //   }
+  // }
 
   singleItemCard.style.display = "none";
 
@@ -92,7 +109,7 @@ export function populateItemDetails(item) {
   const totalBids = item._count?.bids || 0;
   clone.querySelector("#itemTotalBids").textContent = `Bids: ${totalBids}`;
 
-  const highestBid = getHighestBid(item.bids);
+  const { highestBid } = getHighestBid(item.bids);
   const highestBidElement = clone.querySelector("#itemHighestBid");
 
   if (highestBid > 0) {

@@ -22,7 +22,7 @@ export function toggleBidHistory(item) {
 }
 
 /**
- * Displays the bid history for the given item, sorted by bid amount.
+ * Displays the bid history for the given item, showing only the top 8 highest bids.
  * @param {Object} item - The item for which the bid history is to be displayed.
  */
 function displayBidHistory(item) {
@@ -35,7 +35,8 @@ function displayBidHistory(item) {
 
   bidHistoryList.innerHTML = "";
 
-  const sortedBids = item.bids.sort((a, b) => b.amount - a.amount);
+  // Sort bids in descending order and take only the top 8
+  const sortedBids = item.bids.sort((a, b) => b.amount - a.amount).slice(0, 8);
 
   const headerRow = document.createElement("div");
   headerRow.classList.add(

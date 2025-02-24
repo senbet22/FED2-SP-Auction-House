@@ -23,7 +23,6 @@ export async function fetchUserWins() {
     console.log("Wins Data:", data.data);
 
     if (!data.data.length) {
-      console.warn("No wins found for this user.");
       return;
     }
 
@@ -83,8 +82,15 @@ function displayWins(wins) {
 
     const winningBidElement = clone.querySelector(".winning-bid");
     if (winningBidElement) {
+      const highestBid = win.bids.reduce(
+        (maxBid, currentBid) => {
+          return currentBid.amount > maxBid.amount ? currentBid : maxBid;
+        },
+        { amount: 0 }
+      );
+
       winningBidElement.textContent = `Winning bid: $${
-        win._count?.bids || "N/A"
+        highestBid.amount || "N/A"
       }`;
     } else {
       console.warn("Winning bid element not found in template!");

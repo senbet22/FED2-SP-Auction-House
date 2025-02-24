@@ -62,9 +62,7 @@ export async function bidRequest(id) {
     const data = await response.json();
     console.log("Bid submitted successfully:", data);
 
-    // Make sure to update sessionStorage and display only once
     showSuccess("Congratulations! You have placed your bid.");
-    sessionStorage.setItem("lastBid", bidAmount);
 
     modal.classList.add("hidden");
     return data;

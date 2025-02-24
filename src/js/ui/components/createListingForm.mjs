@@ -1,13 +1,24 @@
-import { fetchListings } from "../../api/createListing.mjs";
+import { fetchListings } from "../../api/createListing.mjs"; // Adjust the path accordingly
 
 const form = document.getElementById("createListingForm");
 const errorContainer = document.getElementById("errorContainer");
 const errorMessage = document.getElementById("errorMessage");
 
-/**
- * Handles the form submission to create a new listing.
- * @param {Event} event - The submit event.
- */
+// Function to get additional images
+function getAdditionalImages() {
+  const images = [];
+
+  document.querySelectorAll("#imageInputs input").forEach((input) => {
+    const url = input.value.trim();
+    if (url) {
+      images.push({ url, alt: "Additional image" }); // Default alt text; can be changed
+    }
+  });
+
+  return images;
+}
+
+// Form submission event
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -20,16 +31,23 @@ form.addEventListener("submit", async (event) => {
 
   const tags = [category.toLowerCase()];
 
+  // Collect additional images
+  const additionalImages = getAdditionalImages();
+
+  // Main image + additional images
+  const media = [
+    {
+      url: imageUrl,
+      alt: imageAlt,
+    },
+    ...additionalImages, // Spread operator to add more images
+  ];
+
   const newListing = {
     title: title,
     description: description,
     tags: tags,
-    media: [
-      {
-        url: imageUrl,
-        alt: imageAlt,
-      },
-    ],
+    media: media,
     endsAt: getEndTime(listingTime),
   };
 
@@ -45,7 +63,10 @@ form.addEventListener("submit", async (event) => {
   try {
     const response = await fetchListings(newListing);
     if (response) {
-      alert("Listing created successfully!");
+      // Set itemCreated flag in sessionStorage for toastMessage.
+      sessionStorage.setItem("itemCreated", "true");
+
+      // Redirect to homepage
       window.location.href = "/";
     } else {
       errorMessage.textContent = "Failed to create listing.";
@@ -86,3 +107,39 @@ function getEndTime(listingTime) {
 
   return endDate.toISOString();
 }
+
+// Toggle additional image inputs visibility
+document.getElementById("addMoreImg").addEventListener("click", function () {
+  const imageInputs = document.getElementById("imageInputs");
+  const arrowIcon = document.getElementById("arrowIcon");
+
+  imageInputs.classList.toggle("hidden");
+
+  // Toggle rotation class for arrow icon
+  arrowIcon.classList.toggle("rotate-90");
+  arrowIcon.classList.toggle("-rotate-90");
+});
+
+// Check if itemCreated flag exists in sessionStorage
+document.addEventListener("DOMContentLoaded", () => {
+  const deleteSucessMessage = document.getElementById("deleteSucessMessage");
+  const deleteSucessText = document.getElementById("deleteSucessText");
+
+  // If itemCreated flag is found, display the success message
+  if (sessionStorage.getItem("itemCreated") === "true") {
+    deleteSucessText.textContent = "Listing created successfully!";
+    deleteSucessMessage.classList.remove("hidden");
+    deleteSucessMessage.classList.add("translate-x-0"); // Slide in animation
+
+    // Hide success message after 3 seconds
+    setTimeout(() => {
+      deleteSucessMessage.classList.add("translate-x-full"); // Slide out animation
+      setTimeout(() => {
+        deleteSucessMessage.classList.add("hidden"); // Hide completely after sliding out
+      }, 500); // Wait for the sliding out animation to complete
+    }, 3000); // Message stays for 3 seconds
+
+    // Remove the itemCreated flag after showing the success message
+    sessionStorage.removeItem("itemCreated");
+  }
+});

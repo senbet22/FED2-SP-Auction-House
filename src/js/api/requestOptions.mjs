@@ -34,6 +34,7 @@ export const optionPut = (putReq) => ({
   headers: {
     "Content-Type": "application/json",
     Authorization: `Bearer ${accessToken}`,
+    "X-Noroff-API-Key": API_KEY,
   },
   body: JSON.stringify(putReq),
 });

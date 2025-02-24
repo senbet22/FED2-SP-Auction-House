@@ -44,7 +44,7 @@
           >
             <li class="hover:text-secondary"><a href="/">Home</a></li>
             <li class="hover:text-secondary">
-              <a href="/item/create/index.html">Create listing</a>
+              <a href="/item/create/index.html">New listing</a>
             </li>
             <li class="hover:text-secondary"><a href="/auth/">Login</a></li>
           </ul>
@@ -103,7 +103,7 @@
 
             <!-- Image URL -->
             <div>
-              <label class="block">Image URL</label>
+              <label class="block">Main Image URL</label>
               <input
                 type="text"
                 id="itemImage"
@@ -179,12 +179,54 @@
               </p>
             </div>
 
+            <!-- Add more Images Section -->
+            <div class="space-y-2">
+              <div
+                id="addMoreImg"
+                class="flex w-fit items-center bg-secondary text-lg text-text shadow-text/50 hover:bg-background cursor-pointer px-2 rounded-2xl shadow-lg hover:shadow-xl font-bold border-4 border-s-primary transition-all duration-300"
+              >
+                Add more images
+                <img
+                  id="arrowIcon"
+                  class="h-10 w-10 transform rotate-90 transition-transform duration-300"
+                  src="/public/arrow-right.svg"
+                />
+              </div>
+
+              <div id="imageInputs" class="hidden space-y-2">
+                <input
+                  type="text"
+                  id="itemImageTwo"
+                  placeholder="Enter image URL"
+                  class="w-full bg-background border-b-2 border-text focus:outline-none p-2"
+                />
+                <input
+                  type="text"
+                  id="itemImageThree"
+                  placeholder="Enter image URL"
+                  class="w-full bg-background border-b-2 border-text focus:outline-none p-2"
+                />
+                <input
+                  type="text"
+                  id="itemImageFour"
+                  placeholder="Enter image URL"
+                  class="w-full bg-background border-b-2 border-text focus:outline-none p-2"
+                />
+                <input
+                  type="text"
+                  id="itemImageFive"
+                  placeholder="Enter image URL"
+                  class="w-full bg-background border-b-2 border-text focus:outline-none p-2"
+                />
+              </div>
+            </div>
+
             <!-- Submit Button -->
             <button
               id="submitCreateListingForm"
-              class="w-full text-center bg-primary text-background hover:bg-text hover:text-secondary cursor-pointer px-6 py-4 rounded-2xl shadow-lg hover:shadow-xl font-bold border-4 border-s-accent transition-all duration-300"
+              class="w-full text-center bg-primary text-xl text-background shadow-text/50 hover:bg-text hover:text-secondary cursor-pointer px-6 py-4 rounded-2xl shadow-lg hover:shadow-xl font-bold border-4 border-s-accent transition-all duration-300"
             >
-              Create Listing
+              Submit Listing
             </button>
           </form>
         </div>

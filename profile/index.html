@@ -46,12 +46,6 @@
             </li>
             <li class="hover:text-secondary"><a href="/auth/">Login</a></li>
           </ul>
-          <div
-            id="wallet"
-            class="sm:block text-background text-lg right-16 top-10"
-          >
-            <p class="italic">wallet(0)</p>
-          </div>
         </div>
       </nav>
     </header>
@@ -67,9 +61,15 @@
           <img id="profileAvatar" class="w-full h-full object-cover" />
         </div>
       </section>
-      <div class="text-center mt-4">
-        <h2 id="profileName" class="text-2xl my-2.5 font-bold"></h2>
-        <p id="profileBio" class="text-lg"></p>
+      <div class="mt-4">
+        <h2 id="profileName" class="text-center text-2xl my-2.5 font-bold"></h2>
+        <p id="profileBio" class="text-center text-lg"></p>
+        <div
+          id="wallet"
+          class="mx-2 sm:block text-text text-lg right-16 top-10"
+        >
+          <p class="text-left italic">wallet(0)</p>
+        </div>
       </div>
 
       <section
@@ -346,7 +346,7 @@
         <!-- Update Profile card -->
         <div
           id="profileCard"
-          class="bids-card text-lg bg-background md:mx-20 shadow-md"
+          class="bids-card text-lg bg-background my-9 w-full min-h-60 shadow-md"
         >
           <h1
             class="m-4 text-xl flex justify-center text-background p-2 bg-primary sm:text-2xl"
@@ -355,46 +355,48 @@
           </h1>
           <div class="prime-info flex justify-between items-center">
             <div class="w-1/4 mx-4">
-              <img
-                src="/public/auctionHouse.png"
-                class="max-h-full w-24 bg-accent"
-                alt=""
-              />
+              <p>Profile Avatar</p>
             </div>
             <div
               class="mr-2 text-sm sm:text-lg w-full border-b-2 border-text focus:outline-none"
             >
               <input
                 type="text"
-                placeholder="Enter image URL"
+                placeholder="Enter Image Adress Here"
                 class="w-full p-2 bg-secondary"
+                id="profileAvatarInput"
               />
             </div>
           </div>
-          <div class="prime-info flex justify-between items-center">
-            <div class="w-1/4 mx-4">
-              <h2 class="">Bio</h2>
-            </div>
-            <div
-              class="mr-2 text-sm sm:text-lg w-full border-b-2 border-text focus:outline-none"
-            >
-              <textarea
-                type="text"
-                placeholder="Enter Bio"
-                class="w-full p-2 bg-secondary"
-              ></textarea>
-            </div>
-          </div>
           <div class="flex">
-            <div
-              class="bg-background hover:bg-primary hover:text-background w-fit mx-auto m-2 p-2 rounded-full shadow-md ml-auto"
+            <button
+              id="updateProfileBtn"
+              class="bg-background my-10 m-2 cursor-pointer text-xl shadow-text/60 text-primary hover:bg-primary hover:text-background focus:ring-2 focus:ring-primary transition-all px-4 py-2 rounded-full shadow-sm mx-auto"
             >
-              <a class="m-2" href="item/">Update profile</a>
-            </div>
+              Update Profile
+            </button>
           </div>
         </div>
       </section>
     </main>
+    <!-- Alert Message -->
+    <div
+      id="alertMessage"
+      class="hidden fixed top-36 right-0 w-72 sm:w-96 transform translate-x-full flex items-center p-4 mb-4 text-secondary border-t-4 border-accent bg-text transition-transform duration-500 ease-in-out"
+      role="alert"
+    >
+      <svg
+        class="shrink-0 w-4 h-4"
+        aria-hidden="true"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+      >
+        <path
+          d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+        />
+      </svg>
+      <div class="ms-3 font-medium text-lg" id="alertText">Error message</div>
+    </div>
 
     <!-- Footer -->
     <footer

@@ -11,10 +11,8 @@ import { optionPost } from "./requestOptions.mjs";
 export async function fetchListings(postData) {
   try {
     const options = optionPost(postData);
-    console.log("Fetching with options:", options); // Debugging log
 
     const response = await fetch(API_LISTINGS, options);
-    console.log("Fetch response:", response); // Debugging log
 
     if (!response.ok) {
       const errorData = await response.json();

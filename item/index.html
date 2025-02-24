@@ -12,7 +12,7 @@
   >
     <!-- Header -->
     <header
-      class="bg-primary z-50 mx-auto fixed top-0 w-full shadow-text shadow-sm"
+      class="bg-primary z-49 mx-auto fixed top-0 w-full shadow-text shadow-sm"
     >
       <nav class="max-w-5xl mx-auto">
         <a href="/">
@@ -68,7 +68,10 @@
               class="w-full md:w-1/2 flex justify-center flex-col items-center"
             >
               <!-- Main Image -->
-              <img id="itemImage" class="w-fit h-64 object-cover" />
+              <img
+                id="itemImage"
+                class="w-fit md:hover:scale-200 md:hover:z-50 h-64 object-cover"
+              />
 
               <!-- Carousel -->
               <div class="relative w-full mt-4">
@@ -185,7 +188,7 @@
               <!-- View More Listings by seller -->
 
               <!-- Delete & Edit Buttons (Right Aligned) -->
-              <div id="adminButtons" class="hidden flex gap-4 text-xl">
+              <div id="adminButtons" class="flex gap-4 text-xl">
                 <button
                   class="bg-background text-text px-6 py-3 rounded-lg shadow-md cursor-pointer hover:text-secondary hover:bg-text"
                 >

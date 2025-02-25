@@ -10,33 +10,16 @@ import {
   handlePrevImage,
 } from "./carouselHandler.mjs";
 import { fetchSellerListings } from "./sellerListings.mjs";
-import { handleDeleteButtonClick } from "./deleteListingHandler.mjs"; // Import the delete function
+import { handleEditButtonClick } from "./editListingHandler.mjs";
+import { handleDeleteButtonClick } from "./deleteListingHandler.mjs";
 
 export function populateItemDetails(item) {
   const template = document.getElementById("single-item-template");
   const mainContainer = document.querySelector("main");
   const singleItemCard = document.getElementById("singleItemCard");
-  const adminButtons = document.getElementById("adminButtons");
-
   if (!template || !mainContainer || !singleItemCard) {
     console.error("Template or main container or placeholder not found!");
     return;
-  }
-
-  const auctionProfile = JSON.parse(sessionStorage.getItem("auctionProfile"));
-
-  // Check if item.seller.name matches auctionProfile.name
-  if (item.seller.name && auctionProfile.name == item.seller.name) {
-    console.log(item.seller.name);
-    console.log(auctionProfile.name);
-
-    if (adminButtons) {
-      adminButtons.classList.remove("hidden"); // Remove the hidden class
-      adminButtons.classList.add("flex"); // Remove the hidden class
-      console.log(
-        "Admin buttons are now visible because the seller name matches the auction profile name."
-      );
-    }
   }
 
   singleItemCard.style.display = "none";
@@ -137,8 +120,27 @@ export function populateItemDetails(item) {
 
   mainContainer.innerHTML = "";
   mainContainer.appendChild(clone);
+  handleEditButtonClick(item.id);
 
-  console.log(item, "Here's the item");
+  // Admin buttons visible with accesstoken or if youre admin.
+  const auctionProfile = JSON.parse(sessionStorage.getItem("auctionProfile"));
+  const adminBtn1 = document.getElementById("adminBtn1");
+  const adminBtn2 = document.getElementById("adminBtn2");
+  const accessToken = sessionStorage.getItem("token");
+  console.log(auctionProfile.name);
+  console.log(sellerName);
+
+  if (sellerName === auctionProfile.name) {
+    adminBtn2.classList.remove("hidden");
+    adminBtn2.classList.add("flex");
+    console.log(
+      "Admin buttons are now visible because the seller name matches the auction profile name."
+    );
+  }
+  if (accessToken) {
+    adminBtn1.classList.remove("hidden");
+    adminBtn1.classList.add("flex");
+  }
 
   const sellerListingsButton = document.getElementById("sellerListings");
 
@@ -147,29 +149,25 @@ export function populateItemDetails(item) {
     sellerName.trim() !== "" &&
     sellerName !== "Unknown Seller"
   ) {
-    sellerListingsButton.textContent = `More listings by ${sellerName}`;
+    sellerListingsButton.textContent = `More listings by Seller`;
 
-    let listingsVisible = false; // A flag to track the visibility of the listings
+    let listingsVisible = false;
 
     sellerListingsButton.addEventListener("click", () => {
-      console.log(`Fetching listings for seller: ${sellerName}`); // Debugging
-
-      // If the listings are currently visible, hide them and set the flag to false
       if (listingsVisible) {
         const sellerCard = document.getElementById("sellerCard");
         if (sellerCard) {
           sellerCard.style.display = "none"; // Hide the listings
         }
-        sellerListingsButton.textContent = `More listings by ${sellerName}`; // Change button text
+        sellerListingsButton.textContent = `More listings by Seller`;
         listingsVisible = false;
       } else {
-        // If listings are not visible, fetch and display them
         fetchSellerListings(sellerName);
         const sellerCard = document.getElementById("sellerCard");
         if (sellerCard) {
-          sellerCard.style.display = "block"; // Show the listings
+          sellerCard.style.display = "block";
         }
-        sellerListingsButton.textContent = `Hide listings by ${sellerName}`; // Change button text
+        sellerListingsButton.textContent = `Hide listings by Seller`;
         listingsVisible = true;
       }
     });
@@ -182,8 +180,6 @@ export function populateItemDetails(item) {
 
   toggleBidHistory(item);
 
-  // Call the delete function, passing the listingId and accessToken
-  const accessToken = sessionStorage.getItem("token"); // Assuming the token is stored in sessionStorage
   const listingId = item.id;
 
   if (accessToken) {

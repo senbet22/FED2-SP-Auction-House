@@ -1,4 +1,4 @@
-import { formatDate } from "../../utils/formatDate.mjs";
+import { formatBidTime } from "../../utils/formatBidTime.mjs";
 import { formatTimeLeft } from "../../utils/formatTimer.mjs";
 import { handleImage } from "../components/imageHandle.mjs";
 import { getHighestBid } from "../../utils/getHighestBid.mjs";
@@ -6,9 +6,9 @@ import { getHighestBid } from "../../utils/getHighestBid.mjs";
 export function renderListingCard(listing, template, cardWrapper) {
   const clone = template.content.cloneNode(true);
 
-  clone.querySelector(".seller-name").textContent =
-    listing.seller?.name || "Unknown Seller";
-  clone.querySelector(".date-posted").textContent = formatDate(listing.updated);
+  clone.querySelector(".date-posted").textContent = formatBidTime(
+    listing.updated
+  );
 
   const listingTitleElement = clone.querySelector(".listing-title");
   listingTitleElement.textContent = listing.title;
@@ -21,9 +21,6 @@ export function renderListingCard(listing, template, cardWrapper) {
   clone.querySelector(".bids").textContent = `Bids: ${
     listing._count?.bids || 0
   }`;
-
-  const sellerAvatar = clone.querySelector(".seller-avatar");
-  sellerAvatar.src = listing.seller?.avatar?.url || "auctionHouse.png";
 
   const listingImageElement = clone.querySelector(".listing-image");
   handleImage(listingImageElement, listing.media?.[0]?.url || null);

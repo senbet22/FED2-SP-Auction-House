@@ -16,9 +16,10 @@
     >
       <nav class="max-w-5xl mx-auto">
         <a href="/">
-          <img src="/Logo1.svg" alt="" class="h-20 sm:h-20" />
+          <img src="/Logo1.svg" alt="" class="h-20" />
         </a>
-        <label id="hamburger" class="sm:hidden absolute pb-5 top-0 right-5">
+
+        <label id="hamburger" class="md:hidden absolute pb-5 top-0 right-5">
           <div
             class="w-20 h-20 cursor-pointer flex flex-col items-center justify-center"
           >
@@ -37,23 +38,20 @@
 
         <div
           id="navtab"
-          class="hidden bg-text text-background h-fit sm:h-14 px-6 sm:flex flex-col sm:flex-row pt-12 sm:pt-0 items-center justify-between shadow-md"
+          class="hidden justify-end bg-text text-background h-fit md:h-14 px-6 md:flex flex-col md:flex-row pt-12 md:pt-0 items-center shadow-md"
         >
           <ul
-            class="text-2xl sm:text-2xl py-5 sm:py-0 flex flex-col sm:flex-row space-x-6 ml-6"
+            class="text-xl py-5 md:py-0 flex flex-col md:flex-row space-x-6 ml-6"
           >
             <li class="hover:text-secondary"><a href="/">Home</a></li>
             <li class="hover:text-secondary">
-              <a href="/item/create/index.html">New listing</a>
+              <a href="/item/create/">New listing</a>
+            </li>
+            <li class="hover:text-secondary">
+              <a href="/profile/">Profile</a>
             </li>
             <li class="hover:text-secondary"><a href="/auth/">Login</a></li>
           </ul>
-          <div
-            id="wallet"
-            class="sm:block text-background text-lg right-16 top-10"
-          >
-            <p class="italic">wallet(0)</p>
-          </div>
         </div>
       </nav>
     </header>
@@ -134,7 +132,7 @@
               <label class="block">Listing Time</label>
               <select
                 id="listingTime"
-                class="w-full border-b-2 bg-background border-text focus:outline-none p-2"
+                class="w-full cursor-pointer border-b-2 bg-background border-text focus:outline-none p-2"
               >
                 <option value="24H">24 Hours</option>
                 <option value="30Days">30 Days</option>
@@ -148,7 +146,7 @@
               <label class="block">Category</label>
               <select
                 id="itemCategory"
-                class="w-full border-b-2 bg-background border-text focus:outline-none p-2"
+                class="w-full cursor-pointer border-b-2 bg-background border-text focus:outline-none p-2"
               >
                 <option value="Art">Art</option>
                 <option value="Watches">Watches</option>

@@ -20,7 +20,6 @@ export function toggleBidHistory(item) {
     }
   });
 }
-
 /**
  * Displays the bid history for the given item, showing only the top 8 highest bids.
  * @param {Object} item - The item for which the bid history is to be displayed.
@@ -30,6 +29,7 @@ function displayBidHistory(item) {
 
   if (!item || !item.bids || item.bids.length === 0) {
     bidHistoryList.innerHTML = "<p>No bids yet.</p>";
+    bidHistoryList.classList = "m-2 p-2 text-lg bg-secondary";
     return;
   }
 

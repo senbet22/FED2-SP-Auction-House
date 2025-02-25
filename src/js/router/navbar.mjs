@@ -1,3 +1,4 @@
+// Mobile navbar functionality
 function setupNavbar() {
   const navToggle = document.getElementById("navToggle");
   const navtab = document.getElementById("navtab");
@@ -13,6 +14,7 @@ function setupNavbar() {
 
 setupNavbar();
 
+// Active Navbar indicator.
 const currentUrl = window.location.pathname;
 
 const menuItems = document.querySelectorAll("nav ul li");
@@ -22,3 +24,40 @@ menuItems.forEach((item) => {
     item.classList.add("border-b-4", "border-secondary");
   }
 });
+
+// Navbar Behaviour based on if user is logged in or not.
+const auctionProfile = sessionStorage.getItem("auctionProfile");
+const accessToken = sessionStorage.getItem("token");
+const newListingLink = document.querySelector('a[href="/item/create/"]');
+const profileLink = document.querySelector('a[href="/profile/"]');
+const loginButton = document.querySelector('a[href="/auth/"]');
+
+if (!auctionProfile & !accessToken) {
+  if (newListingLink) {
+    newListingLink.closest("li").classList.add("hidden");
+  }
+  if (profileLink) {
+    profileLink.closest("li").classList.add("hidden");
+  }
+} else {
+  if (newListingLink) {
+    newListingLink.closest("li").classList.remove("hidden");
+  }
+  if (profileLink) {
+    profileLink.closest("li").classList.remove("hidden");
+  }
+
+  if (loginButton) {
+    loginButton.textContent = "Logout";
+    loginButton.href = "#";
+
+    loginButton.addEventListener("click", function (event) {
+      event.preventDefault();
+
+      sessionStorage.removeItem("auctionProfile");
+      sessionStorage.removeItem("token");
+
+      window.location.href = "/";
+    });
+  }
+}

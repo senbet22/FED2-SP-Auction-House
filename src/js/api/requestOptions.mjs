@@ -1,4 +1,4 @@
-import { getAccessToken } from "./localStorage.mjs";
+import { getAccessToken } from "./sessionStorage.mjs";
 import { API_KEY } from "../constants.mjs";
 
 /**

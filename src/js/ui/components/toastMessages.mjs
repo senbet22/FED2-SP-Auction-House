@@ -93,3 +93,26 @@ if (sessionStorage.getItem("itemUpdated") === "true") {
     }, 2000);
   }
 }
+
+// Toast for Logout Success - (re-use of the delete Toast)
+if (sessionStorage.getItem("logout") === "true") {
+  const createMessage = document.getElementById("deleteSucessMessage");
+  const successText = document.getElementById("deleteSucessText");
+
+  if (createMessage && successText) {
+    successText.textContent = "You are now logged out!";
+
+    createMessage.classList.remove("hidden", "translate-x-full");
+    createMessage.classList.add("translate-x-0");
+
+    setTimeout(() => {
+      createMessage.classList.remove("translate-x-0");
+      createMessage.classList.add("translate-x-full");
+
+      setTimeout(() => {
+        sessionStorage.removeItem("logout"); // Remove logout flag after showing message
+        createMessage.classList.add("hidden");
+      }, 500);
+    }, 2000);
+  }
+}

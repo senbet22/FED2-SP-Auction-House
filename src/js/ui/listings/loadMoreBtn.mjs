@@ -9,13 +9,8 @@ export function loadMoreBtn() {
     if (event.target && event.target.id === "loadMore") {
       console.log("Load More button clicked.");
       currentPage++;
-
-      const hasMoreListings = await loadListings(currentPage, selectedTag);
-
-      if (!hasMoreListings) {
-        document.getElementById("loadMore").style.display = "none";
-        currentPage--;
-      }
+      const searchValue = document.getElementById("search")?.value || "";
+      await loadListings(currentPage, selectedTag, searchValue);
     }
   });
 }

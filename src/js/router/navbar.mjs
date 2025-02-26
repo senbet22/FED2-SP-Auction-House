@@ -53,6 +53,8 @@ if (!auctionProfile & !accessToken) {
 
     loginButton.addEventListener("click", function (event) {
       event.preventDefault();
+      // Logout Message
+      sessionStorage.setItem("logout", "true");
 
       sessionStorage.removeItem("auctionProfile");
       sessionStorage.removeItem("token");

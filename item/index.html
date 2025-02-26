@@ -40,6 +40,12 @@
           id="navtab"
           class="hidden justify-end bg-text text-background h-fit md:h-14 px-6 md:flex flex-col md:flex-row pt-12 md:pt-0 items-center shadow-md"
         >
+          <div
+            id="wallet"
+            class="sm:block mr-auto text-background text-lg right-16 top-10"
+          >
+            <p class="italic text-secondary">wallet(0)</p>
+          </div>
           <ul
             class="text-xl py-5 md:py-0 flex flex-col md:flex-row space-x-6 ml-6"
           >
@@ -67,6 +73,8 @@
             >
               <!-- Main Image -->
               <img
+                src="/public/imgnotfound.png"
+                alt="Listing Image"
                 id="itemImage"
                 class="w-fit md:hover:scale-200 md:hover:z-50 h-64 object-cover"
               />
@@ -170,14 +178,14 @@
             >
               <button
                 id="sellerListings"
-                class="text-xl w-fit font-medium text-white bg-primary px-6 py-3 rounded-lg shadow-md cursor-pointer transition-all hover:bg-text hover:text-white flex items-center gap-2"
+                class="text-lg sm:text-xl w-fit shadow-text/60 font-medium text-white bg-primary px-6 py-3 rounded-lg shadow-md cursor-pointer transition-all hover:bg-text hover:text-white flex items-center gap-2"
               >
                 <p>Load more listings by...</p>
               </button>
 
               <button
                 id="bidHistoryButton"
-                class="text-xl w-fit font-medium text-white bg-primary px-6 py-3 rounded-lg shadow-md cursor-pointer transition-all hover:bg-text hover:text-white flex items-center gap-2"
+                class="text-lg sm:text-xl w-fit shadow-text/60 font-medium text-white bg-primary px-6 py-3 rounded-lg shadow-md cursor-pointer transition-all hover:bg-text hover:text-white flex items-center gap-2"
               >
                 <p id="bidHistoryText">Bid history</p>
                 <span class="text-xl">&#8595;</span>

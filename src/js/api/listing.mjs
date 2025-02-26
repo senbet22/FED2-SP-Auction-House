@@ -10,7 +10,7 @@ export async function fetchListings(url) {
 
     const data = await response.json();
 
-    return data.data;
+    return data;
   } catch (error) {
     console.error("Failed to fetch listings:", error);
     return [];

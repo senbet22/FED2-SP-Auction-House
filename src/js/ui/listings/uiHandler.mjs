@@ -2,7 +2,7 @@ import { renderListingCard } from "./renderListingCard.mjs";
 import { fetchListings } from "../../api/listing.mjs";
 import { handleCardClick } from "./clickHandler.mjs";
 import { API_LISTINGS } from "../../constants.mjs";
-import { loadMoreBtn } from "./loadMoreBtn..mjs";
+import { loadMoreBtn } from "./loadMoreBtn.mjs";
 import { checkNextPageExists } from "./paginationHandler.mjs";
 
 let selectedTag = sessionStorage.getItem("selectedTag") || "";
@@ -10,9 +10,29 @@ let currentPage = 1;
 
 loadListings(currentPage, selectedTag);
 
+let searchTimeout;
+
+const cardWrapper = document.getElementById("cardWrapper");
+
+document.getElementById("search")?.addEventListener("input", (event) => {
+  sessionStorage.removeItem("selectedTag");
+  clearTimeout(searchTimeout); // Prevent multiple rapid calls
+  document.getElementById("category").selectedIndex = 1;
+
+  searchTimeout = setTimeout(() => {
+    const searchValue = event.target.value.trim();
+    loadListings(1, null, searchValue); // Ignore tag, only use search
+  }, 300);
+  cardWrapper
+    .querySelectorAll(".listing-card")
+    .forEach((card) => card.remove());
+});
+
 document.getElementById("category")?.addEventListener("change", (event) => {
+  document.getElementById("search").value = "";
   selectedTag = event.target.value;
   sessionStorage.setItem("selectedTag", selectedTag);
+  loadListings(1, selectedTag, ""); // Ignore search, only use category
   location.reload();
 });
 
@@ -20,28 +40,46 @@ loadMoreBtn();
 
 checkNextPageExists();
 
-export async function loadListings(currentPage, tag) {
-  // Ensure currentPage is valid before proceeding
+export async function loadListings(currentPage, tag, searchValue = "") {
   if (isNaN(currentPage) || currentPage < 1) {
     console.error("Invalid currentPage value:", currentPage);
     return false;
   }
 
+  const cardWrapper = document.getElementById("cardWrapper");
+  if (!cardWrapper) {
+    console.error("Card wrapper not found!");
+    return;
+  }
+
+  let listings = [];
+
   const params = new URLSearchParams({
     limit: 12,
-    page: currentPage, // Current page
+    page: currentPage,
     _seller: true,
     _bids: true,
     _active: true,
   });
 
-  if (tag) {
+  if (searchValue) {
+    params.append("q", searchValue);
+    const searchUrl = `${API_LISTINGS}/search?${params}`;
+    console.log("search happening");
+
+    listings = await fetchListings(searchUrl);
+  } else if (tag) {
     params.append("_tag", tag);
+    const categoryUrl = `${API_LISTINGS}?${params}`;
+    listings = await fetchListings(categoryUrl);
+  } else {
+    const baseUrl = `${API_LISTINGS}?${params}`;
+    listings = await fetchListings(baseUrl);
   }
 
-  const newUrl = `${API_LISTINGS}?${params}`;
+  const { data, meta } = listings;
+  console.log("alla data", data, meta);
 
-  const listings = await fetchListings(newUrl);
   const loadMoreButton = document.getElementById("loadMore");
 
   if (!listings || listings.length === 0) {
@@ -49,7 +87,6 @@ export async function loadListings(currentPage, tag) {
     return false;
   }
 
-  const cardWrapper = document.getElementById("cardWrapper");
   const template = document.getElementById("listing-template");
 
   if (!cardWrapper || !template) {
@@ -57,20 +94,18 @@ export async function loadListings(currentPage, tag) {
     return false;
   }
 
-  // Render listings to the page
-  listings.forEach((listing) => {
+  listings.data.forEach((listing) => {
     renderListingCard(listing, template, cardWrapper);
   });
 
   handleCardClick();
-
   document.getElementById("category").value = selectedTag;
 
-  // Check if there is a next page of listings
-  const hasNextPage = await checkNextPageExists(currentPage, tag);
+  await checkNextPageExists(meta.currentPage, tag, searchValue);
 
-  if (!hasNextPage && loadMoreButton) {
-    loadMoreButton.style.display = "none";
+  if (meta.nextPage === null) {
+    if (loadMoreButton) loadMoreButton.style.display = "none";
+    sessionStorage.removeItem("selectedTag");
   } else if (loadMoreButton) {
     loadMoreButton.style.display = "block";
   }

@@ -4,7 +4,6 @@ export default async function router(pathname = window.location.pathname) {
       await import("./navbar.mjs");
       await import("../ui/components/toastMessages.mjs");
       await import("../ui/listings/uiHandler.mjs");
-      await import("../ui/components/wallet.mjs");
       await import("../api/UserProfile.mjs");
 
       break;
@@ -42,6 +41,5 @@ export default async function router(pathname = window.location.pathname) {
       await import("../ui/components/populateEditForm.mjs");
       break;
     default:
-      await import("./notFound.mjs");
   }
 }

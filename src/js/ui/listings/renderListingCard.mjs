@@ -1,6 +1,5 @@
 import { formatBidTime } from "../../utils/formatBidTime.mjs";
 import { formatTimeLeft } from "../../utils/formatTimer.mjs";
-import { handleImage } from "../components/imageHandle.mjs";
 import { getHighestBid } from "../../utils/getHighestBid.mjs";
 
 export function renderListingCard(listing, template, cardWrapper) {
@@ -22,8 +21,14 @@ export function renderListingCard(listing, template, cardWrapper) {
     listing._count?.bids || 0
   }`;
 
+  // Get the image element
   const listingImageElement = clone.querySelector(".listing-image");
-  handleImage(listingImageElement, listing.media?.[0]?.url || null);
+
+  // Check if listing has an image and set it, otherwise leave default
+  if (listing.media?.length > 0 && listing.media[0].url) {
+    listingImageElement.src = listing.media[0].url;
+    listingImageElement.alt = listing.title || "Listing Image";
+  }
 
   const timeLeftElement = clone.querySelector(".time-left");
   const { time, expired } = formatTimeLeft(listing.endsAt);

@@ -6,7 +6,9 @@ async function displayWallet() {
     const credits = profile.data.credits;
     const walletElement = document.getElementById("wallet");
 
-    walletElement.innerHTML = `<p>wallet($${credits})</p>`;
+    walletElement.innerHTML = `<p>wallet: $${credits}</p>`;
+    walletElement.classList.add("text-secondary");
+
     walletElement.classList.remove("hidden"); // Removes hidden class
   } catch (error) {
     console.error("Error fetching user profile:", error);

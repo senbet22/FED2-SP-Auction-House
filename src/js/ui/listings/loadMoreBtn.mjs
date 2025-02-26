@@ -1,5 +1,9 @@
 import { loadListings } from "./uiHandler.mjs";
-// Load more Btn handler
+
+/**
+ * Adds a click event listener to the "Load More" button. When clicked, it increments
+ * the current page number and loads more listings based on the selected tag and search value.
+ */
 
 let selectedTag = sessionStorage.getItem("selectedTag") || "";
 let currentPage = 1;

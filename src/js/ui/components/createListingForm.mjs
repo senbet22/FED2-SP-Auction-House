@@ -1,5 +1,13 @@
 import { fetchListings } from "../../api/createListing.mjs"; // Adjust the path accordingly
 
+/**
+ * Handles the form for creating a new listing. Validates inputs, collects media, calculates the end time, and sends data to the API.
+ * Displays success or error messages based on the result of the form submission.
+ *
+ * @listens submit - Submits the form, creates a new listing, and redirects upon success.
+ * @listens click - Toggles visibility of additional image inputs and rotates the arrow icon.
+ */
+
 const form = document.getElementById("createListingForm");
 const errorContainer = document.getElementById("errorContainer");
 const errorMessage = document.getElementById("errorMessage");
@@ -18,7 +26,6 @@ function getAdditionalImages() {
   return images;
 }
 
-// Form submission event
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -31,16 +38,14 @@ form.addEventListener("submit", async (event) => {
 
   const tags = [category.toLowerCase()];
 
-  // Collect additional images
   const additionalImages = getAdditionalImages();
 
-  // Main image + additional images
   const media = [
     {
       url: imageUrl,
       alt: imageAlt,
     },
-    ...additionalImages, // Spread operator to add more images
+    ...additionalImages,
   ];
 
   const newListing = {
@@ -63,10 +68,9 @@ form.addEventListener("submit", async (event) => {
   try {
     const response = await fetchListings(newListing);
     if (response) {
-      // Set itemCreated flag in sessionStorage for toastMessage.
+      // Sets itemCreated flag in sessionStorage for toastMessage.
       sessionStorage.setItem("itemCreated", "true");
 
-      // Redirect to homepage
       window.location.href = "/";
     } else {
       errorMessage.textContent = "Failed to create listing.";
@@ -108,38 +112,12 @@ function getEndTime(listingTime) {
   return endDate.toISOString();
 }
 
-// Toggle additional image inputs visibility
 document.getElementById("addMoreImg").addEventListener("click", function () {
   const imageInputs = document.getElementById("imageInputs");
   const arrowIcon = document.getElementById("arrowIcon");
 
   imageInputs.classList.toggle("hidden");
 
-  // Toggle rotation class for arrow icon
   arrowIcon.classList.toggle("rotate-90");
   arrowIcon.classList.toggle("-rotate-90");
-});
-
-// Check if itemCreated flag exists in sessionStorage
-document.addEventListener("DOMContentLoaded", () => {
-  const deleteSucessMessage = document.getElementById("deleteSucessMessage");
-  const deleteSucessText = document.getElementById("deleteSucessText");
-
-  // If itemCreated flag is found, display the success message
-  if (sessionStorage.getItem("itemCreated") === "true") {
-    deleteSucessText.textContent = "Listing created successfully!";
-    deleteSucessMessage.classList.remove("hidden");
-    deleteSucessMessage.classList.add("translate-x-0"); // Slide in animation
-
-    // Hide success message after 3 seconds
-    setTimeout(() => {
-      deleteSucessMessage.classList.add("translate-x-full"); // Slide out animation
-      setTimeout(() => {
-        deleteSucessMessage.classList.add("hidden"); // Hide completely after sliding out
-      }, 500); // Wait for the sliding out animation to complete
-    }, 3000); // Message stays for 3 seconds
-
-    // Remove the itemCreated flag after showing the success message
-    sessionStorage.removeItem("itemCreated");
-  }
 });

@@ -4,6 +4,12 @@ import { formatBidTime } from "../../utils/formatBidTime.mjs";
  * Toggles the visibility of the bid history container and displays the bid history for the given item.
  * @param {Object} item - The item for which the bid history is to be displayed.
  */
+
+/**
+ * Displays the bid history for the given item, showing only the top 8 highest bids.
+ * @param {Object} item - The item for which the bid history is to be displayed.
+ */
+
 export function toggleBidHistory(item) {
   const bidHistoryButton = document.getElementById("bidHistoryButton");
   const bidHistoryContainer = document.getElementById("bidHistoryContainer");

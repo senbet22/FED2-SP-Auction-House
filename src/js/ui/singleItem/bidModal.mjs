@@ -1,3 +1,8 @@
+/**
+ * Observes the document for dynamic changes and attaches event listeners to elements
+ * to manage the bid modal behavior, including opening, closing, and updating bid values.
+ */
+
 const observer = new MutationObserver(() => {
   const modal = document.getElementById("bidModal");
   const bidButton = document.getElementById("bidButton");

@@ -1,5 +1,13 @@
 import { register } from "../../auth/register.mjs";
 
+/**
+ * Handles the registration form submission, validates user input, and registers the user.
+ * Displays error messages for invalid input and success message upon successful registration.
+ * Handles specific error cases such as name, email, or password issues.
+ *
+ * @listens submit - Submits the registration form, validates input, and registers the user.
+ */
+
 const form = document.getElementById("registerForm");
 const nameInput = document.getElementById("name");
 const emailInput = document.getElementById("email-register");
@@ -92,7 +100,6 @@ form.addEventListener("submit", async (event) => {
   } catch (error) {
     console.error("Registration failed:", error);
 
-    // Display the error in the password container for any general error
     errorPassMessage.textContent = error.message;
     errorPassContainer.classList.remove("hidden");
 

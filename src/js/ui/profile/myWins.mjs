@@ -2,13 +2,21 @@ import { optionGetProfile } from "../../api/requestOptions.mjs";
 import { getAuctionEndpoints } from "../../constants.mjs";
 import { formatBidTime } from "../../utils/formatBidTime.mjs";
 
+/**
+ * Fetches and displays the user's auction wins.
+ * If no wins are found, displays a message prompting the user to place bids.
+ * If an error occurs during data fetching, an error message is shown.
+ * Each win is displayed with details such as title, image, seller, category, winning bid, and time.
+ */
+
 const MY_WINS_ENDPOINT = getAuctionEndpoints().API_MY_WINS;
 
 export async function fetchUserWins() {
   const accessToken = sessionStorage.getItem("token");
 
   if (!accessToken) {
-    throw new Error("No access token found. Please log in again.");
+    console.warn("No access token found. User not logged in.");
+    return;
   }
 
   const options = optionGetProfile(accessToken);
@@ -20,15 +28,20 @@ export async function fetchUserWins() {
     }
 
     const data = await response.json();
-    console.log("Wins Data:", data.data);
+    const winsCardContainer = document.getElementById("winsCard");
 
     if (!data.data.length) {
+      console.warn("No wins found for this user.");
+      winsCardContainer.innerHTML =
+        "<p class='text-center text-text text-xl my-8'>You do not have any wins at this time. Try placing some bids!</p>";
       return;
     }
 
     displayWins(data.data);
   } catch (error) {
     console.error("Error fetching user wins:", error);
+    document.getElementById("winsCard").innerHTML =
+      "<p class='text-center text-red-500 mt-4'>Error loading wins. Please try again later.</p>";
   }
 }
 
@@ -58,7 +71,7 @@ function displayWins(wins) {
 
     const imageElement = clone.querySelector(".wins-image");
     if (imageElement) {
-      imageElement.src = win.media?.[0]?.url || "/public/auctionHouse.png";
+      imageElement.src = win.media?.[0]?.url || "/auctionHouse.png";
       imageElement.alt = win.media?.[0]?.alt || "Win image";
     } else {
       console.warn("Image element not found in template!");

@@ -13,6 +13,12 @@ import { fetchSellerListings } from "./sellerListings.mjs";
 import { handleEditButtonClick } from "./editListingHandler.mjs";
 import { handleDeleteButtonClick } from "./deleteListingHandler.mjs";
 
+/**
+ * Populates the item details on the page including images, descriptions, bid information,
+ * seller information, and other relevant data. It handles dynamic behaviors like
+ * displaying seller listings, toggling bid history, and managing admin buttons based on access.
+ */
+
 export function populateItemDetails(item) {
   const template = document.getElementById("single-item-template");
   const mainContainer = document.querySelector("main");
@@ -32,7 +38,7 @@ export function populateItemDetails(item) {
   const imageElement = clone.querySelector("#itemImage");
   let currentIndex = 0;
 
-  imageElement.src = item.media?.[0]?.url || "/public/placeholder.png";
+  imageElement.src = item.media?.[0]?.url || "/imgnotfound.png";
   imageElement.alt = item.media?.[0]?.alt || "Item image";
 
   const imgArContainer = clone.querySelector("#imgArContainer");
@@ -114,7 +120,7 @@ export function populateItemDetails(item) {
   clone.querySelector("#sellerName").textContent = sellerName;
 
   const sellerAvatar = clone.querySelector("#sellerAvatar");
-  sellerAvatar.src = item.seller?.avatar?.url || "/public/default-avatar.png";
+  sellerAvatar.src = item.seller?.avatar?.url || "/auctionHouse.png";
 
   document.title = item.title || "Auction House";
 
@@ -122,7 +128,7 @@ export function populateItemDetails(item) {
   mainContainer.appendChild(clone);
   handleEditButtonClick(item.id);
 
-  // Admin buttons visible with accesstoken or if youre admin.
+  // Admin buttons visible with accesstoken/if youre logged in.
   const auctionProfile = JSON.parse(sessionStorage.getItem("auctionProfile"));
   const adminBtn1 = document.getElementById("adminBtn1");
   const adminBtn2 = document.getElementById("adminBtn2");
@@ -157,7 +163,7 @@ export function populateItemDetails(item) {
       if (listingsVisible) {
         const sellerCard = document.getElementById("sellerCard");
         if (sellerCard) {
-          sellerCard.style.display = "none"; // Hide the listings
+          sellerCard.style.display = "none";
         }
         sellerListingsButton.textContent = `More listings by Seller`;
         listingsVisible = false;
@@ -175,7 +181,7 @@ export function populateItemDetails(item) {
     console.error(
       "Seller name is missing or invalid. Cannot fetch seller listings."
     );
-    sellerListingsButton.style.display = "none"; // Hide the button if no seller is available
+    sellerListingsButton.style.display = "none";
   }
 
   toggleBidHistory(item);
@@ -183,7 +189,7 @@ export function populateItemDetails(item) {
   const listingId = item.id;
 
   if (accessToken) {
-    handleDeleteButtonClick(listingId, accessToken); // Setup the delete button functionality
+    handleDeleteButtonClick(listingId, accessToken);
   } else {
     console.error("No access token found.");
   }

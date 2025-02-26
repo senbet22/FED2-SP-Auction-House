@@ -2,6 +2,13 @@ import { formatBidTime } from "../../utils/formatBidTime.mjs";
 import { formatTimeLeft } from "../../utils/formatTimer.mjs";
 import { getHighestBid } from "../../utils/getHighestBid.mjs";
 
+/**
+ * Renders a listing card by populating a template with data from a listing object.
+ * @param {Object} listing - The listing data to render.
+ * @param {HTMLTemplateElement} template - The template element used to create the card.
+ * @param {HTMLElement} cardWrapper - The container to append the rendered listing card.
+ */
+
 export function renderListingCard(listing, template, cardWrapper) {
   const clone = template.content.cloneNode(true);
 
@@ -21,10 +28,8 @@ export function renderListingCard(listing, template, cardWrapper) {
     listing._count?.bids || 0
   }`;
 
-  // Get the image element
   const listingImageElement = clone.querySelector(".listing-image");
 
-  // Check if listing has an image and set it, otherwise leave default
   if (listing.media?.length > 0 && listing.media[0].url) {
     listingImageElement.src = listing.media[0].url;
     listingImageElement.alt = listing.title || "Listing Image";

@@ -3,12 +3,21 @@ import { getAuctionEndpoints } from "../../constants.mjs";
 import { formatTimeLeft } from "../../utils/formatTimer.mjs";
 import { formatBidTime } from "../../utils/formatBidTime.mjs";
 
+/**
+ * Fetches and displays the user's active bids.
+ * Retrieves the user's bids from the server and displays the highest bid for each listing.
+ * If no active bids are found, displays a message indicating so.
+ * @async
+ * @returns {Promise<void>} - A promise that resolves when the bids are fetched and displayed.
+ */
+
 const MY_BIDS_ENDPOINT = getAuctionEndpoints().API_MY_BIDS;
 
 export async function fetchUserBids() {
   const accessToken = sessionStorage.getItem("token");
   if (!accessToken) {
-    throw new Error("No access token found. Please log in again.");
+    console.warn("No access token found. User not logged in.");
+    return;
   }
 
   const options = optionGetProfile(accessToken);
@@ -20,17 +29,21 @@ export async function fetchUserBids() {
     }
 
     const data = await response.json();
+    const bidsCardContainer = document.getElementById("bidsCard");
+
     if (!data.data.length) {
       console.warn("No bids found for this user.");
+      bidsCardContainer.innerHTML =
+        "<p class='text-center text-text text-xl my-8'>You have not placed any bids yet.</p>";
       return;
     }
+
     const userHighestBids = new Map();
 
     data.data.forEach((bid) => {
       const listingId = bid.listing.id;
       const bidAmount = bid.amount;
 
-      // Filters out bids where the auction has already ended
       const endsAt = new Date(bid.listing.endsAt);
       const now = new Date();
 
@@ -50,11 +63,15 @@ export async function fetchUserBids() {
 
     if (filteredListings.length === 0) {
       console.warn("No active bids found for this user.");
+      bidsCardContainer.innerHTML =
+        "<p class='text-center text-text text-lg mt-4'>You have not placed any bids yet.</p>";
     } else {
       displayBids(filteredListings);
     }
   } catch (error) {
     console.error("Error fetching user bids:", error);
+    document.getElementById("bidsCard").innerHTML =
+      "<p class='text-center text-red-500 mt-4'>Error loading bids. Please try again later.</p>";
   }
 }
 
@@ -85,8 +102,7 @@ function displayBids(bids) {
     titleElement.textContent = bid.listing.title || "No Title";
 
     const imageElement = clone.querySelector(".bids-image");
-    imageElement.src =
-      bid.listing.media?.[0]?.url || "/public/auctionHouse.png";
+    imageElement.src = bid.listing.media?.[0]?.url || "/auctionHouse.png";
     imageElement.alt = bid.listing.media?.[0]?.alt || "Bids image";
 
     const categoryElement = clone.querySelector(".bids-category");

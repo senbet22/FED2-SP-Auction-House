@@ -1,3 +1,9 @@
+/**
+ * Manages the navigation between different sections (Bids, Wins, Listings, Profile) on the page.
+ * Highlights the active button and displays the corresponding section while hiding others.
+ * The default section displayed is the Bids section.
+ */
+
 // Get buttons
 const bidsButton = document.getElementById("bidsButton");
 const winsButton = document.getElementById("winsButton");
@@ -29,7 +35,7 @@ function setActiveSection(
   inactiveSections.forEach((section) => (section.style.display = "none"));
 }
 
-// Add event listeners
+// Adds event listeners
 bidsButton.addEventListener("click", () => {
   setActiveSection(
     bidsButton,

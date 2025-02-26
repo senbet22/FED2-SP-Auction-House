@@ -1,6 +1,11 @@
-export const API_KEY = import.meta.env.VITE_API_KEY;
+/**
+ * This file contains constants and utility functions for interacting with the auction API.
+ * It defines API endpoints for authentication, profiles, listings, and bids.
+ * Additionally, it includes a function for retrieving specific auction-related API endpoints
+ * based on the logged-in user's profile and session data.
+ */
 
-// Gets profile name from sessionStorage;
+export const API_KEY = import.meta.env.VITE_API_KEY;
 
 export const API_BASE = "https://v2.api.noroff.dev";
 

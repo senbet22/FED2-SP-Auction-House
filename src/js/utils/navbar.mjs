@@ -1,3 +1,11 @@
+/**
+ * Sets up mobile navbar toggle, active link indicator, and shows/hides navbar items based on user login status.
+ * - Toggles visibility of navbar on mobile.
+ * - Highlights the active link in the navbar.
+ * - Adjusts navbar items based on whether the user is logged in.
+ * - Handles logout functionality.
+ */
+
 // Mobile navbar functionality
 function setupNavbar() {
   const navToggle = document.getElementById("navToggle");

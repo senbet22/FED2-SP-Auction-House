@@ -1,20 +1,28 @@
+/**
+ * Dynamically imports modules based on the current pathname.
+ * - Handles routing for various paths, loading necessary UI components and API modules.
+ * - Ensures that only relevant scripts are loaded for each page.
+ *
+ * @param {string} pathname - The current URL path (defaults to window.location.pathname).
+ */
+
 export default async function router(pathname = window.location.pathname) {
   switch (pathname) {
     case "/":
-      await import("./navbar.mjs");
+      await import("../utils/navbar.mjs");
       await import("../ui/components/toastMessages.mjs");
       await import("../ui/listings/uiHandler.mjs");
       await import("../api/UserProfile.mjs");
 
       break;
     case "/auth/":
-      await import("./navbar.mjs");
+      await import("../utils/navbar.mjs");
       await import("../ui/auth/formUI.mjs");
       await import("../ui/auth/loginHandler.mjs");
       await import("../ui/auth/registerHandler.mjs");
       break;
     case "/profile/":
-      await import("./navbar.mjs");
+      await import("../utils/navbar.mjs");
       await import("../ui/profile/profileUI.mjs");
       await import("../ui/profile/myProfile.mjs");
       await import("../ui/profile/myListings.mjs");
@@ -23,7 +31,7 @@ export default async function router(pathname = window.location.pathname) {
       await import("../ui/components/wallet.mjs");
       break;
     case "/item/":
-      await import("./navbar.mjs");
+      await import("../utils/navbar.mjs");
       await import("../ui/singleItem/uiSingleItem.mjs");
       await import("../ui/singleItem/bidHandler.mjs");
       await import("../ui/singleItem/bidModal.mjs");
@@ -32,11 +40,11 @@ export default async function router(pathname = window.location.pathname) {
       break;
 
     case "/item/create/":
-      await import("./navbar.mjs");
+      await import("../utils/navbar.mjs");
       await import("../ui/components/createListingForm.mjs");
       break;
     case "/item/edit/":
-      await import("./navbar.mjs");
+      await import("../utils/navbar.mjs");
       await import("../ui/components/editListingForm.mjs");
       await import("../ui/components/populateEditForm.mjs");
       break;

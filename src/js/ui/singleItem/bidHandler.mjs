@@ -1,6 +1,12 @@
 import { API_LISTINGS } from "../../constants.mjs";
 import { optionPost } from "../../api/requestOptions.mjs";
 
+/**
+ * Handles bid submission by making a request to place a bid.
+ * Displays success or error messages based on the outcome.
+ * Uses MutationObserver to dynamically add the click event listener to the "confirmBid" button.
+ */
+
 const modal = document.getElementById("bidModal");
 const alertBox = document.getElementById("alertMessage");
 const alertText = document.getElementById("alertText");

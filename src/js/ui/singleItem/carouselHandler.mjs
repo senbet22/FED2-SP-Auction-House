@@ -1,8 +1,11 @@
 /**
- * Updates the opacity of images in the image container based on the current index.
- * @param {HTMLElement} imgArContainer - The container element holding the images.
- * @param {number} currentIndex - The index of the image to be set to full opacity.
+ * Provides functions to handle image navigation and opacity adjustments in the image gallery.
+ * - updateImageOpacity: Updates the opacity of images based on the current index.
+ * - handleImageClick: Updates the main image and adjusts the opacity when an image is clicked.
+ * - handleNextImage: Displays the next image in the gallery.
+ * - handlePrevImage: Displays the previous image in the gallery.
  */
+
 export function updateImageOpacity(imgArContainer, currentIndex) {
   const images = imgArContainer.querySelectorAll("img");
   images.forEach((img, index) => {
@@ -16,14 +19,6 @@ export function updateImageOpacity(imgArContainer, currentIndex) {
   });
 }
 
-/**
- * Handles the click event on an image, updating the main image and the opacity of other images.
- * @param {Event} event - The click event.
- * @param {number} currentIndex - The current index of the displayed image.
- * @param {HTMLImageElement} imageElement - The main image element to update.
- * @param {HTMLElement} imgArContainer - The container element holding the images.
- * @returns {number} The updated index of the currently selected image.
- */
 export function handleImageClick(
   event,
   currentIndex,
@@ -42,14 +37,6 @@ export function handleImageClick(
   return currentIndex;
 }
 
-/**
- * Handles showing the next image in the collection.
- * @param {Object} item - The item containing the media information.
- * @param {number} currentIndex - The current index of the displayed image.
- * @param {HTMLImageElement} imageElement - The main image element to update.
- * @param {HTMLElement} imgArContainer - The container element holding the images.
- * @returns {number} The updated index of the currently selected image.
- */
 export function handleNextImage(
   item,
   currentIndex,
@@ -68,14 +55,6 @@ export function handleNextImage(
   return currentIndex;
 }
 
-/**
- * Handles showing the previous image in the collection.
- * @param {Object} item - The item containing the media information.
- * @param {number} currentIndex - The current index of the displayed image.
- * @param {HTMLImageElement} imageElement - The main image element to update.
- * @param {HTMLElement} imgArContainer - The container element holding the images.
- * @returns {number} The updated index of the currently selected image.
- */
 export function handlePrevImage(
   item,
   currentIndex,

@@ -5,6 +5,14 @@ import { API_LISTINGS } from "../../constants.mjs";
 import { loadMoreBtn } from "./loadMoreBtn.mjs";
 import { checkNextPageExists } from "./paginationHandler.mjs";
 
+/**
+ * Loads and renders listings based on current page, selected tag, and search value.
+ * @param {number} currentPage - The current page number to load listings from.
+ * @param {string|null} tag - The selected tag to filter listings by (optional).
+ * @param {string} [searchValue=""] - The search query to filter listings by (optional).
+ * @returns {Promise<boolean>} - Returns a promise that resolves to `true` if listings are loaded, `false` if no listings are found or an error occurs.
+ */
+
 let selectedTag = sessionStorage.getItem("selectedTag") || "";
 let currentPage = 1;
 
@@ -16,12 +24,12 @@ const cardWrapper = document.getElementById("cardWrapper");
 
 document.getElementById("search")?.addEventListener("input", (event) => {
   sessionStorage.removeItem("selectedTag");
-  clearTimeout(searchTimeout); // Prevent multiple rapid calls
+  clearTimeout(searchTimeout);
   document.getElementById("category").selectedIndex = 1;
 
   searchTimeout = setTimeout(() => {
     const searchValue = event.target.value.trim();
-    loadListings(1, null, searchValue); // Ignore tag, only use search
+    loadListings(1, null, searchValue);
   }, 300);
   cardWrapper
     .querySelectorAll(".listing-card")
@@ -32,7 +40,7 @@ document.getElementById("category")?.addEventListener("change", (event) => {
   document.getElementById("search").value = "";
   selectedTag = event.target.value;
   sessionStorage.setItem("selectedTag", selectedTag);
-  loadListings(1, selectedTag, ""); // Ignore search, only use category
+  loadListings(1, selectedTag, "");
   location.reload();
 });
 

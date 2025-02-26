@@ -1,3 +1,9 @@
+/**
+ * Formats a timestamp into a human-readable string representing the bid time.
+ * @param {string|number} timestamp - The timestamp to be formatted.
+ * @returns {string} A formatted string representing the time in "HH:mm dd MMM yyyy" format.
+ */
+
 export function formatBidTime(timestamp) {
   const date = new Date(timestamp);
 

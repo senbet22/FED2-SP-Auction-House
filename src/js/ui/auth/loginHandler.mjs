@@ -1,5 +1,13 @@
 import { login } from "../../auth/login.mjs";
 
+/**
+ * Handles the login form submission, validates user input, and authenticates the user.
+ * On successful login, stores the authentication token, user profile, and displays a welcome message flag.
+ * Redirects the user to the homepage upon successful login.
+ *
+ * @listens submit - Submits the login form and processes authentication.
+ */
+
 const form = document.getElementById("loginForm");
 const emailInput = document.getElementById("email-login");
 const passwordInput = document.getElementById("password-login");

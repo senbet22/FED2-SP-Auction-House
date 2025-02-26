@@ -4,13 +4,22 @@ import { formatTimeLeft } from "../../utils/formatTimer.mjs";
 import { formatBidTime } from "../../utils/formatBidTime.mjs";
 import { getHighestBid } from "../../utils/getHighestBid.mjs";
 
+/**
+ * Fetches and displays the user's active listings.
+ * Retrieves the user's listings from the server, sorts them by active status and creation date,
+ * and displays them. If no listings are found, a message indicating so is displayed.
+ * @async
+ * @returns {Promise<void>} - A promise that resolves when the listings are fetched and displayed.
+ */
+
 const MY_PROFILE_ENDPOINT = getAuctionEndpoints();
 
 export async function fetchUserListings() {
   const accessToken = sessionStorage.getItem("token");
 
   if (!accessToken) {
-    throw new Error("No access token found. Please log in again.");
+    console.warn("No access token found. User not logged in.");
+    return;
   }
 
   const options = optionGetProfile(accessToken);
@@ -22,9 +31,16 @@ export async function fetchUserListings() {
     }
 
     const data = await response.json();
-    console.log("Listing Data:", data.data);
+    const listingCardContainer = document.getElementById("listingCard");
 
-    // List sorting
+    if (!data.data.length) {
+      console.warn("No listings found for this user.");
+      listingCardContainer.innerHTML =
+        "<p class='text-center text-text text-xl my-8'>You do not have any listings at this moment.</p>";
+      return;
+    }
+
+    // List sorting: Active listings first, then newest at the top.
     const sortedListings = data.data.sort((a, b) => {
       const now = new Date();
       const dateA = new Date(a.endsAt);
@@ -33,12 +49,14 @@ export async function fetchUserListings() {
       const isExpiredA = dateA < now ? 1 : 0;
       const isExpiredB = dateB < now ? 1 : 0;
 
-      return isExpiredA - isExpiredB || dateB - dateA; // Active first, then newest at the top
+      return isExpiredA - isExpiredB || dateB - dateA;
     });
 
     displayListings(sortedListings);
   } catch (error) {
     console.error("Error fetching user listings:", error);
+    document.getElementById("listingCard").innerHTML =
+      "<p class='text-center text-red-500 mt-4'>Error loading listings. Please try again later.</p>";
   }
 }
 
@@ -56,7 +74,7 @@ function displayListings(listings) {
     titleElement.setAttribute("title", listing.title);
 
     const imageElement = clone.querySelector(".listing-image");
-    imageElement.src = listing.media?.[0]?.url || "/public/auctionHouse.png";
+    imageElement.src = listing.media?.[0]?.url || "/auctionHouse.png";
     imageElement.alt = listing.media?.[0]?.alt || "Listing image";
 
     const bidsElement = clone.querySelector(".bids");

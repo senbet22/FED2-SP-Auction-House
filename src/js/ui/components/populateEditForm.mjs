@@ -1,5 +1,12 @@
 import { loadSingleItem } from "../../api/singleListing.mjs"; // Import API function
 
+/**
+ * Populates the edit form with details of a specific listing.
+ * Retrieves listing data by ID and fills form fields (title, description, images, category).
+ *
+ * @param {string} listingId - The ID of the listing to populate the form.
+ */
+
 export async function populateEditForm(listingId) {
   try {
     const data = await loadSingleItem(listingId);
@@ -11,7 +18,6 @@ export async function populateEditForm(listingId) {
 
     const item = data.data;
 
-    // Populate form fields with existing listing details
     document.getElementById("itemTitle").value = item.title || "";
     document.getElementById("itemDescription").value = item.description || "";
     document.getElementById("itemImage").value = item.media?.[0]?.url || "";

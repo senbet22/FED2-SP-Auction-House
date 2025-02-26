@@ -1,4 +1,8 @@
-// When clicking on a Card, takes you to single item page with id in URL!
+/**
+ * Adds a click event listener to the card wrapper to navigate to the single item page
+ * when a listing card is clicked. The listing ID is passed in the URL.
+ */
+
 export function handleCardClick() {
   const cardWrapper = document.getElementById("cardWrapper");
 

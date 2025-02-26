@@ -7,7 +7,9 @@ import { API_PROFILES } from "../../constants.mjs";
  * Fetches a seller's listings excluding the current listing by its ID.
  * @param {string} sellerName - The name of the seller whose listings are to be fetched.
  * @throws {Error} - Throws an error if no valid seller name is provided or if the access token is missing.
+ *  It populates the seller card with the filtered listings and handles errors if the access token is missing.
  */
+
 export async function fetchSellerListings(sellerName) {
   if (!sellerName || sellerName === "Unknown Seller") {
     console.error("No valid seller name found.");
@@ -51,19 +53,11 @@ export async function fetchSellerListings(sellerName) {
   }
 }
 
-/**
- * Retrieves the current listing ID from the URL.
- * @returns {string|null} The current listing ID from the URL query parameters.
- */
 function getCurrentListingId() {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get("id");
 }
 
-/**
- * Populates the seller card with the given listings.
- * @param {Array} listings - An array of listings to populate the seller card with.
- */
 function populateSellerCard(listings) {
   const sellerCard = document.getElementById("sellerCard");
   if (!sellerCard) {

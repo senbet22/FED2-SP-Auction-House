@@ -1,10 +1,8 @@
 /**
  * @fileoverview
- * This script has two main functions:
- * 1. **Update Profile**: On clicking the "Update Profile" button, a PUT request is made to update the user's avatar.
- *    The updated avatar is displayed, and the profile is saved in sessionStorage.
- *
- * 2. **Display Profile**: On page load, the user's profile data is retrieved from sessionStorage and displayed, including the banner, avatar, name, and bio.
+ * This script handles user profile functionality, including:
+ * 1. **Update Profile**: Allows the user to update their avatar through a PUT request, displaying the new avatar and saving it in sessionStorage.
+ * 2. **Display Profile**: On page load, it retrieves the user's profile data from sessionStorage and displays the profile information (banner, avatar, name, and bio).
  */
 
 import { updateUserProfile } from "../../api/putReqProfile.mjs";
@@ -26,8 +24,8 @@ export function showAlert(message) {
 
     setTimeout(() => {
       alertMessage.classList.add("hidden");
-    }, 500); // Time for the sliding out animation to complete
-  }, 2000); // Time to keep the alert visible
+    }, 500);
+  }, 2000);
 }
 
 document
@@ -38,7 +36,6 @@ document
       .value.trim();
 
     if (!newAvatarUrl) {
-      // Show the alert with a message if the input is empty
       showAlert("Please enter a valid image URL.");
       return;
     }

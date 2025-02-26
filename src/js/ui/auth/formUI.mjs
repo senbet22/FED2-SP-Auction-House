@@ -1,3 +1,9 @@
+/**
+ * Handles the switching between login and register forms. Toggles the active state of the buttons and displays the corresponding form.
+ *
+ * @listens click - Switches between login and register forms and updates button styles.
+ */
+
 // Get buttons
 const loginButton = document.getElementById("loginButton");
 const registerButton = document.getElementById("registerButton");

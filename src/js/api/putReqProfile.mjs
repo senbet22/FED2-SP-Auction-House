@@ -1,14 +1,15 @@
 import { optionPut } from "./requestOptions.mjs";
 import { getAuctionEndpoints } from "../constants.mjs";
 
-const MY_PROFILE_ENDPOINT = getAuctionEndpoints();
-
 /**
  * Sends a PUT request to update the user's profile with the provided data.
  * @param {Object} updatedProfile - The profile data to update (e.g., avatar, bio, etc.).
  * @returns {Promise<Object>} - A promise that resolves to the API response data.
  * @throws {Error} - Throws an error if the API request fails or the response is not successful.
  */
+
+const MY_PROFILE_ENDPOINT = getAuctionEndpoints();
+
 export async function updateUserProfile(updatedProfile) {
   const options = optionPut(updatedProfile);
 
@@ -23,9 +24,9 @@ export async function updateUserProfile(updatedProfile) {
       );
     }
 
-    return responseBody; // Return the response if successful
+    return responseBody;
   } catch (error) {
     console.error("Error updating user profile:", error);
-    throw error; // Propagate the error to be handled by the caller
+    throw error;
   }
 }

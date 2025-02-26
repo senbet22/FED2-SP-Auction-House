@@ -11,7 +11,7 @@ import { optionPut } from "./requestOptions.mjs";
 
 export async function updateListing(listingId, updateData) {
   try {
-    const url = `${API_LISTINGS}/${listingId}`; // API endpoint with listing ID
+    const url = `${API_LISTINGS}/${listingId}`;
     const options = optionPut(updateData);
 
     const response = await fetch(url, options);

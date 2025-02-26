@@ -1,6 +1,14 @@
 import { updateListing } from "../../api/editListing.mjs";
 import { populateEditForm } from "./populateEditForm.mjs";
 
+/**
+ * Handles the form for editing a listing. Retrieves listing details, populates the form, and allows users to update the listing.
+ * Validates the form, updates the listing on submission, and provides error feedback if needed.
+ *
+ * @listens submit - Handles form submission and updates the listing.
+ * @listens click - Toggles visibility of additional image inputs.
+ */
+
 const form = document.getElementById("createListingForm");
 const errorContainer = document.getElementById("errorContainer");
 const errorMessage = document.getElementById("errorMessage");
@@ -20,14 +28,13 @@ function getAdditionalImages() {
 // Get listing ID from URL
 const listingId = new URLSearchParams(window.location.search).get("id");
 
-// If ID exists, populate the form
+// If ID exists, populates the form
 if (listingId) {
   populateEditForm(listingId);
 } else {
   console.error("No listing ID found.");
 }
 
-// Form submission event for editing a listing
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -61,7 +68,7 @@ form.addEventListener("submit", async (event) => {
     const response = await updateListing(listingId, updatedListing);
     if (response) {
       sessionStorage.setItem("itemUpdated", "true");
-      window.location.href = "/"; // Redirect after success
+      window.location.href = "/";
     } else {
       errorMessage.textContent = "Failed to update listing.";
       errorContainer.classList.remove("hidden");

@@ -1,4 +1,4 @@
-import { optionDelete } from "./requestOptions.mjs"; // Assuming optionDelete is in the requestOptions.mjs file
+import { optionDelete } from "./requestOptions.mjs";
 import { API_LISTINGS } from "../constants.mjs";
 
 /**
@@ -8,20 +8,19 @@ import { API_LISTINGS } from "../constants.mjs";
  * @returns {Promise<Object>} - A promise that resolves to the API response data.
  * @throws {Error} - Throws an error if the API request fails.
  */
+
 export async function deleteListing(listingId, accessToken) {
   try {
     const response = await fetch(`${API_LISTINGS}/${listingId}`, {
       ...optionDelete,
       headers: {
         ...optionDelete.headers,
-        Authorization: `Bearer ${accessToken}`, // Include the access token in the request headers
+        Authorization: `Bearer ${accessToken}`,
       },
     });
 
-    // Check for success response: 204 No Content
     if (response.status === 204) {
-      console.log("Item successfully deleted.");
-      return; // No content expected, we can proceed
+      return;
     } else {
       const errorData = await response.json();
       throw new Error(

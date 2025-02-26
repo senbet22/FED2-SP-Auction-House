@@ -1,10 +1,14 @@
+/**
+ * Uses a MutationObserver to detect when the admin buttons are added to the DOM.
+ * If the seller's name matches the user's profile name, the admin buttons are displayed.
+ */
+
 export function showAdminButton(sellerName) {
   const auctionProfile = JSON.parse(sessionStorage.getItem("auctionProfile"));
   const adminButtonsContainer = document.getElementById(
     "adminButtonsContainer"
   );
 
-  // Ensure auctionProfile and adminButtonsContainer are available
   if (!auctionProfile) {
     console.error("Auction profile not found in sessionStorage.");
     return;
@@ -15,7 +19,6 @@ export function showAdminButton(sellerName) {
     return;
   }
 
-  // Set up MutationObserver to watch for when adminButtons are added to the DOM
   const observer = new MutationObserver((mutationsList) => {
     for (const mutation of mutationsList) {
       if (mutation.type === "childList") {
@@ -33,16 +36,14 @@ export function showAdminButton(sellerName) {
             console.log("Seller name does not match auction profile name.");
           }
 
-          // Disconnect observer once the admin buttons have been handled
           observer.disconnect();
         }
       }
     }
   });
 
-  // Start observing the adminButtonsContainer for changes in its children
   observer.observe(adminButtonsContainer, {
-    childList: true, // Observe additions/removals of child elements
-    subtree: true, // Observe changes in the entire subtree
+    childList: true,
+    subtree: true,
   });
 }

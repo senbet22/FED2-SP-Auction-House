@@ -10,6 +10,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, "./index.html"),
+        login: resolve(__dirname, "./auth/index.html"),
         item: resolve(__dirname, "./item/index.html"),
         profile: resolve(__dirname, "./profile/index.html"),
         create: resolve(__dirname, "./item/create/index.html"),

@@ -40,16 +40,26 @@ export async function fetchUserListings() {
       return;
     }
 
-    // List sorting: Active listings first, then newest at the top.
     const sortedListings = data.data.sort((a, b) => {
       const now = new Date();
       const dateA = new Date(a.endsAt);
       const dateB = new Date(b.endsAt);
 
+      // Checks if a listing is expired or not
       const isExpiredA = dateA < now ? 1 : 0;
       const isExpiredB = dateB < now ? 1 : 0;
 
-      return isExpiredA - isExpiredB || dateB - dateA;
+      // First, sort by active status (expired listings go to the bottom)
+      const statusComparison = isExpiredA - isExpiredB;
+      if (statusComparison !== 0) {
+        return statusComparison;
+      }
+
+      // Then, if the status is the same (both active or both expired), sort by updated date (newest to oldest)
+      const updatedAtA = new Date(a.updatedAt);
+      const updatedAtB = new Date(b.updatedAt);
+
+      return updatedAtB - updatedAtA;
     });
 
     displayListings(sortedListings);

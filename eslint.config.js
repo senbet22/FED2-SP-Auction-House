@@ -19,3 +19,9 @@ export default [
   },
   pluginJs.configs.recommended,
 ];
+
+module.exports = {
+  env: {
+    node: true,
+  },
+};

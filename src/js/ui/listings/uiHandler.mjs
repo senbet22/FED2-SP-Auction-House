@@ -88,7 +88,7 @@ export async function loadListings(currentPage, tag, searchValue = "") {
 
   const loadMoreButton = document.getElementById("loadMore");
 
-  // Remove old "No Results" message if it exists
+  // Remove old No Results message if it exists
   document.getElementById("noResultsMessage")?.remove();
 
   // Removes skeleton loaders before handling results
@@ -97,7 +97,7 @@ export async function loadListings(currentPage, tag, searchValue = "") {
   if (!listings.data || listings.data.length === 0) {
     if (loadMoreButton) loadMoreButton.style.display = "none";
 
-    // Create and append "No Results" message
+    // Create and append No Results message
     const message = document.createElement("p");
     message.id = "noResultsMessage";
     message.textContent =

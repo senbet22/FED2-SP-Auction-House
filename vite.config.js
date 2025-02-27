@@ -15,12 +15,15 @@ export default defineConfig({
     target: "esnext",
     rollupOptions: {
       input: {
-        main: resolve(__dirname, "./index.html"),
-        auth: resolve(__dirname, "./auth/index.html"),
-        item: resolve(__dirname, "./item/index.html"),
-        profile: resolve(__dirname, "./profile/index.html"),
-        create: resolve(__dirname, "./item/create/index.html"),
-        edit: resolve(__dirname, "./item/edit/index.html"),
+        main: resolve(__dirname, "FED2-SP-AUCTION-HOUSE/index.html"),
+        auth: resolve(__dirname, "FED2-SP-AUCTION-HOUSE/auth/index.html"),
+        item: resolve(__dirname, "FED2-SP-AUCTION-HOUSE/item/index.html"),
+        profile: resolve(__dirname, "FED2-SP-AUCTION-HOUSE/profile/index.html"),
+        create: resolve(
+          __dirname,
+          "FED2-SP-AUCTION-HOUSE/item/create/index.html"
+        ),
+        edit: resolve(__dirname, "FED2-SP-AUCTION-HOUSE/item/edit/index.html"),
       },
     },
   },

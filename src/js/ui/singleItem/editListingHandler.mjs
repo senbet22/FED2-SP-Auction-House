@@ -14,7 +14,6 @@ export function handleEditButtonClick(listingId) {
             window.location.href = `/item/edit/?id=${listingId}`;
           });
 
-          console.log("Edit button found and event attached.");
           observer.disconnect();
         }
       }

@@ -29,11 +29,6 @@ export function showAdminButton(sellerName) {
           if (sellerName === auctionProfile.name) {
             adminButtons.classList.remove("hidden");
             adminButtons.classList.add("flex");
-            console.log(
-              "Admin buttons are now visible because the seller name matches the auction profile name."
-            );
-          } else {
-            console.log("Seller name does not match auction profile name.");
           }
 
           observer.disconnect();

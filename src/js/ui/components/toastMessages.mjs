@@ -17,8 +17,7 @@
     if (welcomeMessage) {
       welcomeMessage.classList.remove("hidden");
 
-      document.getElementById("userAvatar").src =
-        user.avatar?.url || "/auctionHouse.png";
+      document.getElementById("userAvatar").src = user.avatar?.url || "/";
       document.getElementById(
         "userName"
       ).textContent = `Welcome back, ${user.name}!`;

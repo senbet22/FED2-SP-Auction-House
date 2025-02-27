@@ -77,7 +77,6 @@ export async function loadListings(currentPage, tag, searchValue = "") {
   if (searchValue) {
     params.append("q", searchValue);
     const searchUrl = `${API_LISTINGS}/search?${params}`;
-    console.log("Search happening...");
     listings = await fetchListings(searchUrl);
   } else if (tag) {
     params.append("_tag", tag);
@@ -89,7 +88,6 @@ export async function loadListings(currentPage, tag, searchValue = "") {
   }
 
   const { data, meta } = listings;
-  console.log("Fetched data:", data, meta);
 
   const loadMoreButton = document.getElementById("loadMore");
 

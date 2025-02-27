@@ -26,8 +26,6 @@ form.addEventListener("submit", async (event) => {
   try {
     const userData = await login({ email, password });
 
-    console.log(userData);
-
     const { accessToken, ...user } = userData.data;
 
     sessionStorage.setItem("token", accessToken);
@@ -39,7 +37,6 @@ form.addEventListener("submit", async (event) => {
       JSON.stringify({ timestamp: Date.now() })
     );
 
-    console.log("Login successful:", userData);
     window.location.href = "/";
   } catch (error) {
     console.error("Login failed:", error);

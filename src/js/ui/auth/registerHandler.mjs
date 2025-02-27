@@ -86,10 +86,6 @@ form.addEventListener("submit", async (event) => {
       password,
     });
 
-    console.log(userData);
-
-    console.log("Registration successful:", userData);
-
     const successAlert = document.getElementById("RegsuccessAlert");
     successAlert.classList.remove("hidden");
 

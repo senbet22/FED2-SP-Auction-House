@@ -102,7 +102,7 @@ function displayBids(bids) {
     titleElement.textContent = bid.listing.title || "No Title";
 
     const imageElement = clone.querySelector(".bids-image");
-    imageElement.src = bid.listing.media?.[0]?.url || "/auctionHouse.png";
+    imageElement.src = bid.listing.media?.[0]?.url || "/smallLogo.svg";
     imageElement.alt = bid.listing.media?.[0]?.alt || "Bids image";
 
     const categoryElement = clone.querySelector(".bids-category");

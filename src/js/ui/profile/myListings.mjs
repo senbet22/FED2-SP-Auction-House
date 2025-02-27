@@ -74,7 +74,7 @@ function displayListings(listings) {
     titleElement.setAttribute("title", listing.title);
 
     const imageElement = clone.querySelector(".listing-image");
-    imageElement.src = listing.media?.[0]?.url || "/auctionHouse.png";
+    imageElement.src = listing.media?.[0]?.url || "/smallLogo.svg";
     imageElement.alt = listing.media?.[0]?.alt || "Listing image";
 
     const bidsElement = clone.querySelector(".bids");

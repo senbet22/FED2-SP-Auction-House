@@ -34,8 +34,6 @@ export async function checkNextPageExists(
 
   const newUrl = `${API_LISTINGS}?${params}`;
 
-  console.log("Next page check URL:", newUrl);
-
   const nextPageListings = await fetchListings(newUrl);
 
   if (!nextPageListings || !nextPageListings.data) {

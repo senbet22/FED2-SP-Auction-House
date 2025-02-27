@@ -59,14 +59,12 @@ export async function bidRequest(id) {
 
     if (!response.ok) {
       const errorData = await response.json();
-      console.log("Error data:", errorData);
       throw new Error(
         `${errorData.statusCode}: ${errorData.status}. ${errorData.errors[0].message}`
       );
     }
 
     const data = await response.json();
-    console.log("Bid submitted successfully:", data);
 
     showSuccess("Congratulations! You have placed your bid.");
 
@@ -90,10 +88,9 @@ const observer = new MutationObserver(() => {
     bidButton.addEventListener("click", () => {
       bidRequest(itemId).then((response) => {
         if (response) {
-          console.log("Bid placed successfully:", response);
           modal.classList.add("hidden");
         } else {
-          console.log("Bid failed.");
+          console.error("Bid failed.");
         }
       });
     });

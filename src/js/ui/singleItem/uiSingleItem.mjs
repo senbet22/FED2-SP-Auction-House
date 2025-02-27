@@ -120,7 +120,7 @@ export function populateItemDetails(item) {
   clone.querySelector("#sellerName").textContent = sellerName;
 
   const sellerAvatar = clone.querySelector("#sellerAvatar");
-  sellerAvatar.src = item.seller?.avatar?.url || "/auctionHouse.png";
+  sellerAvatar.src = item.seller?.avatar?.url || "/smallLogo.svg";
 
   document.title = item.title || "Auction House";
 
@@ -133,15 +133,10 @@ export function populateItemDetails(item) {
   const adminBtn1 = document.getElementById("adminBtn1");
   const adminBtn2 = document.getElementById("adminBtn2");
   const accessToken = sessionStorage.getItem("token");
-  console.log(auctionProfile.name);
-  console.log(sellerName);
 
   if (sellerName === auctionProfile.name) {
     adminBtn2.classList.remove("hidden");
     adminBtn2.classList.add("flex");
-    console.log(
-      "Admin buttons are now visible because the seller name matches the auction profile name."
-    );
   }
   if (accessToken) {
     adminBtn1.classList.remove("hidden");

@@ -35,8 +35,6 @@ export async function populateEditForm(listingId) {
         allInputs[index].value = media.url;
       }
     });
-
-    console.log("Edit form populated with:", item);
   } catch (error) {
     console.error("Error fetching listing details:", error);
   }

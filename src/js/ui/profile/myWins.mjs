@@ -57,8 +57,6 @@ function displayWins(wins) {
   winsCardContainer.innerHTML = "";
 
   wins.forEach((win) => {
-    console.log("Win:", win);
-
     const clone = template.content.cloneNode(true);
 
     const titleElement = clone.querySelector(".wins-title");
@@ -71,7 +69,7 @@ function displayWins(wins) {
 
     const imageElement = clone.querySelector(".wins-image");
     if (imageElement) {
-      imageElement.src = win.media?.[0]?.url || "/auctionHouse.png";
+      imageElement.src = win.media?.[0]?.url || "/smallLogo.svg";
       imageElement.alt = win.media?.[0]?.alt || "Win image";
     } else {
       console.warn("Image element not found in template!");

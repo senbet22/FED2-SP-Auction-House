@@ -37,7 +37,6 @@ export function getAuctionEndpoints() {
       API_MY_BIDS: `${API_PROFILES}/${userName.name}/bids`,
     };
   } else {
-    console.log("No user data available");
     return {};
   }
 }

@@ -27,7 +27,7 @@ const cardWrapper = document.getElementById("cardWrapper");
 document.getElementById("search")?.addEventListener("input", (event) => {
   sessionStorage.removeItem("selectedTag");
   clearTimeout(searchTimeout);
-  document.getElementById("category").selectedIndex = 1;
+  document.getElementById("category").selectedIndex = 0;
 
   searchTimeout = setTimeout(() => {
     const searchValue = event.target.value.trim();
@@ -76,35 +76,50 @@ export async function loadListings(currentPage, tag, searchValue = "") {
 
   if (searchValue) {
     params.append("q", searchValue);
-    const searchUrl = `${API_LISTINGS}/search?${params}`;
-    listings = await fetchListings(searchUrl);
+    listings = await fetchListings(`${API_LISTINGS}/search?${params}`);
   } else if (tag) {
     params.append("_tag", tag);
-    const categoryUrl = `${API_LISTINGS}?${params}`;
-    listings = await fetchListings(categoryUrl);
+    listings = await fetchListings(`${API_LISTINGS}?${params}`);
   } else {
-    const baseUrl = `${API_LISTINGS}?${params}`;
-    listings = await fetchListings(baseUrl);
+    listings = await fetchListings(`${API_LISTINGS}?${params}`);
   }
 
-  const { data, meta } = listings;
+  const { meta } = listings;
 
   const loadMoreButton = document.getElementById("loadMore");
 
-  if (!listings || listings.length === 0) {
+  // Remove old "No Results" message if it exists
+  document.getElementById("noResultsMessage")?.remove();
+
+  // Removes skeleton loaders before handling results
+  removeSkeletonLoaders(cardWrapper);
+
+  if (!listings.data || listings.data.length === 0) {
     if (loadMoreButton) loadMoreButton.style.display = "none";
+
+    // Create and append "No Results" message
+    const message = document.createElement("p");
+    message.id = "noResultsMessage";
+    message.textContent =
+      "Unfortunately, no listings were found that match your criteria.";
+    message.classList.add(
+      "text-center",
+      "justify-center",
+      "text-xl",
+      "text-text",
+      "my-26"
+    );
+
+    cardWrapper.appendChild(message);
     return false;
   }
 
   const template = document.getElementById("listing-template");
 
-  if (!cardWrapper || !template) {
-    console.error("Template or card wrapper not found in the DOM!");
+  if (!template) {
+    console.error("Template not found in the DOM!");
     return false;
   }
-
-  // Removes skeleton loaders once data is loaded
-  removeSkeletonLoaders(cardWrapper);
 
   listings.data.forEach((listing) => {
     renderListingCard(listing, template, cardWrapper);

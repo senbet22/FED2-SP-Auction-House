@@ -77,6 +77,8 @@ if (auctionProfile) {
   const profileBanner = document.getElementById("profileBanner");
   profileBanner.style.background = `url('${auctionProfile.banner.url}') center/cover no-repeat`;
 
+  document.title = auctionProfile.name || "Profile - Auction House";
+
   const profileAvatar = document.getElementById("profileAvatar");
   profileAvatar.src = auctionProfile.avatar.url;
   profileAvatar.alt = auctionProfile.avatar.alt || "Profile Avatar";

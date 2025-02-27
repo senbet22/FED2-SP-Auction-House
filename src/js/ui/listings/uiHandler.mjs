@@ -6,11 +6,13 @@ import { loadMoreBtn } from "./loadMoreBtn.mjs";
 import { checkNextPageExists } from "./paginationHandler.mjs";
 
 /**
- * Loads and renders listings based on current page, selected tag, and search value.
+ * Loads and renders listings based on the current page, selected tag, and search value.
+ * Displays a skeleton loader while fetching data.
+ *
  * @param {number} currentPage - The current page number to load listings from.
  * @param {string|null} tag - The selected tag to filter listings by (optional).
  * @param {string} [searchValue=""] - The search query to filter listings by (optional).
- * @returns {Promise<boolean>} - Returns a promise that resolves to `true` if listings are loaded, `false` if no listings are found or an error occurs.
+ * @returns {Promise<boolean>} - Returns a promise that resolves to `true` if listings are loaded successfully, `false` if no listings are found or an error occurs.
  */
 
 let selectedTag = sessionStorage.getItem("selectedTag") || "";
@@ -31,6 +33,7 @@ document.getElementById("search")?.addEventListener("input", (event) => {
     const searchValue = event.target.value.trim();
     loadListings(1, null, searchValue);
   }, 300);
+
   cardWrapper
     .querySelectorAll(".listing-card")
     .forEach((card) => card.remove());
@@ -45,7 +48,6 @@ document.getElementById("category")?.addEventListener("change", (event) => {
 });
 
 loadMoreBtn();
-
 checkNextPageExists();
 
 export async function loadListings(currentPage, tag, searchValue = "") {
@@ -60,8 +62,10 @@ export async function loadListings(currentPage, tag, searchValue = "") {
     return;
   }
 
-  let listings = [];
+  // Shows skeleton loaders while fetching data
+  showSkeletonLoaders(cardWrapper, 12);
 
+  let listings = [];
   const params = new URLSearchParams({
     limit: 12,
     page: currentPage,
@@ -73,8 +77,7 @@ export async function loadListings(currentPage, tag, searchValue = "") {
   if (searchValue) {
     params.append("q", searchValue);
     const searchUrl = `${API_LISTINGS}/search?${params}`;
-    console.log("search happening");
-
+    console.log("Search happening...");
     listings = await fetchListings(searchUrl);
   } else if (tag) {
     params.append("_tag", tag);
@@ -86,7 +89,7 @@ export async function loadListings(currentPage, tag, searchValue = "") {
   }
 
   const { data, meta } = listings;
-  console.log("alla data", data, meta);
+  console.log("Fetched data:", data, meta);
 
   const loadMoreButton = document.getElementById("loadMore");
 
@@ -101,6 +104,9 @@ export async function loadListings(currentPage, tag, searchValue = "") {
     console.error("Template or card wrapper not found in the DOM!");
     return false;
   }
+
+  // Removes skeleton loaders once data is loaded
+  removeSkeletonLoaders(cardWrapper);
 
   listings.data.forEach((listing) => {
     renderListingCard(listing, template, cardWrapper);
@@ -119,4 +125,32 @@ export async function loadListings(currentPage, tag, searchValue = "") {
   }
 
   return true;
+}
+
+/**
+ * Displays skeleton loader cards while data is being fetched.
+ *
+ * @param {HTMLElement} container - The container where skeleton loaders should be added.
+ * @param {number} [count=6] - The number of skeleton loader cards to display.
+ */
+function showSkeletonLoaders(container, count = 6) {
+  const skeletonTemplate = document.getElementById("skeleton-template");
+  if (!skeletonTemplate) return;
+
+  for (let i = 0; i < count; i++) {
+    const skeletonClone = skeletonTemplate.content.cloneNode(true);
+    container.appendChild(skeletonClone);
+  }
+}
+
+/**
+ * Removes skeleton loader cards after data has been loaded.
+ *
+ * @param {HTMLElement} container - The container from which skeleton loaders should be removed.
+ */
+
+function removeSkeletonLoaders(container) {
+  container
+    .querySelectorAll(".skeleton-card")
+    .forEach((skeleton) => skeleton.remove());
 }

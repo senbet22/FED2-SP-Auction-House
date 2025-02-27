@@ -119,9 +119,6 @@ function displayBids(bids) {
       timeLeftElement.classList.add("bg-accent");
     }
 
-    const participantsElement = clone.querySelector(".participants");
-    participantsElement.textContent = `Participants: ${uniqueBidders.size}`;
-
     const yourBidElement = clone.querySelector(".your-bid");
     yourBidElement.textContent = `Your bid: $${bid.amount}`;
 

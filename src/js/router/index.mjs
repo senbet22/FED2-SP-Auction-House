@@ -15,12 +15,6 @@ export default async function router(pathname = window.location.pathname) {
       await import("../api/UserProfile.mjs");
 
       break;
-    case "/auth/":
-      await import("../utils/navbar.mjs");
-      await import("../ui/auth/formUI.mjs");
-      await import("../ui/auth/loginHandler.mjs");
-      await import("../ui/auth/registerHandler.mjs");
-      break;
     case "/profile/":
       await import("../utils/navbar.mjs");
       await import("../ui/profile/profileUI.mjs");
@@ -29,6 +23,12 @@ export default async function router(pathname = window.location.pathname) {
       await import("../ui/profile/myBids.mjs");
       await import("../ui/profile/myWins.mjs");
       await import("../ui/components/wallet.mjs");
+      break;
+    case "/auth/":
+      await import("../utils/navbar.mjs");
+      await import("../ui/auth/formUI.mjs");
+      await import("../ui/auth/loginHandler.mjs");
+      await import("../ui/auth/registerHandler.mjs");
       break;
     case "/item/":
       await import("../utils/navbar.mjs");

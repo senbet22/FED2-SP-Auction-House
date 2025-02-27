@@ -42,6 +42,7 @@ export default async function router(pathname = window.location.pathname) {
     case "/item/create/":
       await import("../utils/navbar.mjs");
       await import("../ui/components/createListingForm.mjs");
+
       break;
     case "/item/edit/":
       await import("../utils/navbar.mjs");

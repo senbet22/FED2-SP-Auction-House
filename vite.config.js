@@ -7,8 +7,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export default defineConfig({
-  appType: "mpa", // Multi-Page App setup
-  base: "", // Adjust the base URL if needed
+  appType: "mpa",
+  base: "",
   plugins: [tailwindcss()],
   build: {
     target: "esnext",
@@ -20,11 +20,6 @@ export default defineConfig({
         profile: resolve(__dirname, "./profile/index.html"),
         create: resolve(__dirname, "./item/create/index.html"),
         edit: resolve(__dirname, "./item/edit/index.html"),
-      },
-      output: {
-        dir: "dist", // Specifies the directory for the build output
-        format: "es", // Use 'es' (ES Module) format
-        entryFileNames: "[name]/index.js", // Ensure that each HTML page has its own JS file
       },
     },
   },

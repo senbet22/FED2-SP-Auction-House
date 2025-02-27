@@ -1,7 +1,7 @@
 /**
  * Handles user notifications and toast messages for various actions:
  * - Welcome message on login
- * - Success messages for item creation, update, and deletion
+ * - Success messages for item creation, update, deletion and authGuard.
  * - Logout success notification
  * All messages are shown using a sliding toast animation and cleared from sessionStorage after display.
  */
@@ -32,91 +32,36 @@
   }
 })();
 
-// Toast for Item deleted
-if (sessionStorage.getItem("itemDeleted") === "true") {
-  const deleteMessage = document.getElementById("deleteSucessMessage");
+// List of sessionStorage keys and corresponding messages
+const toastMessages = {
+  itemDeleted: "Listing deleted successfully!",
+  itemCreated: "Listing created successfully!",
+  itemUpdated: "Listing updated successfully!",
+  logout: "You are now logged out!",
+  authGuard: "You must be logged in to access this page.",
+};
 
-  if (deleteMessage) {
-    deleteMessage.classList.remove("hidden", "translate-x-full");
-    deleteMessage.classList.add("translate-x-0");
+// Loops through the toastMessages object and display the corresponding toast
+Object.keys(toastMessages).forEach((key) => {
+  if (sessionStorage.getItem(key) === "true") {
+    const toastMessage = document.getElementById("deleteSucessMessage");
+    const toastText = document.getElementById("deleteSucessText");
 
-    setTimeout(() => {
-      deleteMessage.classList.remove("translate-x-0");
-      deleteMessage.classList.add("translate-x-full");
+    if (toastMessage && toastText) {
+      toastText.textContent = toastMessages[key];
 
-      setTimeout(() => {
-        sessionStorage.removeItem("itemDeleted");
-        deleteMessage.classList.add("hidden");
-      }, 500);
-    }, 2000);
-  }
-}
-
-// Toast for Item created - (re-use of the delete Toast)
-if (sessionStorage.getItem("itemCreated") === "true") {
-  const createMessage = document.getElementById("deleteSucessMessage");
-  const successText = document.getElementById("deleteSucessText");
-
-  if (createMessage && successText) {
-    successText.textContent = "Listing created successfully!";
-
-    createMessage.classList.remove("hidden", "translate-x-full");
-    createMessage.classList.add("translate-x-0");
-
-    setTimeout(() => {
-      createMessage.classList.remove("translate-x-0");
-      createMessage.classList.add("translate-x-full");
+      toastMessage.classList.remove("hidden", "translate-x-full");
+      toastMessage.classList.add("translate-x-0");
 
       setTimeout(() => {
-        sessionStorage.removeItem("itemCreated");
-        createMessage.classList.add("hidden");
-      }, 500);
-    }, 2000);
+        toastMessage.classList.remove("translate-x-0");
+        toastMessage.classList.add("translate-x-full");
+
+        setTimeout(() => {
+          sessionStorage.removeItem(key);
+          toastMessage.classList.add("hidden");
+        }, 500);
+      }, 2000);
+    }
   }
-}
-
-// Toast for Item Edited - (re-use of the delete Toast)
-if (sessionStorage.getItem("itemUpdated") === "true") {
-  const createMessage = document.getElementById("deleteSucessMessage");
-  const successText = document.getElementById("deleteSucessText");
-
-  if (createMessage && successText) {
-    successText.textContent = "Listing updated successfully!";
-
-    createMessage.classList.remove("hidden", "translate-x-full");
-    createMessage.classList.add("translate-x-0");
-
-    setTimeout(() => {
-      createMessage.classList.remove("translate-x-0");
-      createMessage.classList.add("translate-x-full");
-
-      setTimeout(() => {
-        sessionStorage.removeItem("itemUpdated");
-        createMessage.classList.add("hidden");
-      }, 500);
-    }, 2000);
-  }
-}
-
-// Toast for Logout Success - (re-use of the delete Toast)
-if (sessionStorage.getItem("logout") === "true") {
-  const createMessage = document.getElementById("deleteSucessMessage");
-  const successText = document.getElementById("deleteSucessText");
-
-  if (createMessage && successText) {
-    successText.textContent = "You are now logged out!";
-
-    createMessage.classList.remove("hidden", "translate-x-full");
-    createMessage.classList.add("translate-x-0");
-
-    setTimeout(() => {
-      createMessage.classList.remove("translate-x-0");
-      createMessage.classList.add("translate-x-full");
-
-      setTimeout(() => {
-        sessionStorage.removeItem("logout");
-        createMessage.classList.add("hidden");
-      }, 500);
-    }, 2000);
-  }
-}
+});

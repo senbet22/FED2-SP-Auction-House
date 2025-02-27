@@ -1,5 +1,6 @@
 /**
  * Sets up mobile navbar toggle, active link indicator, and shows/hides navbar items based on user login status.
+ * - Authguard is imported and called to check if user has access to specific pages.
  * - Toggles visibility of navbar on mobile.
  * - Highlights the active link in the navbar.
  * - Adjusts navbar items based on whether the user is logged in.
@@ -7,6 +8,10 @@
  */
 
 // Mobile navbar functionality
+
+import { authGuard } from "../utils/authGuard.mjs";
+authGuard();
+
 function setupNavbar() {
   const navToggle = document.getElementById("navToggle");
   const navtab = document.getElementById("navtab");

@@ -15,13 +15,13 @@ export default async function router(pathname = window.location.pathname) {
       await import("../api/UserProfile.mjs");
 
       break;
-    case "/auth/":
+    case "/auth/index.html":
       await import("../utils/navbar.mjs");
       await import("../ui/auth/formUI.mjs");
       await import("../ui/auth/loginHandler.mjs");
       await import("../ui/auth/registerHandler.mjs");
       break;
-    case "/profile/":
+    case "/profile/index.html":
       await import("../utils/navbar.mjs");
       await import("../ui/profile/profileUI.mjs");
       await import("../ui/profile/myProfile.mjs");
@@ -30,7 +30,7 @@ export default async function router(pathname = window.location.pathname) {
       await import("../ui/profile/myWins.mjs");
       await import("../ui/components/wallet.mjs");
       break;
-    case "/item/":
+    case "/item/index.html":
       await import("../utils/navbar.mjs");
       await import("../ui/singleItem/uiSingleItem.mjs");
       await import("../ui/singleItem/bidHandler.mjs");
@@ -39,12 +39,12 @@ export default async function router(pathname = window.location.pathname) {
       await import("../ui/singleItem/sellerListings.mjs");
       break;
 
-    case "/item/create/":
+    case "/item/create/index.html":
       await import("../utils/navbar.mjs");
       await import("../ui/components/createListingForm.mjs");
 
       break;
-    case "/item/edit/":
+    case "/item/edit/index.html":
       await import("../utils/navbar.mjs");
       await import("../ui/components/editListingForm.mjs");
       await import("../ui/components/populateEditForm.mjs");

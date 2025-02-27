@@ -8,7 +8,7 @@ const __dirname = dirname(__filename);
 
 export default defineConfig({
   appType: "mpa",
-  base: "",
+  base: "/FED2-SP-AUCTION-HOUSE",
   plugins: [tailwindcss()],
   build: {
     target: "esnext",

@@ -6,15 +6,41 @@ Auction House is a user-driven auction platform where participants can list thei
 
 ## Key Features
 
-- 🆕 Initial Credits: New users start with 1000 credits to place their first bids.
-- 💼 Bidding and Selling: Users can list items for bidding or place bids on others' auctions.
-- 💳 Credits System: Transactions are handled using credits for seamless payments.
-- 🔍 Browse Auctions: Non-registered users can explore and search auctions.
+- 🆕 **Initial Credits**: New users start with 1000 credits to place their first bids.
+- 💼 **Bidding and Selling**: Users can list items for bidding or place bids on others' auctions.
+- 💳 **Credits System**: Transactions are handled using credits for seamless payments.
+- 🔍 **Browse Auctions**: Non-registered users can explore and search auctions.
 
-![Image](/public/ah-preview2.png)
-![Image](/public/ah-preview.png)
+![Auction House Preview](/public/ah-preview2.png)
+![Auction House Preview](/public/ah-preview.png)
 
 ###
+
+## 📝 How to Set Up the Project
+
+To get a copy of this project, you can clone the repository:
+
+```bash
+git clone https://github.com/senbet22/FED2-SP-Auction-House.
+```
+
+Alternatively, you can download the ZIP file and extract it.
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+To run
+
+```bash
+npm run build
+```
+
+```bash
+npm run dev
+```
 
 <h3 align="left">Built with:</h3>
 
@@ -32,7 +58,7 @@ Auction House is a user-driven auction platform where participants can list thei
 
 ###
 
-<h2 align="left">My tools</h2>
+<h3 align="left">My tools:</h3>
 
 ###
 
@@ -47,3 +73,7 @@ Auction House is a user-driven auction platform where participants can list thei
 </div>
 
 ###
+
+```
+
+```

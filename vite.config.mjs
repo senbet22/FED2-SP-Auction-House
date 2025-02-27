@@ -1,6 +1,5 @@
 import { fileURLToPath } from "url";
-import { dirname } from "path";
-import path from "path";
+import { dirname, resolve } from "path";
 import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
 
@@ -15,12 +14,12 @@ export default defineConfig({
     target: "esnext",
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, "index.html"),
-        auth: path.resolve(__dirname, "auth/index.html"),
-        item: path.resolve(__dirname, "item/index.html"),
-        profile: path.resolve(__dirname, "profile/index.html"),
-        create: path.resolve(__dirname, "item/create/index.html"),
-        edit: path.resolve(__dirname, "item/edit/index.html"),
+        main: resolve(__dirname, "./index.html"),
+        auth: resolve(__dirname, "./auth/index.html"),
+        item: resolve(__dirname, "./item/index.html"),
+        profile: resolve(__dirname, "./profile/index.html"),
+        create: resolve(__dirname, "./item/create/index.html"),
+        edit: resolve(__dirname, "./item/edit/index.html"),
       },
     },
   },

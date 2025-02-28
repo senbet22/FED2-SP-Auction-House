@@ -70,6 +70,7 @@ function populateSellerCard(listings) {
   if (listings.length === 0) {
     const noListingsMessage = document.createElement("p");
     noListingsMessage.textContent = "No listings found";
+    noListingsMessage.classList = "text-lg mx-4";
     sellerCard.appendChild(noListingsMessage);
     return;
   }

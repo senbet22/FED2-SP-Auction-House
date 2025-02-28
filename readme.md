@@ -73,6 +73,11 @@ _This project requires an API key to access certain features._
 ## 📚 Documentation
 
 **API Endpoints**: All the relevant API endpoints and their usage can be found in the `src/js/constants.mjs` file. This file holds the base URLs and paths for API requests used within the application.
+It also imports the `.env` file for environment variables like the API key, securely handled using `import.meta.env.VITE_API_KEY`.
+
+**Error Handling** in **API Calls**: The application provides error messages in case of failed requests. For example, when logging in, if the request fails, the error message will be captured from the API response and thrown, indicating the status code, status, and specific error message.
+
+**Toast Messages**: The app utilizes toast notifications to display user-friendly error messages for various actions like login failures or invalid form inputs, helping users understand and resolve issues promptly.
 
 <h3 align="left">Built with:</h3>
 

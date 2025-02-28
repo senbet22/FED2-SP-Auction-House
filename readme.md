@@ -58,14 +58,13 @@ npm run build
 
 ## 🔑 Environment Variables
 
-1. 1. Get your API key from the [Noroff API Key Tool](https://docs.noroff.dev/docs/v2/auth/api-key#api-key-tool).
+1. Get your API key from the [Noroff API Key Tool](https://docs.noroff.dev/docs/v2/auth/api-key#api-key-tool).
 2. Create a .env file in the project root.
 3. Inside the .env file Add your key like this:
    `VITE_API_KEY=your_api_key`
 4. Add .env in .gitignore for security.
 
 <h3 align="left">Built with:</h3>
-###
 
 <div align="left">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="40" alt="javascript logo"  />
@@ -95,6 +94,4 @@ npm run build
 
 ###
 
-```
-
-```
+[Back to Top](#readme)

@@ -58,6 +58,8 @@ npm run build
 
 ## 🔑 Environment Variables
 
+_This project requires an API key to access certain features._
+
 1. Get your API key from the [Noroff API Key Tool](https://docs.noroff.dev/docs/v2/auth/api-key#api-key-tool).
 2. Create a .env file in the project root.
 3. Inside the .env file Add your key like this:

@@ -68,6 +68,10 @@ _This project requires an API key to access certain features._
    `VITE_API_KEY=your_api_key`
 4. Add .env in .gitignore for security.
 
+## 📚 Documentation
+
+**API Endpoints**: All the relevant API endpoints and their usage can be found in the `src/js/constants.mjs` file. This file holds the base URLs and paths for API requests used within the application.
+
 <h3 align="left">Built with:</h3>
 
 <div align="left">
@@ -95,6 +99,12 @@ _This project requires an API key to access certain features._
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/behance/behance-original.svg" height="40" alt="behance logo"  />
 </div>
+
+###
+
+### 📞 Contact
+
+[My GitHub Profile](https://github.com/senbet22)
 
 ###
 

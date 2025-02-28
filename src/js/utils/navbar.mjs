@@ -7,11 +7,10 @@
  * - Handles logout functionality.
  */
 
-// Mobile navbar functionality
-
 import { authGuard } from "../utils/authGuard.mjs";
 authGuard();
 
+// Mobile navbar functionality
 function setupNavbar() {
   const navToggle = document.getElementById("navToggle");
   const navtab = document.getElementById("navtab");

@@ -1,6 +1,6 @@
-# Auction House - Norroff Semester Project 2025
-
 <a name="readme"></a>
+
+# Auction House - Norroff Semester Project 2025
 
 ### Project Overview:
 

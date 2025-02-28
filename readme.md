@@ -4,6 +4,8 @@
 
 Auction House is a user-driven auction platform where participants can list their items for sale or place bids on auctions created by others. The platform uses credits for transactions, with new users receiving an initial balance of 1000 credits to begin bidding.
 
+### 🔗 [Visit the live project on Netlify](https://ah-senbet.netlify.app/)
+
 ## Key Features
 
 - 🆕 **Initial Credits**: New users start with 1000 credits to place their first bids.
@@ -21,7 +23,7 @@ Auction House is a user-driven auction platform where participants can list thei
 To get a copy of this project, you can clone the repository:
 
 ```bash
-git clone https://github.com/senbet22/FED2-SP-Auction-House.
+git clone https://github.com/senbet22/FED2-SP-Auction-House
 ```
 
 Alternatively, you can download the ZIP file and extract it.
@@ -32,18 +34,37 @@ Alternatively, you can download the ZIP file and extract it.
 npm install
 ```
 
-To run
+### 🛠 Dev Dependencies
 
-```bash
-npm run build
-```
+- **Vite**: Development server and build tool.
+- **Tailwind CSS v4** (using Vite): for styling.
+- **Rollup**: handles bundling.
+- Multi-page app (MPA) with entry points for:
+  /auth, /item, /profile, /create, /edit
+
+#### 🏁 Run the Development Server
+
+This generates optimized, production-ready files in the dist/ folder.
 
 ```bash
 npm run dev
 ```
 
-<h3 align="left">Built with:</h3>
+To start your project locally:
 
+```bash
+npm run build
+```
+
+## 🔑 Environment Variables
+
+1. 1. Get your API key from the [Noroff API Key Tool](https://docs.noroff.dev/docs/v2/auth/api-key#api-key-tool).
+2. Create a .env file in the project root.
+3. Inside the .env file Add your key like this:
+   `VITE_API_KEY=your_api_key`
+4. Add .env in .gitignore for security.
+
+<h3 align="left">Built with:</h3>
 ###
 
 <div align="left">

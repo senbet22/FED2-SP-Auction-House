@@ -1,5 +1,7 @@
 # Auction House - Norroff Semester Project 2025
 
+<a name="readme"></a>
+
 ### Project Overview:
 
 Auction House is a user-driven auction platform where participants can list their items for sale or place bids on auctions created by others. The platform uses credits for transactions, with new users receiving an initial balance of 1000 credits to begin bidding.

@@ -110,7 +110,12 @@ export function populateItemDetails(item) {
 
   const timeLeftElement = clone.querySelector("#itemTimeLeft");
   const { time, expired } = formatTimeLeft(item.endsAt);
-  timeLeftElement.textContent = expired ? "Auction Ended" : time;
+  timeLeftElement.textContent = expired ? "Auction Closed" : time;
+
+  if (expired) {
+    timeLeftElement.classList.remove("bg-primary");
+    timeLeftElement.classList.add("bg-accent");
+  }
 
   clone.querySelector("#itemCategory").textContent = `Category: ${
     item.tags?.join(", ") || "N/A"

@@ -77,7 +77,8 @@ It also imports the `.env` file for environment variables like the API key, secu
 
 **Error Handling** in **API Calls**: The application provides error messages in case of failed requests. For example, when logging in, if the request fails, the error message will be captured from the API response and thrown, indicating the status code, status, and specific error message.
 
-**Toast Messages**: The app utilizes toast notifications to display user-friendly error messages for various actions like login failures or invalid form inputs, helping users understand and resolve issues promptly.
+**Email Validation Requirement**
+For account registration, a valid email must end with either @noroff.no or @stud.noroff.no. Any other email domains will be rejected during the signup process.
 
 <h3 align="left">Built with:</h3>
 

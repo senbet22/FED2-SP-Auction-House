@@ -28,7 +28,7 @@ form.addEventListener("submit", async (event) => {
 
     const { accessToken, ...user } = userData.data;
 
-    sessionStorage.setItem("token", accessToken);
+    sessionStorage.setItem("token", JSON.stringify(accessToken));
     sessionStorage.setItem("auctionProfile", JSON.stringify(user));
 
     // Store welcome message flag with timestamp (expires after 10 sec)

@@ -59,7 +59,7 @@ export async function loadListings(currentPage, tag, searchValue = "") {
   const cardWrapper = document.getElementById("cardWrapper");
   if (!cardWrapper) {
     console.error("Card wrapper not found!");
-    return;
+    return false;
   }
 
   // Shows skeleton loaders while fetching data

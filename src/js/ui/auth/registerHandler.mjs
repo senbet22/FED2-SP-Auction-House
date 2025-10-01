@@ -80,7 +80,7 @@ form.addEventListener("submit", async (event) => {
   }
 
   try {
-    const userData = await register({
+    await register({
       name,
       email,
       password,
@@ -92,7 +92,7 @@ form.addEventListener("submit", async (event) => {
     setTimeout(() => {
       successAlert.classList.add("hidden");
       location.reload();
-    }, 2300);
+    }, 3300);
   } catch (error) {
     console.error("Registration failed:", error);
 

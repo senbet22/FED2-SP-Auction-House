@@ -5,15 +5,15 @@ import { loadSingleItem } from "../../api/singleListing.mjs"; // Import API func
  * Retrieves listing data by ID and fills form fields (title, description, images, category).
  *
  * @param {string} listingId - The ID of the listing to populate the form.
+ * @returns {boolean} - Returns true if form was populated successfully, false otherwise.
  */
-
 export async function populateEditForm(listingId) {
   try {
     const data = await loadSingleItem(listingId);
 
     if (!data || !data.data) {
       console.error("Listing data not found.");
-      return;
+      return false;
     }
 
     const item = data.data;
@@ -28,14 +28,17 @@ export async function populateEditForm(listingId) {
     const imageInputsContainer = document.getElementById("imageInputs");
     const allInputs = imageInputsContainer.querySelectorAll("input");
 
-    let existingImages = item.media?.slice(1) || []; // All images except the main one
+    const existingImages = item.media?.slice(1) || [];
 
     existingImages.forEach((media, index) => {
       if (allInputs[index]) {
         allInputs[index].value = media.url;
       }
     });
+
+    return true;
   } catch (error) {
     console.error("Error fetching listing details:", error);
+    return false;
   }
 }

@@ -40,11 +40,30 @@ document.getElementById("search")?.addEventListener("input", (event) => {
 });
 
 document.getElementById("category")?.addEventListener("change", (event) => {
-  document.getElementById("search").value = "";
-  selectedTag = event.target.value;
-  sessionStorage.setItem("selectedTag", selectedTag);
+  const searchInput = document.getElementById("search");
+  const cardWrapper = document.getElementById("cardWrapper");
+
+  // Clear search input
+  if (searchInput) searchInput.value = "";
+
+  // Get selected tag
+  selectedTag = event.target.value || "";
+
+  // Store or remove in sessionStorage
+  if (selectedTag) {
+    sessionStorage.setItem("selectedTag", selectedTag);
+  } else {
+    sessionStorage.removeItem("selectedTag");
+  }
+
+  // Remove old listings & no-results message
+  cardWrapper
+    .querySelectorAll(".listing-card")
+    .forEach((card) => card.remove());
+  document.getElementById("noResultsMessage")?.remove();
+
+  // Load listings
   loadListings(1, selectedTag, "");
-  location.reload();
 });
 
 loadMoreBtn();
@@ -95,9 +114,15 @@ export async function loadListings(currentPage, tag, searchValue = "") {
   removeSkeletonLoaders(cardWrapper);
 
   if (!listings.data || listings.data.length === 0) {
+    const loadMoreButton = document.getElementById("loadMore");
     if (loadMoreButton) loadMoreButton.style.display = "none";
 
-    // Create and append No Results message
+    // Clear existing cards
+    cardWrapper
+      .querySelectorAll(".listing-card")
+      .forEach((card) => card.remove());
+
+    // Show No Results message
     const message = document.createElement("p");
     message.id = "noResultsMessage";
     message.textContent =
@@ -107,10 +132,15 @@ export async function loadListings(currentPage, tag, searchValue = "") {
       "justify-center",
       "text-xl",
       "text-text",
-      "my-26"
+      "my-26",
+      "mx-4"
     );
 
     cardWrapper.appendChild(message);
+
+    // Make sure default selection still works
+    document.getElementById("category").value = selectedTag || "";
+
     return false;
   }
 

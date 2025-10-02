@@ -148,11 +148,11 @@
           <!-- Bottom Section: Description & Seller Info -->
           <div class="flex flex-col gap-6">
             <!-- Description -->
-            <p id="itemDescription" class="text-lg md:mx-4 md:text-xl"></p>
+            <p id="itemDescription" class="text-lg md:text-xl"></p>
 
             <!-- Seller Section -->
             <div class="flex flex-col gap-2">
-              <p class="text-lg text-primary">Listing by:</p>
+              <p class="text-lg text-primary">Listed by:</p>
               <div class="flex items-center gap-4">
                 <img id="sellerAvatar" class="w-12 h-12 rounded-full" />
                 <p id="sellerName" class="text-lg"></p>
@@ -177,16 +177,13 @@
               <button
                 id="sellerListings"
                 class="text-lg sm:text-xl w-fit shadow-text/60 font-medium text-white bg-primary px-6 py-3 rounded-lg shadow-md cursor-pointer transition-all hover:bg-text hover:text-white flex items-center gap-2"
-              >
-                <p>Load more listings by...</p>
-              </button>
+              ></button>
 
               <button
                 id="bidHistoryButton"
                 class="text-lg sm:text-xl w-fit shadow-text/60 font-medium text-white bg-primary px-6 py-3 rounded-lg shadow-md cursor-pointer transition-all hover:bg-text hover:text-white flex items-center gap-2"
               >
                 <p id="bidHistoryText">Bid history</p>
-                <span class="text-xl">&#8595;</span>
               </button>
             </div>
             <div class="flex justify-between items-center mt-6 text-lg">
@@ -322,31 +319,110 @@
       </div>
     </template>
 
-    <!-- Bid History Container  -->
-    <div
-      id="bidHistoryContainer"
-      class="hidden mt-4 bg-background rounded-lg shadow-md w-full max-w-5xl mx-auto"
-    >
-      <h3 class="text-2xl mb-4 font-bold m-2">Most recent bid history</h3>
-      <div id="bidHistoryList">
-        <!-- Bid history will be populated here -->
+    <!-- Bid History Modal -->
+    <div id="bidHistoryModal" class="fixed inset-0 bg-black/50 z-50 hidden">
+      <div class="flex items-center justify-center min-h-screen p-4">
+        <div
+          class="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
+        >
+          <!-- Modal Header -->
+          <div
+            class="flex justify-between items-center p-6 border-b border-gray-200 bg-gray-50"
+          >
+            <h2 class="text-2xl font-bold text-gray-800">Bid History</h2>
+            <button
+              id="closeBidHistoryModal"
+              class="text-gray-500 hover:text-gray-800 text-6xl cursor-pointer font-bold leading-none"
+            >
+              &times;
+            </button>
+          </div>
+
+          <!-- Modal Content -->
+          <div
+            class="overflow-y-auto p-6"
+            style="max-height: calc(90vh - 100px)"
+          >
+            <div id="bidHistoryList"></div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Bid history -->
-    <template id="bidHistoryTemplate" class="">
-      <div class="shadow-md bg-background">
-        <div class="flex py-2"></div>
+    <!-- Seller Listings Modal -->
+    <div id="sellerListingsModal" class="fixed inset-0 bg-black/50 z-50 hidden">
+      <div class="flex items-center justify-center min-h-screen p-4">
+        <div
+          class="bg-white rounded-lg shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden"
+        >
+          <!-- Modal Header -->
+          <div
+            class="flex justify-between items-center p-6 border-b border-gray-200 bg-gray-50"
+          >
+            <h2 class="text-2xl font-bold text-gray-800">
+              More Listings by
+              <span id="sellerNameInModal" class="text-primary">Seller</span>
+            </h2>
+            <button
+              id="closeSellerListingsModal"
+              class="text-gray-500 hover:text-gray-800 text-6xl font-bold cursor-pointer leading-none"
+            >
+              &times;
+            </button>
+          </div>
 
-        <div class="flex justify-between items-center bg-secondary text-lg">
-          <div class="w-1/2 p-2 text-xl" id="bidderName">N/A</div>
-          <div class="w-1/4 p-2" id="bidAmount">$0.00</div>
-          <div class="w-1/4 p-2" id="bidTime">N/A</div>
+          <!-- Modal Content -->
+          <div
+            class="overflow-y-auto p-6"
+            style="max-height: calc(90vh - 100px)"
+          >
+            <div
+              id="sellerHistory"
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+            ></div>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Bid History Template -->
+    <template id="bidHistoryTemplate">
+      <div class="flex py-3 border-b border-gray-200 hover:bg-gray-50">
+        <div id="bidderName" class="w-1/2 px-4 text-base"></div>
+        <div id="bidAmount" class="w-1/4 px-4 text-base font-semibold"></div>
+        <div id="bidTime" class="w-1/4 px-4 text-base text-gray-600"></div>
       </div>
     </template>
 
-    <!-- Modal -->
+    <!-- Seller Listing Card Template -->
+    <template id="sellerHistoryTemplate">
+      <a href="#" class="block">
+        <div
+          class="listing-card bg-background border-gray-100 border-4 shadow-text shadow-sm overflow-hidden rounded-lg hover:shadow-lg transition-shadow"
+        >
+          <h2
+            class="listing-title bg-primary truncate text-background text-left text-lg px-4 py-3 font-semibold"
+          >
+            Item Title
+          </h2>
+          <img
+            class="listing-image w-full h-48 object-cover"
+            src="/imgnotfound.png"
+            alt="Listing Image"
+          />
+          <div class="p-4">
+            <p
+              class="time-left text-sm bg-primary text-background inline-block px-3 py-1 rounded-full mb-2"
+            >
+              Ends in: Time
+            </p>
+            <p class="updated-time text-sm text-gray-600">Updated time: Date</p>
+          </div>
+        </div>
+      </a>
+    </template>
+
+    <!-- Bid Now - Modal -->
     <div
       id="bidModal"
       class="hidden fixed z-40 inset-0 bg-primary/30 justify-center items-center"

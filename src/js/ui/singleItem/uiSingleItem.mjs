@@ -9,7 +9,7 @@ import {
   handleNextImage,
   handlePrevImage,
 } from "./carouselHandler.mjs";
-import { fetchSellerListings } from "./sellerListings.mjs";
+import { setupSellerListingsModal } from "./sellerListings.mjs";
 import { handleEditButtonClick } from "./editListingHandler.mjs";
 import { handleDeleteButtonClick } from "./deleteListingHandler.mjs";
 
@@ -18,31 +18,30 @@ import { handleDeleteButtonClick } from "./deleteListingHandler.mjs";
  * seller information, and other relevant data. It handles dynamic behaviors like
  * displaying seller listings, toggling bid history, and managing admin buttons based on access.
  */
-
 export function populateItemDetails(item) {
   const template = document.getElementById("single-item-template");
   const mainContainer = document.querySelector("main");
   const singleItemCard = document.getElementById("singleItemCard");
+
   if (!template || !mainContainer || !singleItemCard) {
     console.error("Template or main container or placeholder not found!");
     return;
   }
 
   singleItemCard.style.display = "none";
-
   const clone = template.content.cloneNode(true);
 
+  // --- Item info ---
   clone.querySelector("#itemName").textContent = item.title || "No Title";
   clone.querySelector("#itemUpdated").textContent = formatBidTime(item.updated);
 
   const imageElement = clone.querySelector("#itemImage");
   let currentIndex = 0;
-
   imageElement.src = item.media?.[0]?.url || "/imgnotfound.png";
   imageElement.alt = item.media?.[0]?.alt || "Item image";
 
   const imgArContainer = clone.querySelector("#imgArContainer");
-  if (item.media && item.media.length > 0) {
+  if (item.media?.length > 0) {
     item.media.forEach((media, index) => {
       const img = document.createElement("img");
       img.src = media.url;
@@ -69,11 +68,9 @@ export function populateItemDetails(item) {
       imgArContainer.appendChild(img);
     });
   }
-
   updateImageOpacity(imgArContainer, currentIndex);
 
-  const nextButton = clone.querySelector("#nextImage");
-  nextButton.addEventListener("click", () => {
+  clone.querySelector("#nextImage").addEventListener("click", () => {
     currentIndex = handleNextImage(
       item,
       currentIndex,
@@ -81,9 +78,7 @@ export function populateItemDetails(item) {
       imgArContainer
     );
   });
-
-  const prevButton = clone.querySelector("#prevImage");
-  prevButton.addEventListener("click", () => {
+  clone.querySelector("#prevImage").addEventListener("click", () => {
     currentIndex = handlePrevImage(
       item,
       currentIndex,
@@ -94,13 +89,13 @@ export function populateItemDetails(item) {
 
   clone.querySelector("#itemDescription").textContent =
     item.description || "No description available.";
+  clone.querySelector("#itemTotalBids").textContent = `Bids: ${
+    item._count?.bids || 0
+  }`;
 
-  const totalBids = item._count?.bids || 0;
-  clone.querySelector("#itemTotalBids").textContent = `Bids: ${totalBids}`;
-
+  // --- Bids ---
   const { highestBid } = getHighestBid(item.bids);
   const highestBidElement = clone.querySelector("#itemHighestBid");
-
   if (highestBid > 0) {
     highestBidElement.textContent = `Highest Bid: $${highestBid}`;
     highestBidElement.classList.remove("hidden");
@@ -108,22 +103,25 @@ export function populateItemDetails(item) {
     highestBidElement.classList.add("hidden");
   }
 
+  // --- Time left ---
   const timeLeftElement = clone.querySelector("#itemTimeLeft");
   const { time, expired } = formatTimeLeft(item.endsAt);
   timeLeftElement.textContent = expired ? "Auction Closed" : time;
-
   if (expired) {
     timeLeftElement.classList.remove("bg-primary");
     timeLeftElement.classList.add("bg-accent");
   }
 
-  clone.querySelector("#itemCategory").textContent = `Category: ${
-    item.tags?.join(", ") || "N/A"
-  }`;
+  const categoryElement = clone.querySelector("#itemCategory");
+  if (item.tags && item.tags.length > 0) {
+    categoryElement.textContent = item.tags.map((tag) => `#${tag}`).join(" ");
+  } else {
+    categoryElement.textContent = "N/A";
+  }
 
+  // --- Seller ---
   const sellerName = item.seller?.name || "Unknown Seller";
   clone.querySelector("#sellerName").textContent = sellerName;
-
   const sellerAvatar = clone.querySelector("#sellerAvatar");
   sellerAvatar.src = item.seller?.avatar?.url || "/smallLogo.svg";
 
@@ -131,15 +129,16 @@ export function populateItemDetails(item) {
 
   mainContainer.innerHTML = "";
   mainContainer.appendChild(clone);
+
   handleEditButtonClick(item.id);
 
-  // Admin buttons visible with accesstoken/if youre logged in.
+  // --- Admin buttons ---
   const auctionProfile = JSON.parse(sessionStorage.getItem("auctionProfile"));
   const adminBtn1 = document.getElementById("adminBtn1");
   const adminBtn2 = document.getElementById("adminBtn2");
   const accessToken = sessionStorage.getItem("token");
 
-  if (sellerName === auctionProfile.name) {
+  if (auctionProfile && sellerName === auctionProfile.name) {
     adminBtn2.classList.remove("hidden");
     adminBtn2.classList.add("flex");
   }
@@ -148,35 +147,11 @@ export function populateItemDetails(item) {
     adminBtn1.classList.add("flex");
   }
 
+  // --- Seller listings modal ---
   const sellerListingsButton = document.getElementById("sellerListings");
-
-  if (
-    sellerName &&
-    sellerName.trim() !== "" &&
-    sellerName !== "Unknown Seller"
-  ) {
-    sellerListingsButton.textContent = `More listings by Seller`;
-
-    let listingsVisible = false;
-
-    sellerListingsButton.addEventListener("click", () => {
-      if (listingsVisible) {
-        const sellerCard = document.getElementById("sellerCard");
-        if (sellerCard) {
-          sellerCard.style.display = "none";
-        }
-        sellerListingsButton.textContent = `More listings by Seller`;
-        listingsVisible = false;
-      } else {
-        fetchSellerListings(sellerName);
-        const sellerCard = document.getElementById("sellerCard");
-        if (sellerCard) {
-          sellerCard.style.display = "block";
-        }
-        sellerListingsButton.textContent = `Hide listings by Seller`;
-        listingsVisible = true;
-      }
-    });
+  if (sellerName && sellerName !== "Unknown Seller") {
+    sellerListingsButton.textContent = `More listings by ${sellerName}`;
+    setupSellerListingsModal(sellerName);
   } else {
     console.error(
       "Seller name is missing or invalid. Cannot fetch seller listings."
@@ -184,17 +159,17 @@ export function populateItemDetails(item) {
     sellerListingsButton.style.display = "none";
   }
 
+  // --- Bid history + delete ---
   toggleBidHistory(item);
 
-  const listingId = item.id;
-
   if (accessToken) {
-    handleDeleteButtonClick(listingId, accessToken);
+    handleDeleteButtonClick(item.id, accessToken);
   } else {
     console.error("No access token found.");
   }
 }
 
+// --- Load single item on page load ---
 const urlParams = new URLSearchParams(window.location.search);
 const listingId = urlParams.get("id");
 

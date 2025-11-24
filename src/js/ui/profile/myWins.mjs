@@ -61,7 +61,7 @@ function displayWins(wins) {
 
     const titleElement = clone.querySelector(".wins-title");
     if (titleElement) {
-      titleElement.setAttribute("title", win.title || "No Title");
+      titleElement.textContent = win.title || "No Title";
     } else {
       console.warn("Title element not found in template!");
     }

@@ -7,7 +7,7 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 export default defineConfig({
   appType: "mpa",
-  base: "",
+  base: "./",
   build: {
     target: "esnext",
     rollupOptions: {

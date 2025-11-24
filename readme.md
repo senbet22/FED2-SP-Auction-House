@@ -6,7 +6,7 @@
 
 Auction House is a user-driven auction platform where participants can list their items for sale or place bids on auctions created by others. The platform uses credits for transactions, with new users receiving an initial balance of 1000 credits to begin bidding.
 
-### 🌐 <a href="https://ah-senbet.netlify.app/" target="_blank">Visit the live project on Netlify</a>
+### 🌐 <a href="https://auctionhouse-sg.netlify.app/" target="_blank">Visit the live project on Netlify</a>
 
 ## Key Features
 

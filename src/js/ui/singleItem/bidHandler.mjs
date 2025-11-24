@@ -1,5 +1,6 @@
 import { API_LISTINGS } from "../../constants.mjs";
 import { optionPost } from "../../api/requestOptions.mjs";
+import { getAccessToken } from "../../api/sessionStorage.mjs";
 
 /**
  * Handles bid submission by making a request to place a bid.
@@ -42,6 +43,12 @@ function showSuccess(success) {
 }
 
 export async function bidRequest(id) {
+  const token = getAccessToken();
+  if (!token) {
+    showAlert("Please log in to place a bid.");
+    modal.classList.add("hidden");
+    return;
+  }
   const bidInput = document.getElementById("bidInput");
   const bidAmount = parseFloat(bidInput.value);
 
@@ -83,9 +90,15 @@ const itemId = urlParams.get("id");
 
 const observer = new MutationObserver(() => {
   const bidButton = document.getElementById("confirmBid");
+  const token = getAccessToken();
 
   if (bidButton) {
     bidButton.addEventListener("click", () => {
+      if (!token) {
+        showAlert("Please login to place a bid.");
+        modal.classList.add("hidden");
+        return;
+      }
       bidRequest(itemId).then((response) => {
         if (response) {
           modal.classList.add("hidden");

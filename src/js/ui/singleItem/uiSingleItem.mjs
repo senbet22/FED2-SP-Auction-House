@@ -167,8 +167,6 @@ export function populateItemDetails(item) {
 
   if (accessToken) {
     handleDeleteButtonClick(item.id, accessToken);
-  } else {
-    console.error("No access token found.");
   }
 }
 

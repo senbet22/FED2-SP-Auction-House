@@ -81,7 +81,6 @@ function displayListings(listings) {
 
     const titleElement = clone.querySelector(".listing-title");
     titleElement.textContent = listing.title;
-    titleElement.setAttribute("title", listing.title);
 
     const imageElement = clone.querySelector(".listing-image");
     imageElement.src = listing.media?.[0]?.url || "/smallLogo.svg";

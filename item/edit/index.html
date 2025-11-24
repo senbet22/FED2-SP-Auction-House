@@ -21,11 +21,16 @@
       class="bg-primary mx-auto fixed top-0 w-full z-50 shadow-text shadow-sm"
     >
       <nav class="max-w-5xl mx-auto">
-        <a href="/">
-          <img src="/Logo1.svg" alt="" class="h-20" />
+        <a href="/" aria-label="Go to homepage">
+          <img src="/Logo1.svg" alt="Auction House Logo" class="h-20" />
         </a>
 
-        <label id="hamburger" class="md:hidden absolute pb-5 top-0 right-5">
+        <label
+          for="navToggle"
+          aria-label="hamburger menu"
+          id="hamburger"
+          class="md:hidden absolute pb-5 top-0 right-5"
+        >
           <div
             class="w-20 h-20 cursor-pointer flex flex-col items-center justify-center"
           >
@@ -66,7 +71,11 @@
     <main class="h-svh flex-1 max-w-5xl mx-auto my-22 md:mt-40">
       <section class="w-full px-2 lg:w-3xl h-full bg-background mx-auto">
         <div class="formheader mb-10 bg-text flex justify-center items-center">
-          <img src="/smallLogo.svg" class="mr-auto" alt="" />
+          <img
+            src="/smallLogo.svg"
+            class="mr-auto"
+            alt="Auction House Small Logo"
+          />
           <h1
             class="text-secondary mr-auto text-xl lg:text-3xl font-bold text-center px-4"
           >
@@ -201,24 +210,28 @@
               </div>
 
               <div id="imageInputs" class="hidden space-y-2">
+                <label for="itemImageTwo" class="block">Image 2</label>
                 <input
                   type="text"
                   id="itemImageTwo"
                   placeholder="Enter image URL"
                   class="w-full bg-background border-b-2 border-text focus:outline-none p-2"
                 />
+                <label for="itemImageThree" class="block">Image 3</label>
                 <input
                   type="text"
                   id="itemImageThree"
                   placeholder="Enter image URL"
                   class="w-full bg-background border-b-2 border-text focus:outline-none p-2"
                 />
+                <label for="itemImageFour" class="block">Image 4</label>
                 <input
                   type="text"
                   id="itemImageFour"
                   placeholder="Enter image URL"
                   class="w-full bg-background border-b-2 border-text focus:outline-none p-2"
                 />
+                <label for="itemImageFive" class="block">Image 5</label>
                 <input
                   type="text"
                   id="itemImageFive"
@@ -252,15 +265,12 @@
       class="px-5 w-full h-32 p-10 bg-text text-secondary text-lg flex justify-center"
     >
       <div class="gap-5 text-sm flex flex-col items-center justify-center">
-        <h3>Copyright © 2025 Auction House</h3>
-        <h3>All Rights Reserved.</h3>
-        <h3>
+        <p>Copyright © 2025 Auction House</p>
+        <p>All Rights Reserved.</p>
+        <p>
           Created by Senbet Gereslase as a semester project at Noroff, 2025.
-        </h3>
+        </p>
       </div>
-      <a href="/" class="absolute bottom-0 right-0 hidden md:block">
-        <img src="/smallLogo.svg" alt="" class="h-32 w-auto" />
-      </a>
     </footer>
   </body>
 </html>

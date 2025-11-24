@@ -21,11 +21,16 @@
       class="bg-primary mx-auto fixed top-0 w-full z-50 shadow-text shadow-sm"
     >
       <nav class="max-w-5xl mx-auto">
-        <a href="/">
-          <img src="/Logo1.svg" alt="" class="h-20" />
+        <a href="/" aria-label="Go to homepage">
+          <img src="/Logo1.svg" alt="Auction House Logo" class="h-20" />
         </a>
 
-        <label id="hamburger" class="md:hidden absolute pb-5 top-0 right-5">
+        <label
+          for="navToggle"
+          aria-label="hamburger menu"
+          id="hamburger"
+          class="md:hidden absolute pb-5 top-0 right-5"
+        >
           <div
             class="w-20 h-20 cursor-pointer flex flex-col items-center justify-center"
           >
@@ -129,6 +134,7 @@
 
               <!-- Bidding Input & Button -->
               <div class="flex ml-auto md:ml-0 gap-2 mt-4">
+                <label for="bidInput" class="sr-only">Bid Amount</label>
                 <input
                   id="bidInput"
                   type="number"
@@ -154,7 +160,7 @@
             <div class="flex flex-col gap-2">
               <p class="text-lg text-primary">Listed by:</p>
               <div class="flex items-center gap-4">
-                <img id="sellerAvatar" class="w-12 h-12 rounded-full" />
+                <img id="sellerAvatar" class="w-12 h-12 rounded-full" alt="Seller Avatar" />
                 <p id="sellerName" class="text-lg"></p>
               </div>
             </div>
@@ -287,7 +293,7 @@
 
     <template id="sellerTemplate">
       <div class="seller-card bg-background shadow-md">
-        <h1 class="listing-title m-4 text-lg md:text-xl sm:text-2xl"></h1>
+        <h2 class="listing-title m-4 text-lg md:text-xl sm:text-2xl"></h2>
         <div class="prime-info flex justify-between">
           <div class="w-1/4 mx-4">
             <img
@@ -400,11 +406,11 @@
         <div
           class="listing-card bg-background border-gray-100 border-4 shadow-text shadow-sm overflow-hidden rounded-lg hover:shadow-lg transition-shadow"
         >
-          <h2
+          <h3
             class="listing-title bg-primary truncate text-background text-left text-lg px-4 py-3 font-semibold"
           >
             Item Title
-          </h2>
+          </h3>
           <img
             class="listing-image w-full h-48 object-cover"
             src="/imgnotfound.png"
@@ -526,11 +532,11 @@
       class="px-5 w-full mt-20 h-32 p-10 bg-text text-secondary text-lg flex justify-center"
     >
       <div class="gap-5 text-sm flex flex-col items-center justify-center">
-        <h3>Copyright © 2025 Auction House</h3>
-        <h3>All Rights Reserved.</h3>
-        <h3>
+        <p>Copyright © 2025 Auction House</p>
+        <p>All Rights Reserved.</p>
+        <p>
           Created by Senbet Gereslase as a semester project at Noroff, 2025.
-        </h3>
+        </p>
       </div>
     </footer>
   </body>

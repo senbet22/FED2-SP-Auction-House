@@ -21,11 +21,16 @@
       class="bg-primary mx-auto fixed top-0 w-full z-50 shadow-text shadow-sm"
     >
       <nav class="max-w-5xl mx-auto">
-        <a href="/">
-          <img src="/Logo1.svg" alt="" class="h-20" />
+        <a href="/" aria-label="Go to homepage">
+          <img src="/Logo1.svg" alt="Auction House Logo" class="h-20" />
         </a>
 
-        <label id="hamburger" class="md:hidden absolute pb-5 top-0 right-5">
+        <label
+          for="navToggle"
+          aria-label="hamburger menu"
+          id="hamburger"
+          class="md:hidden absolute pb-5 top-0 right-5"
+        >
           <div
             class="w-20 h-20 cursor-pointer flex flex-col items-center justify-center"
           >
@@ -49,10 +54,12 @@
           <div
             class="bg-secondary ml-8 mr-1 text-text text-sm xs:text-lg relative w-fit max-w-72"
           >
+            <label for="search" class="sr-only">Search</label>
             <input
               type="text"
               name="search"
               id="search"
+              aria-label="Search"
               placeholder="What are you looking for?"
               class="focus:w-full pl-4 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
             />
@@ -143,11 +150,11 @@
             <div class="flex justify-between text-lg p-4">
               <p class="date-posted">Date</p>
             </div>
-            <h1
+            <h2
               class="listing-title bg-primary truncate text-background text-left text-lg px-4 py-3"
             >
               Item Title
-            </h1>
+            </h2>
             <img
               class="listing-image w-full max-h-52 mx-auto object-cover"
               src="/imgnotfound.png"
@@ -213,7 +220,7 @@
               id="userAvatar"
               class="object-cover w-12 h-12 rounded-lg"
               src="/smallLogo.svg"
-              alt=""
+              alt="User Avatar"
             />
 
             <div class="ml-3 overflow-hidden">
@@ -255,11 +262,11 @@
       class="px-5 w-full h-32 p-10 bg-text text-secondary text-lg flex justify-center"
     >
       <div class="gap-5 text-sm flex flex-col items-center justify-center">
-        <h3>Copyright © 2025 Auction House</h3>
-        <h3>All Rights Reserved.</h3>
-        <h3>
+        <p>Copyright © 2025 Auction House</p>
+        <p>All Rights Reserved.</p>
+        <p>
           Created by Senbet Gereslase as a semester project at Noroff, 2025.
-        </h3>
+        </p>
       </div>
     </footer>
   </body>

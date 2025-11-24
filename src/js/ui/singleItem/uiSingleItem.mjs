@@ -12,6 +12,7 @@ import {
 import { setupSellerListingsModal } from "./sellerListings.mjs";
 import { handleEditButtonClick } from "./editListingHandler.mjs";
 import { handleDeleteButtonClick } from "./deleteListingHandler.mjs";
+import "./bidModal.mjs";
 
 /**
  * Populates the item details on the page including images, descriptions, bid information,

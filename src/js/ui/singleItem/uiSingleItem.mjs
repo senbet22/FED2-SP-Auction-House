@@ -133,7 +133,10 @@ export function populateItemDetails(item) {
   handleEditButtonClick(item.id);
 
   // --- Admin buttons ---
-  const auctionProfile = JSON.parse(sessionStorage.getItem("auctionProfile"));
+  const auctionProfileString = sessionStorage.getItem("auctionProfile");
+  const auctionProfile = auctionProfileString
+    ? JSON.parse(auctionProfileString)
+    : null;
   const adminBtn1 = document.getElementById("adminBtn1");
   const adminBtn2 = document.getElementById("adminBtn2");
   const accessToken = sessionStorage.getItem("token");
